@@ -43,6 +43,7 @@
             textBox1.BackColor = SystemColors.Window;
             textBox1.Location = new Point(15, 90);
             textBox1.Margin = new Padding(4);
+            textBox1.MaxLength = 50;
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(264, 29);
             textBox1.TabIndex = 0;
@@ -57,7 +58,7 @@
             label1.Name = "label1";
             label1.Size = new Size(129, 19);
             label1.TabIndex = 1;
-            label1.Text = "Enter username";           
+            label1.Text = "Enter username";
             // 
             // label2
             // 
@@ -69,16 +70,18 @@
             label2.Name = "label2";
             label2.Size = new Size(129, 19);
             label2.TabIndex = 3;
-            label2.Text = "Enter password";     
+            label2.Text = "Enter password";
             // 
             // textBox2
             // 
             textBox2.BackColor = SystemColors.Window;
             textBox2.Location = new Point(15, 178);
             textBox2.Margin = new Padding(4);
+            textBox2.MaxLength = 50;
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(264, 29);
             textBox2.TabIndex = 2;
+            textBox2.UseSystemPasswordChar = true;
             // 
             // button1
             // 
@@ -86,7 +89,7 @@
             button1.Location = new Point(15, 235);
             button1.Margin = new Padding(4);
             button1.Name = "button1";
-            button1.Size = new Size(265, 35);
+            button1.Size = new Size(267, 34);
             button1.TabIndex = 4;
             button1.Text = "Register";
             button1.UseVisualStyleBackColor = true;
@@ -106,7 +109,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(13, 285);
+            button2.Location = new Point(15, 285);
             button2.Name = "button2";
             button2.Size = new Size(267, 34);
             button2.TabIndex = 6;
@@ -128,6 +131,7 @@
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(1382, 839);
             Controls.Add(button3);
             Controls.Add(button2);
@@ -140,6 +144,7 @@
             Font = new Font("Segoe UI", 12F);
             Margin = new Padding(4);
             Name = "Register";
+            FormClosing += Register_FormClosing;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -149,10 +154,10 @@
         private TextBox textBox1;
         private Label label1;
         private Label label2;
-        private TextBox textBox2;
         private Button button1;
         private Label label3;
         private Button button2;
         private Button button3;
+        private TextBox textBox2;
     }
 }

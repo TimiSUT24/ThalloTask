@@ -14,11 +14,11 @@ using Microsoft.Data.SqlClient;
 namespace ToDoList
 {
     public partial class Login : Form
-    {      
+    {
         public Login(string userName, string password)
         {
-            InitializeComponent();               
-        }       
+            InitializeComponent();
+        }
         private void button1_Click_1(object sender, EventArgs e)
         {
             string username = textBox1.Text;
@@ -49,6 +49,11 @@ namespace ToDoList
                         {
                             return true; // Passwords match
                         }
+                        else
+                        {
+                            MessageBox.Show("Wrong password or username");
+                            return false;
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -78,5 +83,12 @@ namespace ToDoList
         {
             Application.Exit();
         }
+
+        private void Login_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
+      
     }
 }

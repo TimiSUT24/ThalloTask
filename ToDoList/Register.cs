@@ -14,11 +14,11 @@ namespace ToDoList
         public Register()
         {
             InitializeComponent();
-        }              
+        }
         private void button1_Click(object sender, EventArgs e)
         {
-            _userName = textBox1.Text;
-            _password = textBox2.Text;
+            _userName = textBox1.Text?.Trim();
+            _password = textBox2.Text?.Trim();
 
             if (string.IsNullOrEmpty(_userName) || string.IsNullOrEmpty(_password))
             {
@@ -30,6 +30,11 @@ namespace ToDoList
                 MessageBox.Show("Username and password need to be 7 characters long");
                 return;
             }
+            if (string.IsNullOrWhiteSpace(_userName) || string.IsNullOrWhiteSpace(_password) || _userName.Contains(" ") || _password.Contains(" "))
+            {
+                MessageBox.Show("Cant have spaces");
+                return;
+            }
 
             string passwordHash = HashPassword(_password);
 
@@ -39,13 +44,27 @@ namespace ToDoList
                 try
                 {
                     conn.Open();
+
+                    string checkUser = "SELECT COUNT(*) FROM USERS WHERE USERNAME = @UserName";
+                    using (SqlCommand cmdUser = new SqlCommand(checkUser, conn))
+                    {
+                        cmdUser.Parameters.AddWithValue("@UserName", _userName);
+                        int userCount = (int)cmdUser.ExecuteScalar();
+
+                        if (userCount > 0)
+                        {
+                            MessageBox.Show("Account already exist");
+                            return;
+                        }
+                    }
+
                     string query = "INSERT INTO Users (UserName, PasswordHash) VALUES (@UserName, @PasswordHash)";
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@UserName", _userName);
                         cmd.Parameters.AddWithValue("@PasswordHash", passwordHash);
-
                         int rows = cmd.ExecuteNonQuery();
+
                         if (rows > 0)
                         {
                             MessageBox.Show("Registration successful!");
@@ -63,7 +82,7 @@ namespace ToDoList
                 {
                     MessageBox.Show($"An error occurred: {ex.Message}");
                 }
-            }         
+            }
         }
 
         private string HashPassword(string password)
@@ -84,7 +103,13 @@ namespace ToDoList
 
         private void button3_Click(object sender, EventArgs e)
         {
-           Application.Exit();
+            Application.Exit();
         }
+
+        private void Register_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+       
     }
 }
