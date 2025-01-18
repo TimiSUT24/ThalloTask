@@ -24,10 +24,7 @@ namespace ToDoList
             string username = textBox1.Text;
             string password = textBox2.Text;
 
-            if (ValidateUser(username, password))
-            {
-                MessageBox.Show("Sucessfull login");
-            }
+            ValidateUser(username, password);           
         }
         private bool ValidateUser(string userName, string password)
         {
@@ -47,6 +44,10 @@ namespace ToDoList
 
                         if (storedHash != null && storedHash == passwordHash)
                         {
+                            UserMenu usermenu = new UserMenu(userName);
+                            MessageBox.Show("Successful login");                           
+                            usermenu.Show();
+                            this.Hide();
                             return true; // Passwords match
                         }
                         else
@@ -87,8 +88,6 @@ namespace ToDoList
         private void Login_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
-        }
-
-      
+        }        
     }
 }

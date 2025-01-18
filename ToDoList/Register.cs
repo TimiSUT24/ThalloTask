@@ -40,7 +40,7 @@ namespace ToDoList
 
             // Save to the database
             using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft SQL Server"].ConnectionString))
-            {
+            {               
                 try
                 {
                     conn.Open();
