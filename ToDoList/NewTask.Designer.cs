@@ -1,6 +1,6 @@
 ﻿namespace ToDoList
 {
-    partial class New_ToDoList
+    partial class NewTask
     {
         /// <summary>
         /// Required designer variable.
@@ -140,8 +140,7 @@
             dateTimePicker2.Location = new Point(32, 404);
             dateTimePicker2.Name = "dateTimePicker2";
             dateTimePicker2.Size = new Size(200, 23);
-            dateTimePicker2.TabIndex = 16;
-            dateTimePicker2.ValueChanged += dateTimePicker2_ValueChanged;
+            dateTimePicker2.TabIndex = 16;           
             // 
             // label6
             // 
@@ -180,7 +179,7 @@
 
         private Button button1;
         private Label label1;
-        private TextBox textBox1;
+        public TextBox textBox1;
         private Label label2;
         private Label label3;
         private Label label4;

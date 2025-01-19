@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace ToDoList
 {
-    public partial class New_ToDoList : Form
+    public partial class NewTask : Form
     {
         private string currentUser { get; set; }
-        public New_ToDoList(string userName)
+        public NewTask(string userName)
         {
             InitializeComponent();
             currentUser = userName;
@@ -34,7 +34,7 @@ namespace ToDoList
             using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
             {
                 conn.Open();
-                string SelectId = "SELECT ID FROM USERS WHERE USERNAME = @USERNAME";
+                string SelectId = "SELECT ID FROM USERS WHERE USERNAME = @USERNAME";        //get userid by username
                 using (SqlCommand cmd = new SqlCommand(SelectId, conn))
                 {
                     cmd.Parameters.AddWithValue("@USERNAME", currentUser);
@@ -71,7 +71,7 @@ namespace ToDoList
                     string addTask = "INSERT INTO TASKS(TASK,DESCRIPTION,PRIORITY,DATESTART,DATEEND,USER_ID) VALUES (@TASK,@DESCRIPTION,@PRIORITY,@DATESTART,@DATEEND,@USER_ID)";
                     using (SqlCommand cmd = new SqlCommand(addTask, conn))
                     {
-                        cmd.Parameters.AddWithValue("@TASK", textBox1.Text);
+                        cmd.Parameters.AddWithValue("@TASK", textBox1.Text);                //Insert these values to the database 
                         cmd.Parameters.AddWithValue("@DESCRIPTION", richTextBox1.Text);
                         cmd.Parameters.AddWithValue("@PRIORITY", listBox1.Text);
                         cmd.Parameters.AddWithValue("@USER_ID", userId);
@@ -80,11 +80,11 @@ namespace ToDoList
                         int rows = cmd.ExecuteNonQuery();
                         if (rows > 0)
                         {
-                            MessageBox.Show("till lagt");
+                            MessageBox.Show("Task added");
                         }
                         else
                         {
-                            MessageBox.Show("fel");
+                            MessageBox.Show("Error");
                         }
                     }
                 }
@@ -93,13 +93,6 @@ namespace ToDoList
                     MessageBox.Show("An error occured " + ex.Message);
                 }
             }
-
-
-        }
-
-        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
+        }       
     }
 }

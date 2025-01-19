@@ -31,9 +31,11 @@
             button3 = new Button();
             label1 = new Label();
             button1 = new Button();
-            button2 = new Button();
-            button4 = new Button();
+            EditTask = new Button();
             label2 = new Label();
+            Tasks = new ListBox();
+            ShowSelectedTask = new Button();
+            button2 = new Button();
             SuspendLayout();
             // 
             // button3
@@ -66,27 +68,19 @@
             button1.Name = "button1";
             button1.Size = new Size(190, 23);
             button1.TabIndex = 16;
-            button1.Text = "New ToDoList";
+            button1.Text = "New Task";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // button2
+            // EditTask
             // 
-            button2.Location = new Point(912, 70);
-            button2.Name = "button2";
-            button2.Size = new Size(190, 23);
-            button2.TabIndex = 18;
-            button2.Text = "Show ToDoLists";
-            button2.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            button4.Location = new Point(655, 70);
-            button4.Name = "button4";
-            button4.Size = new Size(190, 23);
-            button4.TabIndex = 19;
-            button4.Text = "Edit TodoList";
-            button4.UseVisualStyleBackColor = true;
+            EditTask.Location = new Point(655, 70);
+            EditTask.Name = "EditTask";
+            EditTask.Size = new Size(190, 23);
+            EditTask.TabIndex = 19;
+            EditTask.Text = "Edit Task";
+            EditTask.UseVisualStyleBackColor = true;
+            EditTask.Click += EditTask_Click;
             // 
             // label2
             // 
@@ -101,14 +95,46 @@
             label2.TabIndex = 20;
             label2.TextAlign = ContentAlignment.TopRight;
             // 
+            // Tasks
+            // 
+            Tasks.FormattingEnabled = true;
+            Tasks.ItemHeight = 15;
+            Tasks.Location = new Point(912, 99);
+            Tasks.Name = "Tasks";
+            Tasks.Size = new Size(190, 199);
+            Tasks.TabIndex = 21;
+            Tasks.SelectedIndexChanged += Tasks_SelectedIndexChanged;
+            Tasks.MouseDoubleClick += Tasks_MouseDoubleClick;
+            // 
+            // ShowSelectedTask
+            // 
+            ShowSelectedTask.Location = new Point(912, 304);
+            ShowSelectedTask.Name = "ShowSelectedTask";
+            ShowSelectedTask.Size = new Size(190, 23);
+            ShowSelectedTask.TabIndex = 22;
+            ShowSelectedTask.Text = "Show";
+            ShowSelectedTask.UseVisualStyleBackColor = true;
+            ShowSelectedTask.Click += ShowSelectedTask_Click;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(912, 70);
+            button2.Name = "button2";
+            button2.Size = new Size(190, 23);
+            button2.TabIndex = 23;
+            button2.Text = "Active Tasks";
+            button2.UseVisualStyleBackColor = true;
+            // 
             // UserMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1471, 654);
-            Controls.Add(label2);
-            Controls.Add(button4);
             Controls.Add(button2);
+            Controls.Add(ShowSelectedTask);
+            Controls.Add(Tasks);
+            Controls.Add(label2);
+            Controls.Add(EditTask);
             Controls.Add(button1);
             Controls.Add(label1);
             Controls.Add(button3);
@@ -123,8 +149,10 @@
         private Button button3;
         private Label label1;
         private Button button1;
-        private Button button2;
-        private Button button4;
+        private Button EditTask;
         private Label label2;
+        private ListBox Tasks;
+        private Button ShowSelectedTask;
+        private Button button2;
     }
 }
