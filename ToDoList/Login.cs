@@ -21,8 +21,8 @@ namespace ToDoList
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
-            string username = textBox1.Text;
-            string password = textBox2.Text;
+            string username = UsernameText.Text;
+            string password = PasswordText.Text;
 
             ValidateUser(username, password);           
         }

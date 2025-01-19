@@ -28,49 +28,49 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button3 = new Button();
-            label1 = new Label();
-            button1 = new Button();
+            LogoutButton = new Button();
+            WelcomeText = new Label();
+            NewTask = new Button();
             EditTask = new Button();
             label2 = new Label();
             Tasks = new ListBox();
             ShowSelectedTask = new Button();
-            button2 = new Button();
+            ActiveTasks = new Button();
             SuspendLayout();
             // 
-            // button3
+            // LogoutButton
             // 
-            button3.Font = new Font("Segoe UI", 12F);
-            button3.Location = new Point(604, 591);
-            button3.Margin = new Padding(4);
-            button3.Name = "button3";
-            button3.Size = new Size(267, 34);
-            button3.TabIndex = 14;
-            button3.Text = "Logout";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += RegisterShow_Click;
+            LogoutButton.Font = new Font("Segoe UI", 12F);
+            LogoutButton.Location = new Point(604, 591);
+            LogoutButton.Margin = new Padding(4);
+            LogoutButton.Name = "LogoutButton";
+            LogoutButton.Size = new Size(267, 34);
+            LogoutButton.TabIndex = 14;
+            LogoutButton.Text = "Logout";
+            LogoutButton.UseVisualStyleBackColor = true;
+            LogoutButton.Click += RegisterShow_Click;
             // 
-            // label1
+            // WelcomeText
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 18F);
-            label1.Location = new Point(604, 9);
-            label1.Margin = new Padding(4, 0, 4, 0);
-            label1.MinimumSize = new Size(129, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(295, 32);
-            label1.TabIndex = 15;
-            label1.Text = "Welcome to your ToDoList";
+            WelcomeText.AutoSize = true;
+            WelcomeText.Font = new Font("Segoe UI", 18F);
+            WelcomeText.Location = new Point(604, 9);
+            WelcomeText.Margin = new Padding(4, 0, 4, 0);
+            WelcomeText.MinimumSize = new Size(129, 0);
+            WelcomeText.Name = "WelcomeText";
+            WelcomeText.Size = new Size(295, 32);
+            WelcomeText.TabIndex = 15;
+            WelcomeText.Text = "Welcome to your ToDoList";
             // 
-            // button1
+            // NewTask
             // 
-            button1.Location = new Point(394, 70);
-            button1.Name = "button1";
-            button1.Size = new Size(190, 23);
-            button1.TabIndex = 16;
-            button1.Text = "New Task";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            NewTask.Location = new Point(394, 70);
+            NewTask.Name = "NewTask";
+            NewTask.Size = new Size(190, 23);
+            NewTask.TabIndex = 16;
+            NewTask.Text = "New Task";
+            NewTask.UseVisualStyleBackColor = true;
+            NewTask.Click += button1_Click;
             // 
             // EditTask
             // 
@@ -116,28 +116,28 @@
             ShowSelectedTask.UseVisualStyleBackColor = true;
             ShowSelectedTask.Click += ShowSelectedTask_Click;
             // 
-            // button2
+            // ActiveTasks
             // 
-            button2.Location = new Point(912, 70);
-            button2.Name = "button2";
-            button2.Size = new Size(190, 23);
-            button2.TabIndex = 23;
-            button2.Text = "Active Tasks";
-            button2.UseVisualStyleBackColor = true;
+            ActiveTasks.Location = new Point(912, 70);
+            ActiveTasks.Name = "ActiveTasks";
+            ActiveTasks.Size = new Size(190, 23);
+            ActiveTasks.TabIndex = 23;
+            ActiveTasks.Text = "Active Tasks";
+            ActiveTasks.UseVisualStyleBackColor = true;
             // 
             // UserMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1471, 654);
-            Controls.Add(button2);
+            Controls.Add(ActiveTasks);
             Controls.Add(ShowSelectedTask);
             Controls.Add(Tasks);
             Controls.Add(label2);
             Controls.Add(EditTask);
-            Controls.Add(button1);
-            Controls.Add(label1);
-            Controls.Add(button3);
+            Controls.Add(NewTask);
+            Controls.Add(WelcomeText);
+            Controls.Add(LogoutButton);
             Name = "UserMenu";
             Text = "UserMenu";
             FormClosing += UserMenu_FormClosing;
@@ -146,13 +146,13 @@
         }
 
         #endregion
-        private Button button3;
-        private Label label1;
-        private Button button1;
+        private Button LogoutButton;
+        private Label WelcomeText;
+        private Button NewTask;
         private Button EditTask;
         private Label label2;
         private ListBox Tasks;
         private Button ShowSelectedTask;
-        private Button button2;
+        private Button ActiveTasks;
     }
 }

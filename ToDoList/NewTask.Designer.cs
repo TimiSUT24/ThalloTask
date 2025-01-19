@@ -28,47 +28,47 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
-            label1 = new Label();
-            textBox1 = new TextBox();
+            AddTaskButton = new Button();
+            TaskLabel = new Label();
+            TaskText = new TextBox();
             label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            listBox1 = new ListBox();
-            label5 = new Label();
-            richTextBox1 = new RichTextBox();
-            dateTimePicker1 = new DateTimePicker();
-            dateTimePicker2 = new DateTimePicker();
-            label6 = new Label();
+            DescriptionLabel = new Label();
+            PriorityLabel = new Label();
+            PriorityList = new ListBox();
+            StartDateLabel = new Label();
+            DescriptionText = new RichTextBox();
+            StartDatePicker = new DateTimePicker();
+            EndDatePicker = new DateTimePicker();
+            EndDateLabel = new Label();
             SuspendLayout();
             // 
-            // button1
+            // AddTaskButton
             // 
-            button1.Location = new Point(32, 448);
-            button1.Name = "button1";
-            button1.Size = new Size(148, 31);
-            button1.TabIndex = 0;
-            button1.Text = "Add Task";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += AddTask_Click;
+            AddTaskButton.Location = new Point(32, 448);
+            AddTaskButton.Name = "AddTaskButton";
+            AddTaskButton.Size = new Size(148, 31);
+            AddTaskButton.TabIndex = 0;
+            AddTaskButton.Text = "Add Task";
+            AddTaskButton.UseVisualStyleBackColor = true;
+            AddTaskButton.Click += AddTask_Click;
             // 
-            // label1
+            // TaskLabel
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F);
-            label1.Location = new Point(32, 27);
-            label1.Name = "label1";
-            label1.Size = new Size(39, 21);
-            label1.TabIndex = 3;
-            label1.Text = "Task";
+            TaskLabel.AutoSize = true;
+            TaskLabel.Font = new Font("Segoe UI", 12F);
+            TaskLabel.Location = new Point(32, 27);
+            TaskLabel.Name = "TaskLabel";
+            TaskLabel.Size = new Size(39, 21);
+            TaskLabel.TabIndex = 3;
+            TaskLabel.Text = "Task";
             // 
-            // textBox1
+            // TaskText
             // 
-            textBox1.Font = new Font("Segoe UI", 11F);
-            textBox1.Location = new Point(32, 51);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(204, 27);
-            textBox1.TabIndex = 4;
+            TaskText.Font = new Font("Segoe UI", 11F);
+            TaskText.Location = new Point(32, 51);
+            TaskText.Name = "TaskText";
+            TaskText.Size = new Size(204, 27);
+            TaskText.TabIndex = 4;
             // 
             // label2
             // 
@@ -79,97 +79,97 @@
             label2.Size = new Size(0, 21);
             label2.TabIndex = 5;
             // 
-            // label3
+            // DescriptionLabel
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 12F);
-            label3.Location = new Point(32, 87);
-            label3.Name = "label3";
-            label3.Size = new Size(89, 21);
-            label3.TabIndex = 6;
-            label3.Text = "Description";
+            DescriptionLabel.AutoSize = true;
+            DescriptionLabel.Font = new Font("Segoe UI", 12F);
+            DescriptionLabel.Location = new Point(32, 87);
+            DescriptionLabel.Name = "DescriptionLabel";
+            DescriptionLabel.Size = new Size(89, 21);
+            DescriptionLabel.TabIndex = 6;
+            DescriptionLabel.Text = "Description";
             // 
-            // label4
+            // PriorityLabel
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 12F);
-            label4.Location = new Point(30, 221);
-            label4.Name = "label4";
-            label4.Size = new Size(61, 21);
-            label4.TabIndex = 8;
-            label4.Text = "Priority";
+            PriorityLabel.AutoSize = true;
+            PriorityLabel.Font = new Font("Segoe UI", 12F);
+            PriorityLabel.Location = new Point(30, 221);
+            PriorityLabel.Name = "PriorityLabel";
+            PriorityLabel.Size = new Size(61, 21);
+            PriorityLabel.TabIndex = 8;
+            PriorityLabel.Text = "Priority";
             // 
-            // listBox1
+            // PriorityList
             // 
-            listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 15;
-            listBox1.Items.AddRange(new object[] { "High", "Medium", "Low", "None" });
-            listBox1.Location = new Point(32, 255);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(120, 49);
-            listBox1.TabIndex = 10;
-            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
+            PriorityList.FormattingEnabled = true;
+            PriorityList.ItemHeight = 15;
+            PriorityList.Items.AddRange(new object[] { "High", "Medium", "Low", "None" });
+            PriorityList.Location = new Point(32, 255);
+            PriorityList.Name = "PriorityList";
+            PriorityList.Size = new Size(120, 49);
+            PriorityList.TabIndex = 10;
+            PriorityList.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
-            // label5
+            // StartDateLabel
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 12F);
-            label5.Location = new Point(32, 317);
-            label5.Name = "label5";
-            label5.Size = new Size(76, 21);
-            label5.TabIndex = 11;
-            label5.Text = "Start date";
+            StartDateLabel.AutoSize = true;
+            StartDateLabel.Font = new Font("Segoe UI", 12F);
+            StartDateLabel.Location = new Point(32, 317);
+            StartDateLabel.Name = "StartDateLabel";
+            StartDateLabel.Size = new Size(76, 21);
+            StartDateLabel.TabIndex = 11;
+            StartDateLabel.Text = "Start date";
             // 
-            // richTextBox1
+            // DescriptionText
             // 
-            richTextBox1.Location = new Point(32, 111);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(238, 96);
-            richTextBox1.TabIndex = 13;
-            richTextBox1.Text = "";
+            DescriptionText.Location = new Point(32, 111);
+            DescriptionText.Name = "DescriptionText";
+            DescriptionText.Size = new Size(238, 96);
+            DescriptionText.TabIndex = 13;
+            DescriptionText.Text = "";
             // 
-            // dateTimePicker1
+            // StartDatePicker
             // 
-            dateTimePicker1.Location = new Point(32, 341);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(200, 23);
-            dateTimePicker1.TabIndex = 14;
+            StartDatePicker.Location = new Point(32, 341);
+            StartDatePicker.Name = "StartDatePicker";
+            StartDatePicker.Size = new Size(200, 23);
+            StartDatePicker.TabIndex = 14;
             // 
-            // dateTimePicker2
+            // EndDatePicker
             // 
-            dateTimePicker2.Location = new Point(32, 404);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(200, 23);
-            dateTimePicker2.TabIndex = 16;           
+            EndDatePicker.Location = new Point(32, 404);
+            EndDatePicker.Name = "EndDatePicker";
+            EndDatePicker.Size = new Size(200, 23);
+            EndDatePicker.TabIndex = 16;
             // 
-            // label6
+            // EndDateLabel
             // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 12F);
-            label6.Location = new Point(32, 380);
-            label6.Name = "label6";
-            label6.Size = new Size(70, 21);
-            label6.TabIndex = 15;
-            label6.Text = "End date";
+            EndDateLabel.AutoSize = true;
+            EndDateLabel.Font = new Font("Segoe UI", 12F);
+            EndDateLabel.Location = new Point(32, 380);
+            EndDateLabel.Name = "EndDateLabel";
+            EndDateLabel.Size = new Size(70, 21);
+            EndDateLabel.TabIndex = 15;
+            EndDateLabel.Text = "End date";
             // 
-            // New_ToDoList
+            // NewTask
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(953, 650);
-            Controls.Add(dateTimePicker2);
-            Controls.Add(label6);
-            Controls.Add(dateTimePicker1);
-            Controls.Add(richTextBox1);
-            Controls.Add(label5);
-            Controls.Add(listBox1);
-            Controls.Add(label4);
-            Controls.Add(label3);
+            Controls.Add(EndDatePicker);
+            Controls.Add(EndDateLabel);
+            Controls.Add(StartDatePicker);
+            Controls.Add(DescriptionText);
+            Controls.Add(StartDateLabel);
+            Controls.Add(PriorityList);
+            Controls.Add(PriorityLabel);
+            Controls.Add(DescriptionLabel);
             Controls.Add(label2);
-            Controls.Add(textBox1);
-            Controls.Add(label1);
-            Controls.Add(button1);
-            Name = "New_ToDoList";
+            Controls.Add(TaskText);
+            Controls.Add(TaskLabel);
+            Controls.Add(AddTaskButton);
+            Name = "NewTask";
             Text = "New_ToDoList";
             ResumeLayout(false);
             PerformLayout();
@@ -177,17 +177,17 @@
 
         #endregion
 
-        private Button button1;
-        private Label label1;
-        public TextBox textBox1;
+        private Button AddTaskButton;
+        private Label TaskLabel;
+        public TextBox TaskText;
         private Label label2;
-        private Label label3;
-        private Label label4;
-        private ListBox listBox1;
-        private Label label5;
-        private RichTextBox richTextBox1;
-        private DateTimePicker dateTimePicker1;
-        private DateTimePicker dateTimePicker2;
-        private Label label6;
+        private Label DescriptionLabel;
+        private Label PriorityLabel;
+        private ListBox PriorityList;
+        private Label StartDateLabel;
+        private RichTextBox DescriptionText;
+        private DateTimePicker StartDatePicker;
+        private DateTimePicker EndDatePicker;
+        private Label EndDateLabel;
     }
 }

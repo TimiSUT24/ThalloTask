@@ -54,7 +54,7 @@ namespace ToDoList
         private void AddTask_Click(object sender, EventArgs e)
         {
 
-            if (string.IsNullOrEmpty(textBox1.Text) || string.IsNullOrWhiteSpace(textBox1.Text))
+            if (string.IsNullOrEmpty(TaskText.Text) || string.IsNullOrWhiteSpace(TaskText.Text))
             {
                 MessageBox.Show("Task cannot be empty");
                 return;
@@ -71,12 +71,12 @@ namespace ToDoList
                     string addTask = "INSERT INTO TASKS(TASK,DESCRIPTION,PRIORITY,DATESTART,DATEEND,USER_ID) VALUES (@TASK,@DESCRIPTION,@PRIORITY,@DATESTART,@DATEEND,@USER_ID)";
                     using (SqlCommand cmd = new SqlCommand(addTask, conn))
                     {
-                        cmd.Parameters.AddWithValue("@TASK", textBox1.Text);                //Insert these values to the database 
-                        cmd.Parameters.AddWithValue("@DESCRIPTION", richTextBox1.Text);
-                        cmd.Parameters.AddWithValue("@PRIORITY", listBox1.Text);
+                        cmd.Parameters.AddWithValue("@TASK", TaskText.Text);                //Insert these values to the database 
+                        cmd.Parameters.AddWithValue("@DESCRIPTION", DescriptionText.Text);
+                        cmd.Parameters.AddWithValue("@PRIORITY", PriorityList.Text);
                         cmd.Parameters.AddWithValue("@USER_ID", userId);
-                        cmd.Parameters.AddWithValue("@DATESTART", dateTimePicker1.Value.Date);
-                        cmd.Parameters.AddWithValue("@DATEEND", dateTimePicker2.Value.Date);
+                        cmd.Parameters.AddWithValue("@DATESTART", StartDatePicker.Value.Date);
+                        cmd.Parameters.AddWithValue("@DATEEND", EndDatePicker.Value.Date);
                         int rows = cmd.ExecuteNonQuery();
                         if (rows > 0)
                         {

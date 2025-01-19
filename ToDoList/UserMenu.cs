@@ -17,8 +17,7 @@ namespace ToDoList
     {
         private string currentUser { get; set; }
         private int userId { get; set; }
-        private string task { get; set; }
-
+        private string task { get; set; }      
         public UserMenu(string userName)
         {
             InitializeComponent();
@@ -57,11 +56,8 @@ namespace ToDoList
         {
             ShowTaskDetails();
         }
-        private void ShowTaskDetails()
-        {
-            NewTask to = new NewTask(currentUser);
-            userId = to.GetUserID(currentUser);
-
+        public void ShowTaskDetails()
+        {                                 
             using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
             {
                 try
@@ -74,14 +70,14 @@ namespace ToDoList
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
-                            {
+                            {                                
                                 string task1 = reader["TASK"].ToString();
                                 string description = reader["DESCRIPTION"].ToString();
-                                string priority = reader["PRIORITY"].ToString();
+                                string priority = reader["PRIORITY"].ToString();                           
                                 string datestart = reader["DATESTART"].ToString();
                                 string dateEnd = reader["DATEEND"].ToString();
                                 MessageBox.Show($" Task: {task1}\n\n Description: {description}\n\n Priority: {priority}\n\n DateStart: {datestart}\n DateEnd: {dateEnd}");
-                            }
+                            }                           
                         }
                     }
                 }
@@ -125,7 +121,8 @@ namespace ToDoList
             {
                 if (task == Tasks.Items[Tasks.SelectedIndex].ToString())
                 {
-                    MessageBox.Show(task);                 
+                    EditTask editTask = new EditTask(currentUser,task);                   
+                    editTask.Show(); 
                 }                
             }
             catch (Exception ex)

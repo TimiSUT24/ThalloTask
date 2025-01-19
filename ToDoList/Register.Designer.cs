@@ -28,104 +28,104 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
-            label1 = new Label();
-            label2 = new Label();
-            textBox2 = new TextBox();
-            button1 = new Button();
-            label3 = new Label();
-            button2 = new Button();
-            button3 = new Button();
+            UsernameText = new TextBox();
+            UsernameLabel = new Label();
+            PasswordLabel = new Label();
+            PasswordText = new TextBox();
+            RegisterButton = new Button();
+            RegisterLabel = new Label();
+            LoginButton = new Button();
+            ExitButton = new Button();
             SuspendLayout();
             // 
-            // textBox1
+            // UsernameText
             // 
-            textBox1.BackColor = SystemColors.Window;
-            textBox1.Location = new Point(15, 90);
-            textBox1.Margin = new Padding(4);
-            textBox1.MaxLength = 50;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(264, 29);
-            textBox1.TabIndex = 0;
+            UsernameText.BackColor = SystemColors.Window;
+            UsernameText.Location = new Point(15, 90);
+            UsernameText.Margin = new Padding(4);
+            UsernameText.MaxLength = 50;
+            UsernameText.Name = "UsernameText";
+            UsernameText.Size = new Size(264, 29);
+            UsernameText.TabIndex = 0;
             // 
-            // label1
+            // UsernameLabel
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 10F);
-            label1.Location = new Point(15, 50);
-            label1.Margin = new Padding(4, 0, 4, 0);
-            label1.MinimumSize = new Size(129, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(129, 19);
-            label1.TabIndex = 1;
-            label1.Text = "Enter username";
+            UsernameLabel.AutoSize = true;
+            UsernameLabel.Font = new Font("Segoe UI", 10F);
+            UsernameLabel.Location = new Point(15, 50);
+            UsernameLabel.Margin = new Padding(4, 0, 4, 0);
+            UsernameLabel.MinimumSize = new Size(129, 0);
+            UsernameLabel.Name = "UsernameLabel";
+            UsernameLabel.Size = new Size(129, 19);
+            UsernameLabel.TabIndex = 1;
+            UsernameLabel.Text = "Enter username";
             // 
-            // label2
+            // PasswordLabel
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 10F);
-            label2.Location = new Point(15, 139);
-            label2.Margin = new Padding(4, 0, 4, 0);
-            label2.MinimumSize = new Size(129, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(129, 19);
-            label2.TabIndex = 3;
-            label2.Text = "Enter password";
+            PasswordLabel.AutoSize = true;
+            PasswordLabel.Font = new Font("Segoe UI", 10F);
+            PasswordLabel.Location = new Point(15, 139);
+            PasswordLabel.Margin = new Padding(4, 0, 4, 0);
+            PasswordLabel.MinimumSize = new Size(129, 0);
+            PasswordLabel.Name = "PasswordLabel";
+            PasswordLabel.Size = new Size(129, 19);
+            PasswordLabel.TabIndex = 3;
+            PasswordLabel.Text = "Enter password";
             // 
-            // textBox2
+            // PasswordText
             // 
-            textBox2.BackColor = SystemColors.Window;
-            textBox2.Location = new Point(15, 178);
-            textBox2.Margin = new Padding(4);
-            textBox2.MaxLength = 50;
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(264, 29);
-            textBox2.TabIndex = 2;
-            textBox2.UseSystemPasswordChar = true;
+            PasswordText.BackColor = SystemColors.Window;
+            PasswordText.Location = new Point(15, 178);
+            PasswordText.Margin = new Padding(4);
+            PasswordText.MaxLength = 50;
+            PasswordText.Name = "PasswordText";
+            PasswordText.Size = new Size(264, 29);
+            PasswordText.TabIndex = 2;
+            PasswordText.UseSystemPasswordChar = true;
             // 
-            // button1
+            // RegisterButton
             // 
-            button1.Font = new Font("Segoe UI", 12F);
-            button1.Location = new Point(15, 235);
-            button1.Margin = new Padding(4);
-            button1.Name = "button1";
-            button1.Size = new Size(267, 34);
-            button1.TabIndex = 4;
-            button1.Text = "Register";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            RegisterButton.Font = new Font("Segoe UI", 12F);
+            RegisterButton.Location = new Point(15, 235);
+            RegisterButton.Margin = new Padding(4);
+            RegisterButton.Name = "RegisterButton";
+            RegisterButton.Size = new Size(267, 34);
+            RegisterButton.TabIndex = 4;
+            RegisterButton.Text = "Register";
+            RegisterButton.UseVisualStyleBackColor = true;
+            RegisterButton.Click += button1_Click;
             // 
-            // label3
+            // RegisterLabel
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 10F);
-            label3.Location = new Point(13, 9);
-            label3.Margin = new Padding(4, 0, 4, 0);
-            label3.MinimumSize = new Size(129, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(145, 19);
-            label3.TabIndex = 5;
-            label3.Text = "Register your account:";
+            RegisterLabel.AutoSize = true;
+            RegisterLabel.Font = new Font("Segoe UI", 10F);
+            RegisterLabel.Location = new Point(13, 9);
+            RegisterLabel.Margin = new Padding(4, 0, 4, 0);
+            RegisterLabel.MinimumSize = new Size(129, 0);
+            RegisterLabel.Name = "RegisterLabel";
+            RegisterLabel.Size = new Size(145, 19);
+            RegisterLabel.TabIndex = 5;
+            RegisterLabel.Text = "Register your account:";
             // 
-            // button2
+            // LoginButton
             // 
-            button2.Location = new Point(15, 285);
-            button2.Name = "button2";
-            button2.Size = new Size(267, 34);
-            button2.TabIndex = 6;
-            button2.Text = "Login";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            LoginButton.Location = new Point(15, 285);
+            LoginButton.Name = "LoginButton";
+            LoginButton.Size = new Size(267, 34);
+            LoginButton.TabIndex = 6;
+            LoginButton.Text = "Login";
+            LoginButton.UseVisualStyleBackColor = true;
+            LoginButton.Click += button2_Click;
             // 
-            // button3
+            // ExitButton
             // 
-            button3.Location = new Point(15, 334);
-            button3.Name = "button3";
-            button3.Size = new Size(267, 34);
-            button3.TabIndex = 7;
-            button3.Text = "Exit";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            ExitButton.Location = new Point(15, 334);
+            ExitButton.Name = "ExitButton";
+            ExitButton.Size = new Size(267, 34);
+            ExitButton.TabIndex = 7;
+            ExitButton.Text = "Exit";
+            ExitButton.UseVisualStyleBackColor = true;
+            ExitButton.Click += button3_Click;
             // 
             // Register
             // 
@@ -133,14 +133,14 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(1382, 839);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(label3);
-            Controls.Add(button1);
-            Controls.Add(label2);
-            Controls.Add(textBox2);
-            Controls.Add(label1);
-            Controls.Add(textBox1);
+            Controls.Add(ExitButton);
+            Controls.Add(LoginButton);
+            Controls.Add(RegisterLabel);
+            Controls.Add(RegisterButton);
+            Controls.Add(PasswordLabel);
+            Controls.Add(PasswordText);
+            Controls.Add(UsernameLabel);
+            Controls.Add(UsernameText);
             Font = new Font("Segoe UI", 12F);
             Margin = new Padding(4);
             Name = "Register";
@@ -151,13 +151,13 @@
 
         #endregion
 
-        private TextBox textBox1;
-        private Label label1;
-        private Label label2;
-        private Button button1;
-        private Label label3;
-        private Button button2;
-        private Button button3;
-        private TextBox textBox2;
+        private TextBox UsernameText;
+        private Label UsernameLabel;
+        private Label PasswordLabel;
+        private Button RegisterButton;
+        private Label RegisterLabel;
+        private Button LoginButton;
+        private Button ExitButton;
+        private TextBox PasswordText;
     }
 }

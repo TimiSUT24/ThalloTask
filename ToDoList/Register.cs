@@ -17,8 +17,8 @@ namespace ToDoList
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            _userName = textBox1.Text?.Trim();
-            _password = textBox2.Text?.Trim();
+            _userName = UsernameText.Text?.Trim();
+            _password = PasswordText.Text?.Trim();
 
             if (string.IsNullOrEmpty(_userName) || string.IsNullOrEmpty(_password))
             {
