@@ -48,6 +48,7 @@ namespace ToDoList
                         }
                     }
                 }
+                conn.Close();
             }
         }      
         private void EditTasks()
@@ -66,6 +67,7 @@ namespace ToDoList
                     cmd.Parameters.AddWithValue("@DATEEND", dateEnd);
                     cmd.ExecuteNonQuery();
                 }
+                conn.Close();
             }
         }
         private void EditsTask_Click(object sender, EventArgs e)

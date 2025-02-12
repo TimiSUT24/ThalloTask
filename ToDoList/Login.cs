@@ -41,7 +41,7 @@ namespace ToDoList
                     {
                         cmd.Parameters.AddWithValue("@UserName", userName);
                         string storedHash = cmd.ExecuteScalar() as string;
-
+                        conn.Close();
                         if (storedHash != null && storedHash == passwordHash)
                         {
                             UserMenu usermenu = new UserMenu(userName);
@@ -49,13 +49,13 @@ namespace ToDoList
                             usermenu.Show();
                             this.Hide();
                             return true; // Passwords match
-                        }
+                        }                       
                         else
                         {
                             MessageBox.Show("Wrong password or username");
                             return false;
                         }
-                    }
+                    }                   
                 }
                 catch (Exception ex)
                 {

@@ -13,7 +13,7 @@ namespace ToDoList
 {
     public partial class NewTask : Form
     {
-        private string currentUser { get; set; }
+        private string currentUser { get; set; }      
         public NewTask(string userName)
         {
             InitializeComponent();
@@ -48,10 +48,11 @@ namespace ToDoList
                         MessageBox.Show("Error null");
                     }
                 }
+                conn.Close();
             }
             return userId;
         }
-        private void AddTask_Click(object sender, EventArgs e)
+        public void AddTask_Click(object sender, EventArgs e)
         {
 
             if (string.IsNullOrEmpty(TaskText.Text) || string.IsNullOrWhiteSpace(TaskText.Text))
@@ -79,20 +80,21 @@ namespace ToDoList
                         cmd.Parameters.AddWithValue("@DATEEND", EndDatePicker.Value.Date);
                         int rows = cmd.ExecuteNonQuery();
                         if (rows > 0)
-                        {
-                            MessageBox.Show("Task added");
+                        {                           
+                            MessageBox.Show("Task added");                           
                         }
                         else
                         {
                             MessageBox.Show("Error");
                         }
                     }
-                }
+                    conn.Close();
+                }              
                 catch (Exception ex)
                 {
                     MessageBox.Show("An error occured " + ex.Message);
                 }
-            }
+            }        
         }       
     }
 }

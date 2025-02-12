@@ -77,6 +77,7 @@ namespace ToDoList
                             MessageBox.Show("Registration failed. Please try again.");
                         }
                     }
+                    conn.Close();
                 }
                 catch (Exception ex)
                 {

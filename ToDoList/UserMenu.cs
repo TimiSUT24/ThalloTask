@@ -17,7 +17,7 @@ namespace ToDoList
     {
         private string currentUser { get; set; }
         private int userId { get; set; }
-        private string task { get; set; }      
+        private string task { get; set; }
         public UserMenu(string userName)
         {
             InitializeComponent();
@@ -50,14 +50,14 @@ namespace ToDoList
 
         private void Tasks_SelectedIndexChanged(object sender, EventArgs e)
         {
-            task = Tasks.Items[Tasks.SelectedIndex].ToString(); //Gets the selected id
+            task = Tasks.Items[Tasks.SelectedIndex].ToString(); //Gets the selected id                    
         }
         private void ShowSelectedTask_Click(object sender, EventArgs e)
         {
             ShowTaskDetails();
         }
         public void ShowTaskDetails()
-        {                                 
+        {
             using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
             {
                 try
@@ -70,16 +70,17 @@ namespace ToDoList
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
-                            {                                
+                            {
                                 string task1 = reader["TASK"].ToString();
                                 string description = reader["DESCRIPTION"].ToString();
-                                string priority = reader["PRIORITY"].ToString();                           
+                                string priority = reader["PRIORITY"].ToString();
                                 string datestart = reader["DATESTART"].ToString();
                                 string dateEnd = reader["DATEEND"].ToString();
                                 MessageBox.Show($" Task: {task1}\n\n Description: {description}\n\n Priority: {priority}\n\n DateStart: {datestart}\n DateEnd: {dateEnd}");
-                            }                           
+                            }
                         }
                     }
+                    conn.Close();
                 }
                 catch (Exception ex)
                 {
@@ -87,7 +88,7 @@ namespace ToDoList
                 }
             }
         }
-        private void ShowTasks()
+        public void ShowTasks()
         {
             NewTask to = new NewTask(currentUser);
             userId = to.GetUserID(currentUser);     //Get which user is logged in and gets id 
@@ -108,6 +109,7 @@ namespace ToDoList
                         }
                     }
                 }
+                conn.Close();
             }
         }
         private void Tasks_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -121,16 +123,52 @@ namespace ToDoList
             {
                 if (task == Tasks.Items[Tasks.SelectedIndex].ToString())
                 {
-                    EditTask editTask = new EditTask(currentUser,task);                   
-                    editTask.Show(); 
-                }                
+                    EditTask editTask = new EditTask(currentUser, task);
+                    editTask.Show();
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: Select a task to edit");
             }
-          
+
         }
-      
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                {
+                    conn.Open();
+                    string deleteTask = @"DELETE FROM TASKS WHERE TASK = @TASK";
+                    using (SqlCommand cmd = new SqlCommand(deleteTask, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@TASK", task);
+
+                        cmd.ExecuteNonQuery();
+
+                    }
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error:" + ex);
+            }
+            Tasks.Items.Clear();
+            ShowTasks();
+        }
+
+        public void ReloadButton_Click(object sender, EventArgs e)
+        {
+            Tasks.Items.Clear();
+            ShowTasks();
+        }   
+        private void UserMenu_MouseClick(object sender, MouseEventArgs e)
+        {
+            Tasks.Items.Clear();
+            ShowTasks();
+        }
     }
 }
