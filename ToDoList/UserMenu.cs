@@ -50,7 +50,14 @@ namespace ToDoList
 
         private void Tasks_SelectedIndexChanged(object sender, EventArgs e)
         {
-            task = Tasks.Items[Tasks.SelectedIndex].ToString(); //Gets the selected id                    
+            if (Tasks.SelectedIndex != -1)
+            {
+                task = Tasks.Items[Tasks.SelectedIndex].ToString(); //Gets the selected id
+            }
+            else
+            {
+                return;
+            }
         }
         private void ShowSelectedTask_Click(object sender, EventArgs e)
         {
@@ -96,7 +103,16 @@ namespace ToDoList
             using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
             {
                 conn.Open();
-                string task = "SELECT TASK FROM TASKS WHERE USER_ID = @USER_ID";
+                string task = @"SELECT TASK FROM TASKS WHERE USER_ID = @USER_ID
+                                ORDER BY 
+                                (CASE
+                                    WHEN PRIORITY = 'HIGH' THEN 1 
+                                    WHEN PRIORITY = 'MEDIUM' THEN 2   
+                                    WHEN PRIORITY = 'LOW' THEN 3   
+                                    ELSE 'NONE'
+                                END);
+                                ";
+
                 using (SqlCommand cmd = new SqlCommand(task, conn))
                 {
                     cmd.Parameters.AddWithValue("@USER_ID", userId);
@@ -129,15 +145,29 @@ namespace ToDoList
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: Select a task to edit");
+                MessageBox.Show("Please: Select a task to edit");
             }
 
         }
-
-        private void DeleteButton_Click(object sender, EventArgs e)
+        public static async Task DeleteConformation()
+        {
+            Task.Delay(1000);
+        }
+        private async void DeleteButton_Click(object sender, EventArgs e)
         {
             try
             {
+                var choice = MessageBox.Show("Are you sure you want to delete?", "Confirm Delete",
+                                  MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
+                if (choice == DialogResult.No)
+                {
+                    return;
+                }
+                else if (choice == DialogResult.Yes)
+                {
+                    await DeleteConformation();
+                }
+
                 using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
                 {
                     conn.Open();
@@ -164,11 +194,14 @@ namespace ToDoList
         {
             Tasks.Items.Clear();
             ShowTasks();
-        }   
+        }
         private void UserMenu_MouseClick(object sender, MouseEventArgs e)
         {
+            focuslb.Focus();
             Tasks.Items.Clear();
             ShowTasks();
         }
+
+        
     }
 }

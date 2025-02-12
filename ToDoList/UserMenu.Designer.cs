@@ -39,6 +39,7 @@
             ActiveTasks = new Button();
             DeleteButton = new Button();
             ReloadButton = new Button();
+            focuslb = new Label();
             SuspendLayout();
             // 
             // LogoutButton
@@ -106,9 +107,9 @@
             Tasks.Location = new Point(778, 99);
             Tasks.Name = "Tasks";
             Tasks.Size = new Size(190, 199);
-            Tasks.TabIndex = 21;        
+            Tasks.TabIndex = 21;
             Tasks.SelectedIndexChanged += Tasks_SelectedIndexChanged;
-            Tasks.MouseDoubleClick += Tasks_MouseDoubleClick;         
+            Tasks.MouseDoubleClick += Tasks_MouseDoubleClick;
             // 
             // ShowSelectedTask
             // 
@@ -148,14 +149,24 @@
             ReloadButton.Name = "ReloadButton";
             ReloadButton.Size = new Size(24, 24);
             ReloadButton.TabIndex = 25;
+            ReloadButton.TabStop = false;
             ReloadButton.UseVisualStyleBackColor = false;
             ReloadButton.Click += ReloadButton_Click;
+            // 
+            // focuslb
+            // 
+            focuslb.AutoSize = true;
+            focuslb.Location = new Point(504, 267);
+            focuslb.Name = "focuslb";
+            focuslb.Size = new Size(0, 15);
+            focuslb.TabIndex = 26;
             // 
             // UserMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1443, 680);
+            Controls.Add(focuslb);
             Controls.Add(ReloadButton);
             Controls.Add(DeleteButton);
             Controls.Add(ActiveTasks);
@@ -185,5 +196,6 @@
         private Button ActiveTasks;
         private Button DeleteButton;
         private Button ReloadButton;
+        private Label focuslb;
     }
 }
