@@ -103,12 +103,11 @@
             // 
             PriorityList.FormattingEnabled = true;
             PriorityList.ItemHeight = 15;
-            PriorityList.Items.AddRange(new object[] { "High", "Medium", "Low", "None" });
+            PriorityList.Items.AddRange(new object[] { "High", "Medium", "Low" });
             PriorityList.Location = new Point(32, 255);
             PriorityList.Name = "PriorityList";
             PriorityList.Size = new Size(120, 49);
             PriorityList.TabIndex = 10;
-            PriorityList.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
             // StartDateLabel
             // 

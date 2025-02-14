@@ -24,7 +24,7 @@ namespace ToDoList
             string username = UsernameText.Text;
             string password = PasswordText.Text;
 
-            ValidateUser(username, password);           
+            ValidateUser(username, password);
         }
         private bool ValidateUser(string userName, string password)
         {
@@ -45,17 +45,17 @@ namespace ToDoList
                         if (storedHash != null && storedHash == passwordHash)
                         {
                             UserMenu usermenu = new UserMenu(userName);
-                            MessageBox.Show("Successful login");                           
+                            MessageBox.Show("Successful login");
                             usermenu.Show();
                             this.Hide();
                             return true; // Passwords match
-                        }                       
+                        }
                         else
                         {
                             MessageBox.Show("Wrong password or username");
                             return false;
                         }
-                    }                   
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -88,6 +88,12 @@ namespace ToDoList
         private void Login_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
-        }        
+        }
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            var paint = new Register();
+            paint.PaintForm(e);
+        }
+
     }
 }

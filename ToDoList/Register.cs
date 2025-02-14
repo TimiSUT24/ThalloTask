@@ -3,6 +3,9 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Configuration;
 using System.Security.Cryptography;
 using Microsoft.Data.SqlClient;
+using System.Drawing.Drawing2D;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrayNotify;
+using System.Drawing;
 
 namespace ToDoList
 {
@@ -10,7 +13,6 @@ namespace ToDoList
     {
         private string _userName { get; set; }
         private string _password { get; set; }
-
         public Register()
         {
             InitializeComponent();
@@ -40,7 +42,7 @@ namespace ToDoList
 
             // Save to the database
             using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft SQL Server"].ConnectionString))
-            {               
+            {
                 try
                 {
                     conn.Open();
@@ -111,6 +113,23 @@ namespace ToDoList
         {
             Application.Exit();
         }
-       
+
+        public void PaintForm(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            Color color1 = ColorTranslator.FromHtml("#E6DADA"); // Gradient color
+            Color color2 = ColorTranslator.FromHtml("#274046");
+
+            //LinearGradient Brush
+            using (LinearGradientBrush brush = new LinearGradientBrush(
+                this.ClientRectangle, color1, color2, LinearGradientMode.Vertical))
+            {
+                e.Graphics.FillRectangle(brush, this.ClientRectangle);
+            }
+        }
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            PaintForm(e);
+        }
     }
 }

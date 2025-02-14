@@ -1,65 +1,70 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using CuoreUI;
+using Microsoft.Data.SqlClient;
 using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.ComponentModel.Design.ObjectSelectorEditor;
+
 
 namespace ToDoList
 {
     public partial class UserMenu : Form
     {
-        private string currentUser { get; set; }
-        private int userId { get; set; }
-        private string task { get; set; }
+        private string CurrentUser { get; set; }
+        private int UserId { get; set; }
+        public string task { get; set; }
+        public string AllTasks { get; set; }
         public UserMenu(string userName)
         {
             InitializeComponent();
-            currentUser = userName;
+            CurrentUser = userName;
             ShowName();
             ShowTasks();
         }
-        private void RegisterShow_Click(object sender, EventArgs e)
+        private void LogoutButton_Click(object sender, EventArgs e)
         {
             Register register = new Register();
             register.Show();
             this.Hide();
         }
-
         private void UserMenu_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void NewTask_Click(object sender, EventArgs e)
         {
-            string userName = currentUser;
+            string userName = CurrentUser;
             NewTask ToDo = new NewTask(userName);
             ToDo.Show();
         }
-
         public void ShowName()
         {
-            label2.Text = "Logged in as " + currentUser;
+            if (TextUser.Content.Length > TextUser.Content.Length)
+            {
+                ContentAlignment.MiddleLeft.ToString();
+            }
+            TextUser.Content = "Logged in as " + CurrentUser;
         }
 
         private void Tasks_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Tasks.SelectedIndex != -1)
             {
-                task = Tasks.Items[Tasks.SelectedIndex].ToString(); //Gets the selected id
+                task = Tasks.Items[Tasks.SelectedIndex].ToString(); //Gets the selected task
             }
             else
             {
                 return;
             }
         }
-        private void ShowSelectedTask_Click(object sender, EventArgs e)
+        private void ShowTask_Click(object sender, EventArgs e)
         {
             ShowTaskDetails();
         }
@@ -97,8 +102,8 @@ namespace ToDoList
         }
         public void ShowTasks()
         {
-            NewTask to = new NewTask(currentUser);
-            userId = to.GetUserID(currentUser);     //Get which user is logged in and gets id 
+            NewTask to = new NewTask(CurrentUser);
+            UserId = to.GetUserID(CurrentUser);     //Get which user is logged in and gets id 
 
             using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
             {
@@ -115,13 +120,13 @@ namespace ToDoList
 
                 using (SqlCommand cmd = new SqlCommand(task, conn))
                 {
-                    cmd.Parameters.AddWithValue("@USER_ID", userId);
+                    cmd.Parameters.AddWithValue("@USER_ID", UserId);
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())                   //read from database to code and add items to list
                         {
-                            string item = reader["TASK"].ToString();
-                            Tasks.Items.Add(item);
+                            AllTasks = reader["TASK"].ToString();
+                            Tasks.Items.Add(AllTasks);
                         }
                     }
                 }
@@ -139,7 +144,7 @@ namespace ToDoList
             {
                 if (task == Tasks.Items[Tasks.SelectedIndex].ToString())
                 {
-                    EditTask editTask = new EditTask(currentUser, task);
+                    EditTask editTask = new EditTask(CurrentUser, task);
                     editTask.Show();
                 }
             }
@@ -147,7 +152,6 @@ namespace ToDoList
             {
                 MessageBox.Show("Please: Select a task to edit");
             }
-
         }
         public static async Task DeleteConformation()
         {
@@ -189,8 +193,7 @@ namespace ToDoList
             Tasks.Items.Clear();
             ShowTasks();
         }
-
-        public void ReloadButton_Click(object sender, EventArgs e)
+        private void ReloadButton_Click_1(object sender, EventArgs e)
         {
             Tasks.Items.Clear();
             ShowTasks();
@@ -201,7 +204,10 @@ namespace ToDoList
             Tasks.Items.Clear();
             ShowTasks();
         }
-
-        
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            var paint = new Register();
+            paint.PaintForm(e);
+        }     
     }
 }

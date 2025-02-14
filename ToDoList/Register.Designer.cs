@@ -36,12 +36,13 @@
             RegisterLabel = new Label();
             LoginButton = new Button();
             ExitButton = new Button();
+            label1 = new Label();
             SuspendLayout();
             // 
             // UsernameText
             // 
             UsernameText.BackColor = SystemColors.Window;
-            UsernameText.Location = new Point(15, 90);
+            UsernameText.Location = new Point(564, 216);
             UsernameText.Margin = new Padding(4);
             UsernameText.MaxLength = 50;
             UsernameText.Name = "UsernameText";
@@ -51,8 +52,9 @@
             // UsernameLabel
             // 
             UsernameLabel.AutoSize = true;
+            UsernameLabel.BackColor = Color.Transparent;
             UsernameLabel.Font = new Font("Segoe UI", 10F);
-            UsernameLabel.Location = new Point(15, 50);
+            UsernameLabel.Location = new Point(564, 184);
             UsernameLabel.Margin = new Padding(4, 0, 4, 0);
             UsernameLabel.MinimumSize = new Size(129, 0);
             UsernameLabel.Name = "UsernameLabel";
@@ -63,8 +65,9 @@
             // PasswordLabel
             // 
             PasswordLabel.AutoSize = true;
+            PasswordLabel.BackColor = Color.Transparent;
             PasswordLabel.Font = new Font("Segoe UI", 10F);
-            PasswordLabel.Location = new Point(15, 139);
+            PasswordLabel.Location = new Point(564, 272);
             PasswordLabel.Margin = new Padding(4, 0, 4, 0);
             PasswordLabel.MinimumSize = new Size(129, 0);
             PasswordLabel.Name = "PasswordLabel";
@@ -75,7 +78,7 @@
             // PasswordText
             // 
             PasswordText.BackColor = SystemColors.Window;
-            PasswordText.Location = new Point(15, 178);
+            PasswordText.Location = new Point(564, 304);
             PasswordText.Margin = new Padding(4);
             PasswordText.MaxLength = 50;
             PasswordText.Name = "PasswordText";
@@ -85,31 +88,33 @@
             // 
             // RegisterButton
             // 
+            RegisterButton.BackColor = Color.Transparent;
             RegisterButton.Font = new Font("Segoe UI", 12F);
-            RegisterButton.Location = new Point(15, 235);
+            RegisterButton.Location = new Point(564, 362);
             RegisterButton.Margin = new Padding(4);
             RegisterButton.Name = "RegisterButton";
             RegisterButton.Size = new Size(267, 34);
             RegisterButton.TabIndex = 4;
             RegisterButton.Text = "Register";
-            RegisterButton.UseVisualStyleBackColor = true;
+            RegisterButton.UseVisualStyleBackColor = false;
             RegisterButton.Click += button1_Click;
             // 
             // RegisterLabel
             // 
             RegisterLabel.AutoSize = true;
-            RegisterLabel.Font = new Font("Segoe UI", 10F);
-            RegisterLabel.Location = new Point(13, 9);
+            RegisterLabel.BackColor = Color.Transparent;
+            RegisterLabel.Font = new Font("Segoe UI", 12F);
+            RegisterLabel.Location = new Point(564, 136);
             RegisterLabel.Margin = new Padding(4, 0, 4, 0);
             RegisterLabel.MinimumSize = new Size(129, 0);
             RegisterLabel.Name = "RegisterLabel";
-            RegisterLabel.Size = new Size(145, 19);
+            RegisterLabel.Size = new Size(164, 21);
             RegisterLabel.TabIndex = 5;
             RegisterLabel.Text = "Register your account:";
             // 
             // LoginButton
             // 
-            LoginButton.Location = new Point(15, 285);
+            LoginButton.Location = new Point(564, 412);
             LoginButton.Name = "LoginButton";
             LoginButton.Size = new Size(267, 34);
             LoginButton.TabIndex = 6;
@@ -119,7 +124,7 @@
             // 
             // ExitButton
             // 
-            ExitButton.Location = new Point(15, 334);
+            ExitButton.Location = new Point(564, 461);
             ExitButton.Name = "ExitButton";
             ExitButton.Size = new Size(267, 34);
             ExitButton.TabIndex = 7;
@@ -127,12 +132,24 @@
             ExitButton.UseVisualStyleBackColor = true;
             ExitButton.Click += button3_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Segoe UI", 20F);
+            label1.Location = new Point(541, 68);
+            label1.Name = "label1";
+            label1.Size = new Size(290, 37);
+            label1.TabIndex = 8;
+            label1.Text = "Welcome To ThalloTask\r\n";
+            // 
             // Register
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlLightLight;
+            BackColor = Color.FromArgb(245, 245, 245);
             ClientSize = new Size(1382, 839);
+            Controls.Add(label1);
             Controls.Add(ExitButton);
             Controls.Add(LoginButton);
             Controls.Add(RegisterLabel);
@@ -143,6 +160,7 @@
             Controls.Add(UsernameText);
             Font = new Font("Segoe UI", 12F);
             Margin = new Padding(4);
+            MaximumSize = new Size(1398, 878);
             Name = "Register";
             FormClosing += Register_FormClosing;
             ResumeLayout(false);
@@ -159,5 +177,6 @@
         private Button LoginButton;
         private Button ExitButton;
         private TextBox PasswordText;
+        private Label label1;
     }
 }

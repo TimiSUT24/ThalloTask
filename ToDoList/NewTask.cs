@@ -8,26 +8,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace ToDoList
 {
     public partial class NewTask : Form
     {
-        private string currentUser { get; set; }      
+        private string CurrentUser { get; set; } 
+        
         public NewTask(string userName)
         {
             InitializeComponent();
-            currentUser = userName;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+            CurrentUser = userName;
+        }             
         public int GetUserID(string userName)
         {
             int userId = -1;
@@ -37,7 +30,7 @@ namespace ToDoList
                 string SelectId = "SELECT ID FROM USERS WHERE USERNAME = @USERNAME";        //get userid by username
                 using (SqlCommand cmd = new SqlCommand(SelectId, conn))
                 {
-                    cmd.Parameters.AddWithValue("@USERNAME", currentUser);
+                    cmd.Parameters.AddWithValue("@USERNAME", CurrentUser);
                     object user = cmd.ExecuteScalar();
                     if (user != null)
                     {
@@ -60,8 +53,18 @@ namespace ToDoList
                 MessageBox.Show("Task cannot be empty");
                 return;
             }
+            var task = new UserMenu(CurrentUser);
+            if(TaskText.Text == task.AllTasks)
+            {
+                MessageBox.Show("Task already exist!");
+                return;
+            }
 
-            int userId = GetUserID(currentUser);
+            if(PriorityList.SelectedIndex == -1)
+            {
+                PriorityList.SelectedIndex = 2;
+            }
+            int userId = GetUserID(CurrentUser);
 
             using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
             {
@@ -78,7 +81,7 @@ namespace ToDoList
                         cmd.Parameters.AddWithValue("@USER_ID", userId);
                         cmd.Parameters.AddWithValue("@DATESTART", StartDatePicker.Value.Date);
                         cmd.Parameters.AddWithValue("@DATEEND", EndDatePicker.Value.Date);
-                        int rows = cmd.ExecuteNonQuery();
+                        int rows = cmd.ExecuteNonQuery();                      
                         if (rows > 0)
                         {                           
                             MessageBox.Show("Task added");                           

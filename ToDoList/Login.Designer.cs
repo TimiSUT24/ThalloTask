@@ -41,32 +41,35 @@
             // LoginLabel
             // 
             LoginLabel.AutoSize = true;
-            LoginLabel.Font = new Font("Segoe UI", 10F);
-            LoginLabel.Location = new Point(13, 9);
+            LoginLabel.BackColor = Color.Transparent;
+            LoginLabel.Font = new Font("Segoe UI", 15F);
+            LoginLabel.Location = new Point(588, 75);
             LoginLabel.Margin = new Padding(4, 0, 4, 0);
             LoginLabel.MinimumSize = new Size(129, 0);
             LoginLabel.Name = "LoginLabel";
-            LoginLabel.Size = new Size(129, 19);
+            LoginLabel.Size = new Size(129, 28);
             LoginLabel.TabIndex = 11;
             LoginLabel.Text = "Login";
             // 
             // LoginButton
             // 
+            LoginButton.BackColor = Color.Transparent;
             LoginButton.Font = new Font("Segoe UI", 12F);
-            LoginButton.Location = new Point(15, 235);
+            LoginButton.Location = new Point(588, 311);
             LoginButton.Margin = new Padding(4);
             LoginButton.Name = "LoginButton";
             LoginButton.Size = new Size(267, 34);
             LoginButton.TabIndex = 10;
             LoginButton.Text = "Login";
-            LoginButton.UseVisualStyleBackColor = true;
+            LoginButton.UseVisualStyleBackColor = false;
             LoginButton.Click += button1_Click_1;
             // 
             // PasswordLabel
             // 
             PasswordLabel.AutoSize = true;
+            PasswordLabel.BackColor = Color.Transparent;
             PasswordLabel.Font = new Font("Segoe UI", 10F);
-            PasswordLabel.Location = new Point(15, 139);
+            PasswordLabel.Location = new Point(588, 222);
             PasswordLabel.Margin = new Padding(4, 0, 4, 0);
             PasswordLabel.MinimumSize = new Size(129, 0);
             PasswordLabel.Name = "PasswordLabel";
@@ -78,7 +81,7 @@
             // 
             PasswordText.BackColor = SystemColors.Window;
             PasswordText.Font = new Font("Segoe UI", 12F);
-            PasswordText.Location = new Point(15, 178);
+            PasswordText.Location = new Point(588, 254);
             PasswordText.Margin = new Padding(4);
             PasswordText.MaxLength = 50;
             PasswordText.Name = "PasswordText";
@@ -89,8 +92,9 @@
             // UsernameLabel
             // 
             UsernameLabel.AutoSize = true;
+            UsernameLabel.BackColor = Color.Transparent;
             UsernameLabel.Font = new Font("Segoe UI", 10F);
-            UsernameLabel.Location = new Point(15, 50);
+            UsernameLabel.Location = new Point(588, 134);
             UsernameLabel.Margin = new Padding(4, 0, 4, 0);
             UsernameLabel.MinimumSize = new Size(129, 0);
             UsernameLabel.Name = "UsernameLabel";
@@ -102,7 +106,7 @@
             // 
             UsernameText.BackColor = SystemColors.Window;
             UsernameText.Font = new Font("Segoe UI", 12F);
-            UsernameText.Location = new Point(15, 90);
+            UsernameText.Location = new Point(588, 166);
             UsernameText.Margin = new Padding(4);
             UsernameText.MaxLength = 50;
             UsernameText.Name = "UsernameText";
@@ -111,33 +115,35 @@
             // 
             // RegisterButton
             // 
+            RegisterButton.BackColor = Color.Transparent;
             RegisterButton.Font = new Font("Segoe UI", 12F);
-            RegisterButton.Location = new Point(15, 288);
+            RegisterButton.Location = new Point(588, 364);
             RegisterButton.Margin = new Padding(4);
             RegisterButton.Name = "RegisterButton";
             RegisterButton.Size = new Size(267, 34);
             RegisterButton.TabIndex = 12;
             RegisterButton.Text = "Register";
-            RegisterButton.UseVisualStyleBackColor = true;
+            RegisterButton.UseVisualStyleBackColor = false;
             RegisterButton.Click += button2_Click;
             // 
             // ExitButton
             // 
+            ExitButton.BackColor = Color.Transparent;
             ExitButton.Font = new Font("Segoe UI", 12F);
-            ExitButton.Location = new Point(15, 341);
+            ExitButton.Location = new Point(588, 417);
             ExitButton.Margin = new Padding(4);
             ExitButton.Name = "ExitButton";
             ExitButton.Size = new Size(267, 34);
             ExitButton.TabIndex = 13;
             ExitButton.Text = "Exit";
-            ExitButton.UseVisualStyleBackColor = true;
+            ExitButton.UseVisualStyleBackColor = false;
             ExitButton.Click += button3_Click;
             // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1065, 556);
+            ClientSize = new Size(1382, 839);
             Controls.Add(ExitButton);
             Controls.Add(RegisterButton);
             Controls.Add(LoginLabel);
@@ -146,6 +152,7 @@
             Controls.Add(PasswordText);
             Controls.Add(UsernameLabel);
             Controls.Add(UsernameText);
+            MaximumSize = new Size(1398, 878);
             Name = "Login";
             Text = "Login";
             FormClosing += Login_FormClosing;

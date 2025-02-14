@@ -14,16 +14,16 @@ namespace ToDoList
 {
     public partial class EditTask : Form
     {
-        private string currentUser { get; set; }
+        private string CurrentUser { get; set; }
         private string task { get; set; }
-        private string description { get; set; }
-        private string priority { get; set; }
+        private string Description { get; set; }
+        private string Priority { get; set; }
         private DateTime dateStart { get; set; }
         private DateTime dateEnd { get; set; }
         public EditTask(string userName, string Task)
         {
             InitializeComponent();
-            currentUser = userName;
+            CurrentUser = userName;
             task = Task;
             TaskLabel.Text = "Current Task: \n" + task;
             ShowDetailsInText();
@@ -61,8 +61,8 @@ namespace ToDoList
                 using (SqlCommand cmd = new SqlCommand(editTask, conn))
                 {
                     cmd.Parameters.AddWithValue("@TASK", task);
-                    cmd.Parameters.AddWithValue("@DESCRIPTION", description);
-                    cmd.Parameters.AddWithValue("@PRIORITY", priority);
+                    cmd.Parameters.AddWithValue("@DESCRIPTION", Description);
+                    cmd.Parameters.AddWithValue("@PRIORITY", Priority);
                     cmd.Parameters.AddWithValue("@DATESTART", dateStart);
                     cmd.Parameters.AddWithValue("@DATEEND", dateEnd);
                     cmd.ExecuteNonQuery();
@@ -74,12 +74,12 @@ namespace ToDoList
         {
             EdittedDetails();
             EditTasks();
-            MessageBox.Show(task, description);
+            MessageBox.Show("Sucessful edit");
         }      
         private void EdittedDetails()
         {
-            description = DescriptionText.Text;
-            priority = PriorityList.Text;
+            Description = DescriptionText.Text;
+            Priority = PriorityList.Text;
             dateStart = DateStart.Value.Date;
             dateEnd = DateEnd.Value.Date;           
         }
