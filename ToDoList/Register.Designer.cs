@@ -40,7 +40,7 @@
             SuspendLayout();
             // 
             // UsernameText
-            // 
+            //                       
             UsernameText.BackColor = SystemColors.Window;
             UsernameText.Location = new Point(564, 216);
             UsernameText.Margin = new Padding(4);

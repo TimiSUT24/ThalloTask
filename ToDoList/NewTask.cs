@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,13 +15,13 @@ namespace ToDoList
 {
     public partial class NewTask : Form
     {
-        private string CurrentUser { get; set; } 
-        
+        private string CurrentUser { get; set; }
+
         public NewTask(string userName)
         {
             InitializeComponent();
             CurrentUser = userName;
-        }             
+        }
         public int GetUserID(string userName)
         {
             int userId = -1;
@@ -45,22 +46,27 @@ namespace ToDoList
             }
             return userId;
         }
-        public void AddTask_Click(object sender, EventArgs e)
+        protected override void OnPaint(PaintEventArgs e)
         {
+            Register newTask = new Register();
+            newTask.PaintForm(e);
+        }
 
-            if (string.IsNullOrEmpty(TaskText.Text) || string.IsNullOrWhiteSpace(TaskText.Text))
+        private void AddTask_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(TaskText.Content) || string.IsNullOrWhiteSpace(TaskText.Content))
             {
                 MessageBox.Show("Task cannot be empty");
                 return;
             }
             var task = new UserMenu(CurrentUser);
-            if(TaskText.Text == task.AllTasks)
+            if (TaskText.Content == task.AllTasks)
             {
                 MessageBox.Show("Task already exist!");
                 return;
             }
 
-            if(PriorityList.SelectedIndex == -1)
+            if (PriorityList.SelectedIndex == -1)
             {
                 PriorityList.SelectedIndex = 2;
             }
@@ -75,16 +81,16 @@ namespace ToDoList
                     string addTask = "INSERT INTO TASKS(TASK,DESCRIPTION,PRIORITY,DATESTART,DATEEND,USER_ID) VALUES (@TASK,@DESCRIPTION,@PRIORITY,@DATESTART,@DATEEND,@USER_ID)";
                     using (SqlCommand cmd = new SqlCommand(addTask, conn))
                     {
-                        cmd.Parameters.AddWithValue("@TASK", TaskText.Text);                //Insert these values to the database 
+                        cmd.Parameters.AddWithValue("@TASK", TaskText.Content);                //Insert these values to the database 
                         cmd.Parameters.AddWithValue("@DESCRIPTION", DescriptionText.Text);
                         cmd.Parameters.AddWithValue("@PRIORITY", PriorityList.Text);
                         cmd.Parameters.AddWithValue("@USER_ID", userId);
                         cmd.Parameters.AddWithValue("@DATESTART", StartDatePicker.Value.Date);
                         cmd.Parameters.AddWithValue("@DATEEND", EndDatePicker.Value.Date);
-                        int rows = cmd.ExecuteNonQuery();                      
+                        int rows = cmd.ExecuteNonQuery();
                         if (rows > 0)
-                        {                           
-                            MessageBox.Show("Task added");                           
+                        {
+                            MessageBox.Show("Task added");
                         }
                         else
                         {
@@ -92,12 +98,12 @@ namespace ToDoList
                         }
                     }
                     conn.Close();
-                }              
+                }
                 catch (Exception ex)
                 {
                     MessageBox.Show("An error occured " + ex.Message);
                 }
-            }        
-        }       
+            }
+        }  
     }
 }

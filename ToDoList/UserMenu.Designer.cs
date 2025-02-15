@@ -36,7 +36,7 @@
             LogoutButton = new CuoreUI.Controls.cuiButton();
             ShowTask = new CuoreUI.Controls.cuiButton();
             ActiveTasks = new CuoreUI.Controls.cuiButton();
-            Tasks = new Transparent();
+            Tasks = new TransparentListBox();
             WelcomeText = new CuoreUI.Controls.cuiButton();
             TextUser = new CuoreUI.Controls.cuiButton();
             cuiBorder1 = new CuoreUI.Controls.cuiBorder();
@@ -253,7 +253,7 @@
             ActiveTasks.HoverBackground = Color.Transparent;
             ActiveTasks.HoveredImageTint = Color.White;
             ActiveTasks.HoverForeColor = Color.White;
-            ActiveTasks.HoverOutline = Color.Empty;
+            ActiveTasks.HoverOutline = Color.WhiteSmoke;
             ActiveTasks.Image = null;
             ActiveTasks.ImageAutoCenter = true;
             ActiveTasks.ImageExpand = new Point(0, 0);
@@ -267,7 +267,7 @@
             ActiveTasks.PressedBackground = Color.Transparent;
             ActiveTasks.PressedForeColor = Color.White;
             ActiveTasks.PressedImageTint = Color.White;
-            ActiveTasks.PressedOutline = Color.Empty;
+            ActiveTasks.PressedOutline = Color.WhiteSmoke;
             ActiveTasks.Rounding = new Padding(8);
             ActiveTasks.Size = new Size(144, 26);
             ActiveTasks.TabIndex = 33;
@@ -399,6 +399,7 @@
             // ReloadButton
             // 
             ReloadButton.BackColor = Color.Transparent;
+            ReloadButton.BackgroundImageLayout = ImageLayout.None;
             ReloadButton.CheckButton = false;
             ReloadButton.Checked = false;
             ReloadButton.CheckedBackground = Color.FromArgb(255, 106, 0);
@@ -415,10 +416,10 @@
             ReloadButton.HoverOutline = Color.Transparent;
             ReloadButton.Image = (Image)resources.GetObject("ReloadButton.Image");
             ReloadButton.ImageAutoCenter = true;
-            ReloadButton.ImageExpand = new Point(0, 0);
+            ReloadButton.ImageExpand = new Point(5, 5);
             ReloadButton.ImageOffset = new Point(0, 0);
             ReloadButton.ImageTint = Color.Black;
-            ReloadButton.Location = new Point(69, 117);
+            ReloadButton.Location = new Point(68, 124);
             ReloadButton.Name = "ReloadButton";
             ReloadButton.NormalBackground = Color.Transparent;
             ReloadButton.NormalOutline = Color.Empty;
@@ -428,7 +429,7 @@
             ReloadButton.PressedImageTint = SystemColors.ActiveCaption;
             ReloadButton.PressedOutline = Color.WhiteSmoke;
             ReloadButton.Rounding = new Padding(8);
-            ReloadButton.Size = new Size(29, 27);
+            ReloadButton.Size = new Size(30, 32);
             ReloadButton.TabIndex = 39;
             ReloadButton.TextOffset = new Point(0, 0);
             ReloadButton.Click += ReloadButton_Click_1;
@@ -437,7 +438,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlLight;
+            BackColor = SystemColors.ActiveBorder;
             BackgroundImageLayout = ImageLayout.None;
             ClientSize = new Size(1382, 839);
             Controls.Add(ReloadButton);
@@ -470,7 +471,7 @@
         private CuoreUI.Controls.cuiButton LogoutButton;
         private CuoreUI.Controls.cuiButton ShowTask;
         private CuoreUI.Controls.cuiButton ActiveTasks;
-        private Transparent Tasks;
+        private TransparentListBox Tasks;
         private CuoreUI.Controls.cuiButton WelcomeText;
         private CuoreUI.Controls.cuiButton TextUser;
         private CuoreUI.Controls.cuiBorder cuiBorder1;

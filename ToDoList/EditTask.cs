@@ -25,7 +25,7 @@ namespace ToDoList
             InitializeComponent();
             CurrentUser = userName;
             task = Task;
-            TaskLabel.Text = "Current Task: \n" + task;
+            TaskLabel.Content = "Current Task: \n" + task;
             ShowDetailsInText();
         }
         public void ShowDetailsInText()
@@ -50,9 +50,9 @@ namespace ToDoList
                 }
                 conn.Close();
             }
-        }      
+        }
         private void EditTasks()
-        {          
+        {
             using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
             {
                 conn.Open();
@@ -69,20 +69,25 @@ namespace ToDoList
                 }
                 conn.Close();
             }
-        }
-        private void EditsTask_Click(object sender, EventArgs e)
-        {
-            EdittedDetails();
-            EditTasks();
-            MessageBox.Show("Sucessful edit");
         }      
         private void EdittedDetails()
         {
             Description = DescriptionText.Text;
             Priority = PriorityList.Text;
             dateStart = DateStart.Value.Date;
-            dateEnd = DateEnd.Value.Date;           
+            dateEnd = DateEnd.Value.Date;
         }
-        
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Register newTask = new Register();
+            newTask.PaintForm(e);
+        }
+
+        private void EditsTask_Click(object sender, EventArgs e)
+        {
+            EdittedDetails();
+            EditTasks();
+            MessageBox.Show("Sucessful edit");
+        }
     }
 }

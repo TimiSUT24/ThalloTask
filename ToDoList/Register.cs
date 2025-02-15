@@ -11,8 +11,8 @@ namespace ToDoList
 {
     public partial class Register : Form
     {
-        private string _userName { get; set; }
-        private string _password { get; set; }
+        private string _userName { get; set; } 
+        private string _password { get; set; } 
         public Register()
         {
             InitializeComponent();
@@ -113,7 +113,7 @@ namespace ToDoList
         {
             Application.Exit();
         }
-
+        
         public void PaintForm(PaintEventArgs e)
         {
             base.OnPaint(e);

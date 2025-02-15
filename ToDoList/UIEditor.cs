@@ -2,17 +2,19 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ToDoList
 {
-    public class Transparent : cuiListbox
+    public class TransparentListBox : cuiListbox
     {
-        public Transparent()
+        public TransparentListBox()
         {
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);         
-        }    
-    }
+        }               
+    }         
 }
+

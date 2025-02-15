@@ -29,137 +29,300 @@
         private void InitializeComponent()
         {
             DateEnd = new DateTimePicker();
-            EndDateLabel = new Label();
             DateStart = new DateTimePicker();
-            DescriptionText = new RichTextBox();
-            StartDateLabel = new Label();
-            PriorityList = new ListBox();
-            PriorityLabel = new Label();
-            DescriptionLabel = new Label();
             label2 = new Label();
-            TaskLabel = new Label();
-            EditsTask = new Button();
+            DescriptionLabel = new CuoreUI.Controls.cuiButton();
+            TaskLabel = new CuoreUI.Controls.cuiLabel();
+            DescriptionText = new CuoreUI.Controls.cuiTextBox2();
+            PriorityLabel = new CuoreUI.Controls.cuiButton();
+            PriorityList = new TransparentListBox();
+            StartDateLabel = new CuoreUI.Controls.cuiButton();
+            EndDateLabel = new CuoreUI.Controls.cuiButton();
+            EditsTask = new CuoreUI.Controls.cuiButton();
             SuspendLayout();
             // 
             // DateEnd
             // 
-            DateEnd.Location = new Point(27, 383);
+            DateEnd.Location = new Point(33, 442);
             DateEnd.Name = "DateEnd";
             DateEnd.Size = new Size(200, 23);
             DateEnd.TabIndex = 28;
             // 
-            // EndDateLabel
-            // 
-            EndDateLabel.AutoSize = true;
-            EndDateLabel.Font = new Font("Segoe UI", 12F);
-            EndDateLabel.Location = new Point(27, 359);
-            EndDateLabel.Name = "EndDateLabel";
-            EndDateLabel.Size = new Size(70, 21);
-            EndDateLabel.TabIndex = 27;
-            EndDateLabel.Text = "End date";
-            // 
             // DateStart
             // 
-            DateStart.Location = new Point(27, 320);
+            DateStart.Location = new Point(33, 379);
             DateStart.Name = "DateStart";
             DateStart.Size = new Size(200, 23);
             DateStart.TabIndex = 26;
-            // 
-            // DescriptionText
-            // 
-            DescriptionText.Location = new Point(27, 90);
-            DescriptionText.Name = "DescriptionText";
-            DescriptionText.Size = new Size(238, 96);
-            DescriptionText.TabIndex = 25;
-            DescriptionText.Text = "";
-            // 
-            // StartDateLabel
-            // 
-            StartDateLabel.AutoSize = true;
-            StartDateLabel.Font = new Font("Segoe UI", 12F);
-            StartDateLabel.Location = new Point(27, 296);
-            StartDateLabel.Name = "StartDateLabel";
-            StartDateLabel.Size = new Size(76, 21);
-            StartDateLabel.TabIndex = 24;
-            StartDateLabel.Text = "Start date";
-            // 
-            // PriorityList
-            // 
-            PriorityList.FormattingEnabled = true;
-            PriorityList.ItemHeight = 15;
-            PriorityList.Items.AddRange(new object[] { "High", "Medium", "Low", "None" });
-            PriorityList.Location = new Point(27, 234);
-            PriorityList.Name = "PriorityList";
-            PriorityList.Size = new Size(120, 49);
-            PriorityList.TabIndex = 23;
-            // 
-            // PriorityLabel
-            // 
-            PriorityLabel.AutoSize = true;
-            PriorityLabel.Font = new Font("Segoe UI", 12F);
-            PriorityLabel.Location = new Point(25, 200);
-            PriorityLabel.Name = "PriorityLabel";
-            PriorityLabel.Size = new Size(61, 21);
-            PriorityLabel.TabIndex = 22;
-            PriorityLabel.Text = "Priority";
-            // 
-            // DescriptionLabel
-            // 
-            DescriptionLabel.AutoSize = true;
-            DescriptionLabel.Font = new Font("Segoe UI", 12F);
-            DescriptionLabel.Location = new Point(27, 66);
-            DescriptionLabel.Name = "DescriptionLabel";
-            DescriptionLabel.Size = new Size(89, 21);
-            DescriptionLabel.TabIndex = 21;
-            DescriptionLabel.Text = "Description";
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F);
-            label2.Location = new Point(47, 66);
+            label2.Location = new Point(53, 116);
             label2.Name = "label2";
             label2.Size = new Size(0, 21);
             label2.TabIndex = 20;
             // 
+            // DescriptionLabel
+            // 
+            DescriptionLabel.BackColor = Color.Transparent;
+            DescriptionLabel.CheckButton = false;
+            DescriptionLabel.Checked = false;
+            DescriptionLabel.CheckedBackground = Color.FromArgb(255, 106, 0);
+            DescriptionLabel.CheckedForeColor = Color.White;
+            DescriptionLabel.CheckedImageTint = Color.White;
+            DescriptionLabel.CheckedOutline = Color.Transparent;
+            DescriptionLabel.Content = "Description";
+            DescriptionLabel.DialogResult = DialogResult.None;
+            DescriptionLabel.Font = new Font("Segoe UI", 12F);
+            DescriptionLabel.ForeColor = Color.White;
+            DescriptionLabel.HoverBackground = Color.Transparent;
+            DescriptionLabel.HoveredImageTint = Color.White;
+            DescriptionLabel.HoverForeColor = Color.White;
+            DescriptionLabel.HoverOutline = Color.WhiteSmoke;
+            DescriptionLabel.Image = null;
+            DescriptionLabel.ImageAutoCenter = true;
+            DescriptionLabel.ImageExpand = new Point(0, 0);
+            DescriptionLabel.ImageOffset = new Point(0, 0);
+            DescriptionLabel.ImageTint = Color.White;
+            DescriptionLabel.Location = new Point(33, 111);
+            DescriptionLabel.Name = "DescriptionLabel";
+            DescriptionLabel.NormalBackground = Color.Transparent;
+            DescriptionLabel.NormalOutline = Color.WhiteSmoke;
+            DescriptionLabel.OutlineThickness = 1F;
+            DescriptionLabel.PressedBackground = Color.Transparent;
+            DescriptionLabel.PressedForeColor = Color.White;
+            DescriptionLabel.PressedImageTint = Color.White;
+            DescriptionLabel.PressedOutline = Color.WhiteSmoke;
+            DescriptionLabel.Rounding = new Padding(8);
+            DescriptionLabel.Size = new Size(97, 26);
+            DescriptionLabel.TabIndex = 33;
+            DescriptionLabel.TextOffset = new Point(0, 0);
+            // 
             // TaskLabel
             // 
-            TaskLabel.AutoSize = true;
-            TaskLabel.Font = new Font("Segoe UI", 12F);
-            TaskLabel.Location = new Point(27, 9);
+            TaskLabel.BackColor = Color.Transparent;
+            TaskLabel.Content = "";
+            TaskLabel.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            TaskLabel.ForeColor = Color.White;
+            TaskLabel.HorizontalAlignment = CuoreUI.Controls.cuiLabel.HorizontalAlignments.Left;
+            TaskLabel.Location = new Point(33, 49);
+            TaskLabel.Margin = new Padding(4, 3, 4, 3);
             TaskLabel.Name = "TaskLabel";
-            TaskLabel.Size = new Size(39, 21);
-            TaskLabel.TabIndex = 18;
-            TaskLabel.Text = "Task";
+            TaskLabel.Size = new Size(238, 56);
+            TaskLabel.TabIndex = 35;
+            // 
+            // DescriptionText
+            // 
+            DescriptionText.BackColor = Color.White;
+            DescriptionText.BorderColor = Color.WhiteSmoke;
+            DescriptionText.BorderFocusColor = Color.Gray;
+            DescriptionText.BorderSize = 2;
+            DescriptionText.Content = "";
+            DescriptionText.Font = new Font("Microsoft Sans Serif", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            DescriptionText.ForeColor = SystemColors.ButtonShadow;
+            DescriptionText.Location = new Point(31, 141);
+            DescriptionText.Margin = new Padding(4);
+            DescriptionText.Multiline = true;
+            DescriptionText.Name = "DescriptionText";
+            DescriptionText.Padding = new Padding(15, 5, 15, 5);
+            DescriptionText.PasswordChar = false;
+            DescriptionText.PlaceholderColor = Color.Transparent;
+            DescriptionText.PlaceholderText = "";
+            DescriptionText.Rounding = 8;
+            DescriptionText.Size = new Size(238, 96);
+            DescriptionText.TabIndex = 36;
+            DescriptionText.TextOffset = new Size(0, 0);
+            DescriptionText.UnderlinedStyle = false;
+            // 
+            // PriorityLabel
+            // 
+            PriorityLabel.BackColor = Color.Transparent;
+            PriorityLabel.CheckButton = false;
+            PriorityLabel.Checked = false;
+            PriorityLabel.CheckedBackground = Color.FromArgb(255, 106, 0);
+            PriorityLabel.CheckedForeColor = Color.White;
+            PriorityLabel.CheckedImageTint = Color.White;
+            PriorityLabel.CheckedOutline = Color.Transparent;
+            PriorityLabel.Content = "Priority";
+            PriorityLabel.DialogResult = DialogResult.None;
+            PriorityLabel.Font = new Font("Segoe UI", 12F);
+            PriorityLabel.ForeColor = Color.White;
+            PriorityLabel.HoverBackground = Color.Transparent;
+            PriorityLabel.HoveredImageTint = Color.White;
+            PriorityLabel.HoverForeColor = Color.White;
+            PriorityLabel.HoverOutline = Color.WhiteSmoke;
+            PriorityLabel.Image = null;
+            PriorityLabel.ImageAutoCenter = true;
+            PriorityLabel.ImageExpand = new Point(0, 0);
+            PriorityLabel.ImageOffset = new Point(0, 0);
+            PriorityLabel.ImageTint = Color.White;
+            PriorityLabel.Location = new Point(33, 252);
+            PriorityLabel.Name = "PriorityLabel";
+            PriorityLabel.NormalBackground = Color.Transparent;
+            PriorityLabel.NormalOutline = Color.WhiteSmoke;
+            PriorityLabel.OutlineThickness = 1F;
+            PriorityLabel.PressedBackground = Color.Transparent;
+            PriorityLabel.PressedForeColor = Color.White;
+            PriorityLabel.PressedImageTint = Color.White;
+            PriorityLabel.PressedOutline = Color.WhiteSmoke;
+            PriorityLabel.Rounding = new Padding(8);
+            PriorityLabel.Size = new Size(70, 26);
+            PriorityLabel.TabIndex = 37;
+            PriorityLabel.TextOffset = new Point(0, 0);
+            // 
+            // PriorityList
+            // 
+            PriorityList.BackColor = Color.Transparent;
+            PriorityList.BackgroundColor = Color.White;
+            PriorityList.BorderStyle = BorderStyle.None;
+            PriorityList.DrawMode = DrawMode.OwnerDrawFixed;
+            PriorityList.Font = new Font("Microsoft YaHei UI", 9F);
+            PriorityList.ForeColor = Color.FromArgb(84, 84, 84);
+            PriorityList.ForegroundColor = Color.Black;
+            PriorityList.FormattingEnabled = true;
+            PriorityList.ItemHeight = 18;
+            PriorityList.ItemHoveredBackgroundColor = Color.Transparent;
+            PriorityList.ItemHoveredForegroundColor = Color.Black;
+            PriorityList.ItemRounding = 8;
+            PriorityList.Items.AddRange(new object[] { "High", "Medium", "Low" });
+            PriorityList.ItemSelectedBackgroundColor = SystemColors.ActiveCaption;
+            PriorityList.Location = new Point(31, 282);
+            PriorityList.Margin = new Padding(1);
+            PriorityList.Name = "PriorityList";
+            PriorityList.Rounding = 8;
+            PriorityList.SelectedForegroundColor = Color.Black;
+            PriorityList.Size = new Size(156, 54);
+            PriorityList.TabIndex = 38;
+            // 
+            // StartDateLabel
+            // 
+            StartDateLabel.BackColor = Color.Transparent;
+            StartDateLabel.CheckButton = false;
+            StartDateLabel.Checked = false;
+            StartDateLabel.CheckedBackground = Color.FromArgb(255, 106, 0);
+            StartDateLabel.CheckedForeColor = Color.White;
+            StartDateLabel.CheckedImageTint = Color.White;
+            StartDateLabel.CheckedOutline = Color.Transparent;
+            StartDateLabel.Content = "Start Date";
+            StartDateLabel.DialogResult = DialogResult.None;
+            StartDateLabel.Font = new Font("Segoe UI", 12F);
+            StartDateLabel.ForeColor = Color.White;
+            StartDateLabel.HoverBackground = Color.Transparent;
+            StartDateLabel.HoveredImageTint = Color.White;
+            StartDateLabel.HoverForeColor = Color.White;
+            StartDateLabel.HoverOutline = Color.WhiteSmoke;
+            StartDateLabel.Image = null;
+            StartDateLabel.ImageAutoCenter = true;
+            StartDateLabel.ImageExpand = new Point(0, 0);
+            StartDateLabel.ImageOffset = new Point(0, 0);
+            StartDateLabel.ImageTint = Color.White;
+            StartDateLabel.Location = new Point(31, 349);
+            StartDateLabel.Name = "StartDateLabel";
+            StartDateLabel.NormalBackground = Color.Transparent;
+            StartDateLabel.NormalOutline = Color.WhiteSmoke;
+            StartDateLabel.OutlineThickness = 1F;
+            StartDateLabel.PressedBackground = Color.Transparent;
+            StartDateLabel.PressedForeColor = Color.White;
+            StartDateLabel.PressedImageTint = Color.White;
+            StartDateLabel.PressedOutline = Color.WhiteSmoke;
+            StartDateLabel.Rounding = new Padding(8);
+            StartDateLabel.Size = new Size(80, 26);
+            StartDateLabel.TabIndex = 39;
+            StartDateLabel.TextOffset = new Point(0, 0);
+            // 
+            // EndDateLabel
+            // 
+            EndDateLabel.BackColor = Color.Transparent;
+            EndDateLabel.CheckButton = false;
+            EndDateLabel.Checked = false;
+            EndDateLabel.CheckedBackground = Color.FromArgb(255, 106, 0);
+            EndDateLabel.CheckedForeColor = Color.White;
+            EndDateLabel.CheckedImageTint = Color.White;
+            EndDateLabel.CheckedOutline = Color.Transparent;
+            EndDateLabel.Content = "End Date";
+            EndDateLabel.DialogResult = DialogResult.None;
+            EndDateLabel.Font = new Font("Segoe UI", 12F);
+            EndDateLabel.ForeColor = Color.White;
+            EndDateLabel.HoverBackground = Color.Transparent;
+            EndDateLabel.HoveredImageTint = Color.White;
+            EndDateLabel.HoverForeColor = Color.White;
+            EndDateLabel.HoverOutline = Color.WhiteSmoke;
+            EndDateLabel.Image = null;
+            EndDateLabel.ImageAutoCenter = true;
+            EndDateLabel.ImageExpand = new Point(0, 0);
+            EndDateLabel.ImageOffset = new Point(0, 0);
+            EndDateLabel.ImageTint = Color.White;
+            EndDateLabel.Location = new Point(33, 410);
+            EndDateLabel.Name = "EndDateLabel";
+            EndDateLabel.NormalBackground = Color.Transparent;
+            EndDateLabel.NormalOutline = Color.WhiteSmoke;
+            EndDateLabel.OutlineThickness = 1F;
+            EndDateLabel.PressedBackground = Color.Transparent;
+            EndDateLabel.PressedForeColor = Color.White;
+            EndDateLabel.PressedImageTint = Color.White;
+            EndDateLabel.PressedOutline = Color.WhiteSmoke;
+            EndDateLabel.Rounding = new Padding(8);
+            EndDateLabel.Size = new Size(80, 26);
+            EndDateLabel.TabIndex = 40;
+            EndDateLabel.TextOffset = new Point(0, 0);
             // 
             // EditsTask
             // 
-            EditsTask.Location = new Point(27, 427);
+            EditsTask.BackColor = Color.Transparent;
+            EditsTask.CheckButton = false;
+            EditsTask.Checked = false;
+            EditsTask.CheckedBackground = Color.FromArgb(255, 106, 0);
+            EditsTask.CheckedForeColor = Color.White;
+            EditsTask.CheckedImageTint = Color.White;
+            EditsTask.CheckedOutline = Color.Transparent;
+            EditsTask.Content = "Edit Task";
+            EditsTask.DialogResult = DialogResult.None;
+            EditsTask.Font = new Font("Segoe UI", 12F);
+            EditsTask.ForeColor = Color.White;
+            EditsTask.HoverBackground = Color.Transparent;
+            EditsTask.HoveredImageTint = Color.White;
+            EditsTask.HoverForeColor = Color.White;
+            EditsTask.HoverOutline = Color.WhiteSmoke;
+            EditsTask.Image = null;
+            EditsTask.ImageAutoCenter = true;
+            EditsTask.ImageExpand = new Point(0, 0);
+            EditsTask.ImageOffset = new Point(0, 0);
+            EditsTask.ImageTint = Color.White;
+            EditsTask.Location = new Point(33, 481);
             EditsTask.Name = "EditsTask";
-            EditsTask.Size = new Size(148, 31);
-            EditsTask.TabIndex = 17;
-            EditsTask.Text = "Edit Task";
-            EditsTask.UseVisualStyleBackColor = true;
+            EditsTask.NormalBackground = Color.Transparent;
+            EditsTask.NormalOutline = Color.WhiteSmoke;
+            EditsTask.OutlineThickness = 1F;
+            EditsTask.PressedBackground = Color.Transparent;
+            EditsTask.PressedForeColor = Color.White;
+            EditsTask.PressedImageTint = Color.White;
+            EditsTask.PressedOutline = Color.WhiteSmoke;
+            EditsTask.Rounding = new Padding(8);
+            EditsTask.Size = new Size(98, 26);
+            EditsTask.TabIndex = 41;
+            EditsTask.TextOffset = new Point(0, 0);
             EditsTask.Click += EditsTask_Click;
             // 
             // EditTask
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(879, 568);
-            Controls.Add(DateEnd);
+            BackColor = SystemColors.ActiveBorder;
+            ClientSize = new Size(953, 650);
+            Controls.Add(EditsTask);
             Controls.Add(EndDateLabel);
-            Controls.Add(DateStart);
-            Controls.Add(DescriptionText);
             Controls.Add(StartDateLabel);
             Controls.Add(PriorityList);
             Controls.Add(PriorityLabel);
-            Controls.Add(DescriptionLabel);
-            Controls.Add(label2);
+            Controls.Add(DescriptionText);
             Controls.Add(TaskLabel);
-            Controls.Add(EditsTask);
+            Controls.Add(DescriptionLabel);
+            Controls.Add(DateEnd);
+            Controls.Add(DateStart);
+            Controls.Add(label2);
             Name = "EditTask";
-            Text = "EditTask";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -167,15 +330,16 @@
         #endregion
 
         private DateTimePicker DateEnd;
-        private Label EndDateLabel;
         private DateTimePicker DateStart;
-        private RichTextBox DescriptionText;
-        private Label StartDateLabel;
-        private ListBox PriorityList;
-        private Label PriorityLabel;
-        private Label DescriptionLabel;
         private Label label2;
-        private Label TaskLabel;
-        private Button EditsTask;
+        private CuoreUI.Controls.cuiButton DescriptionLabel;
+        private CuoreUI.Controls.cuiLabel cuiLabel1;
+        private CuoreUI.Controls.cuiLabel TaskLabel;
+        private CuoreUI.Controls.cuiTextBox2 DescriptionText;
+        private CuoreUI.Controls.cuiButton PriorityLabel;
+        private TransparentListBox PriorityList;
+        private CuoreUI.Controls.cuiButton StartDateLabel;
+        private CuoreUI.Controls.cuiButton EndDateLabel;
+        private CuoreUI.Controls.cuiButton EditsTask;
     }
 }
