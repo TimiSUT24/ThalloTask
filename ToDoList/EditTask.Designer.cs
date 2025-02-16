@@ -39,6 +39,7 @@
             StartDateLabel = new CuoreUI.Controls.cuiButton();
             EndDateLabel = new CuoreUI.Controls.cuiButton();
             EditsTask = new CuoreUI.Controls.cuiButton();
+            Focuslabel2 = new CuoreUI.Controls.cuiLabel();
             SuspendLayout();
             // 
             // DateEnd
@@ -53,7 +54,8 @@
             DateStart.Location = new Point(33, 379);
             DateStart.Name = "DateStart";
             DateStart.Size = new Size(200, 23);
-            DateStart.TabIndex = 26;
+            DateStart.TabIndex = 0;
+            DateStart.TabStop = false;
             // 
             // label2
             // 
@@ -121,7 +123,7 @@
             DescriptionText.BorderSize = 2;
             DescriptionText.Content = "";
             DescriptionText.Font = new Font("Microsoft Sans Serif", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            DescriptionText.ForeColor = SystemColors.ButtonShadow;
+            DescriptionText.ForeColor = Color.Black;
             DescriptionText.Location = new Point(31, 141);
             DescriptionText.Margin = new Padding(4);
             DescriptionText.Multiline = true;
@@ -284,7 +286,7 @@
             EditsTask.HoverBackground = Color.Transparent;
             EditsTask.HoveredImageTint = Color.White;
             EditsTask.HoverForeColor = Color.White;
-            EditsTask.HoverOutline = Color.WhiteSmoke;
+            EditsTask.HoverOutline = Color.Transparent;
             EditsTask.Image = null;
             EditsTask.ImageAutoCenter = true;
             EditsTask.ImageExpand = new Point(0, 0);
@@ -298,12 +300,24 @@
             EditsTask.PressedBackground = Color.Transparent;
             EditsTask.PressedForeColor = Color.White;
             EditsTask.PressedImageTint = Color.White;
-            EditsTask.PressedOutline = Color.WhiteSmoke;
+            EditsTask.PressedOutline = Color.Transparent;
             EditsTask.Rounding = new Padding(8);
             EditsTask.Size = new Size(98, 26);
             EditsTask.TabIndex = 41;
             EditsTask.TextOffset = new Point(0, 0);
             EditsTask.Click += EditsTask_Click;
+            // 
+            // Focuslabel2
+            // 
+            Focuslabel2.BackColor = Color.Transparent;
+            Focuslabel2.Content = "";
+            Focuslabel2.ForeColor = Color.Transparent;
+            Focuslabel2.HorizontalAlignment = CuoreUI.Controls.cuiLabel.HorizontalAlignments.Center;
+            Focuslabel2.Location = new Point(836, 23);
+            Focuslabel2.Margin = new Padding(4, 3, 4, 3);
+            Focuslabel2.Name = "Focuslabel2";
+            Focuslabel2.Size = new Size(71, 41);
+            Focuslabel2.TabIndex = 42;
             // 
             // EditTask
             // 
@@ -311,6 +325,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveBorder;
             ClientSize = new Size(953, 650);
+            Controls.Add(Focuslabel2);
             Controls.Add(EditsTask);
             Controls.Add(EndDateLabel);
             Controls.Add(StartDateLabel);
@@ -322,7 +337,10 @@
             Controls.Add(DateEnd);
             Controls.Add(DateStart);
             Controls.Add(label2);
+            DoubleBuffered = true;
+            MaximumSize = new Size(969, 689);
             Name = "EditTask";
+            MouseClick += EditTask_MouseClick;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -341,5 +359,6 @@
         private CuoreUI.Controls.cuiButton StartDateLabel;
         private CuoreUI.Controls.cuiButton EndDateLabel;
         private CuoreUI.Controls.cuiButton EditsTask;
+        private CuoreUI.Controls.cuiLabel Focuslabel2;
     }
 }

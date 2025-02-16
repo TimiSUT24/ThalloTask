@@ -1,5 +1,7 @@
 ﻿using CuoreUI;
+using CuoreUI.Controls;
 using Microsoft.Data.SqlClient;
+using Microsoft.Identity.Client;
 using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
@@ -21,28 +23,39 @@ namespace ToDoList
         private int UserId { get; set; }
         public string task { get; set; }
         public string AllTasks { get; set; }
+
+        public string nl = "\r\n \r\n";
+
+        public string TaskTxt { get; set; }
+
         public UserMenu(string userName)
         {
             InitializeComponent();
             CurrentUser = userName;
             ShowName();
             ShowTasks();
+
         }
+         public UserMenu(string userName, string taskTxt) : this(userName)
+         {            
+             TaskTxt = taskTxt;
+         }
         private void LogoutButton_Click(object sender, EventArgs e)
         {
-            Register register = new Register();
-            register.Show();
             this.Hide();
+            Register register = new Register();
+            register.ShowDialog();
+            this.Close();
         }
         private void UserMenu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+          Application.Exit();
         }
         private void NewTask_Click(object sender, EventArgs e)
         {
             string userName = CurrentUser;
             NewTask ToDo = new NewTask(userName);
-            ToDo.Show();
+            ToDo.ShowDialog();          
         }
         public void ShowName()
         {
@@ -53,7 +66,7 @@ namespace ToDoList
             TextUser.Content = "Logged in as " + CurrentUser;
         }
 
-        private void Tasks_SelectedIndexChanged(object sender, EventArgs e)
+        public void Tasks_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Tasks.SelectedIndex != -1)
             {
@@ -64,22 +77,26 @@ namespace ToDoList
                 return;
             }
         }
-        private void ShowTask_Click(object sender, EventArgs e)
+        public async void ShowTask_Click(object sender, EventArgs e)
         {
-            ShowTaskDetails();
+            
+           await ShowTaskDetails();
+            TaskTextBoxForm textBoxForm = new TaskTextBoxForm(CurrentUser,TaskTxt);
+            textBoxForm.ShowDialog();
         }
-        public void ShowTaskDetails()
+        public async Task ShowTaskDetails()
         {
+
             using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
             {
                 try
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
                     string showTask = "SELECT ID,TASK,DESCRIPTION,PRIORITY,DATESTART,DATEEND FROM TASKS WHERE TASK = @TASK"; //Shows the selected task details
                     using (SqlCommand cmd = new SqlCommand(showTask, conn))
                     {
                         cmd.Parameters.AddWithValue("@TASK", task);
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
                             while (reader.Read())
                             {
@@ -88,27 +105,29 @@ namespace ToDoList
                                 string priority = reader["PRIORITY"].ToString();
                                 string datestart = reader["DATESTART"].ToString();
                                 string dateEnd = reader["DATEEND"].ToString();
-                                MessageBox.Show($" Task: {task1}\n\n Description: {description}\n\n Priority: {priority}\n\n DateStart: {datestart}\n DateEnd: {dateEnd}");
+                                TaskTxt = $"Task: {task1}{nl} Description: {description}{nl} Priority: {priority}{nl} DateStart: {datestart}{nl} DateEnd: {dateEnd}";
                             }
                         }
                     }
-                    conn.Close();
+                   await conn.CloseAsync();
                 }
-                catch (Exception ex)
+                catch
                 {
-                    MessageBox.Show("Error: Please Select a Task");
+                    MessageBox.Show("Please Select a Task");
                 }
             }
         }
         public void ShowTasks()
         {
-            NewTask to = new NewTask(CurrentUser);
-            UserId = to.GetUserID(CurrentUser);     //Get which user is logged in and gets id 
-
-            using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+            try
             {
-                conn.Open();
-                string task = @"SELECT TASK FROM TASKS WHERE USER_ID = @USER_ID
+                NewTask to = new NewTask(CurrentUser);
+                UserId = to.GetUserID(CurrentUser);     //Get which user is logged in and gets id 
+
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                {
+                    conn.Open();
+                    string task = @"SELECT TASK FROM TASKS WHERE USER_ID = @USER_ID
                                 ORDER BY 
                                 (CASE
                                     WHEN PRIORITY = 'HIGH' THEN 1 
@@ -118,20 +137,27 @@ namespace ToDoList
                                 END);
                                 ";
 
-                using (SqlCommand cmd = new SqlCommand(task, conn))
-                {
-                    cmd.Parameters.AddWithValue("@USER_ID", UserId);
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    using (SqlCommand cmd = new SqlCommand(task, conn))
                     {
-                        while (reader.Read())                   //read from database to code and add items to list
+                        cmd.Parameters.AddWithValue("@USER_ID", UserId);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            AllTasks = reader["TASK"].ToString();
-                            Tasks.Items.Add(AllTasks);
+                            while (reader.Read())                   //read from database to code and add items to list
+                            {
+                                AllTasks = reader["TASK"].ToString();
+                                Tasks.Items.Add(AllTasks);
+                            }
                         }
                     }
-                }
-                conn.Close();
+                    conn.Close();
+                } 
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error:" + ex);
+            }
+              
+            
         }
         private void Tasks_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -145,17 +171,17 @@ namespace ToDoList
                 if (task == Tasks.Items[Tasks.SelectedIndex].ToString())
                 {
                     EditTask editTask = new EditTask(CurrentUser, task);
-                    editTask.Show();
+                    editTask.ShowDialog();
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show("Please: Select a task to edit");
+                MessageBox.Show("Please Select a task to edit");
             }
         }
-        public static async Task DeleteConformation()
+        public async Task DeleteConformation()
         {
-            Task.Delay(1000);
+            await Task.Delay(1000);
         }
         private async void DeleteButton_Click(object sender, EventArgs e)
         {
@@ -199,15 +225,16 @@ namespace ToDoList
             ShowTasks();
         }
         private void UserMenu_MouseClick(object sender, MouseEventArgs e)
-        {
-            focuslb.Focus();
-            Tasks.Items.Clear();
-            ShowTasks();
+        {           
+            Tasks.SelectedIndex = -1;
         }
-        protected override void OnPaint(PaintEventArgs e)
+        protected override void OnPaintBackground(PaintEventArgs e)
         {
+            base.OnPaintBackground(e);
             var paint = new Register();
-            paint.PaintForm(e);
-        }     
+            paint.PaintForm(e.Graphics);
+        }
+     
     }
 }
+    

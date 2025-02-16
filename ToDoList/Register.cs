@@ -41,7 +41,7 @@ namespace ToDoList
             string passwordHash = HashPassword(_password);
 
             // Save to the database
-            using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft SQL Server"].ConnectionString))
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Microsoft SQL Server"].ConnectionString))
             {
                 try
                 {
@@ -70,9 +70,10 @@ namespace ToDoList
                         if (rows > 0)
                         {
                             MessageBox.Show("Registration successful!");
-                            Login login = new Login(_userName, _password);
-                            login.Show();
                             this.Hide();
+                            Login login = new Login(_userName, _password);                                                     
+                            login.ShowDialog();
+                            this.Close();
                         }
                         else
                         {
@@ -97,26 +98,26 @@ namespace ToDoList
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void LoginMenu_Click(object sender, EventArgs e)
         {
-            Login login = new Login(_userName, _password);
-            login.Show();
             this.Hide();
+            Login login = new Login(_userName, _password);
+            login.ShowDialog();
+            this.Close();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void ExitBtn_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
         private void Register_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+           // Application.Exit();
         }
         
-        public void PaintForm(PaintEventArgs e)
-        {
-            base.OnPaint(e);
+        public void PaintForm(Graphics g)
+        {           
             Color color1 = ColorTranslator.FromHtml("#E6DADA"); // Gradient color
             Color color2 = ColorTranslator.FromHtml("#274046");
 
@@ -124,12 +125,13 @@ namespace ToDoList
             using (LinearGradientBrush brush = new LinearGradientBrush(
                 this.ClientRectangle, color1, color2, LinearGradientMode.Vertical))
             {
-                e.Graphics.FillRectangle(brush, this.ClientRectangle);
+                g.FillRectangle(brush, this.ClientRectangle);
             }
         }
-        protected override void OnPaint(PaintEventArgs e)
+        protected override void OnPaintBackground(PaintEventArgs e)
         {
-            PaintForm(e);
+            base.OnPaintBackground(e);
+            PaintForm(e.Graphics);
         }
     }
 }

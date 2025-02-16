@@ -124,7 +124,7 @@
             RegisterButton.TabIndex = 12;
             RegisterButton.Text = "Register";
             RegisterButton.UseVisualStyleBackColor = false;
-            RegisterButton.Click += button2_Click;
+            RegisterButton.Click += RegisterMenu_Click;
             // 
             // ExitButton
             // 
@@ -137,7 +137,7 @@
             ExitButton.TabIndex = 13;
             ExitButton.Text = "Exit";
             ExitButton.UseVisualStyleBackColor = false;
-            ExitButton.Click += button3_Click;
+            ExitButton.Click += ExitBtn_Click;
             // 
             // Login
             // 
@@ -152,6 +152,7 @@
             Controls.Add(PasswordText);
             Controls.Add(UsernameLabel);
             Controls.Add(UsernameText);
+            DoubleBuffered = true;
             MaximumSize = new Size(1398, 878);
             Name = "Login";
             Text = "Login";

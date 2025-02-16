@@ -39,6 +39,7 @@
             DescriptionText = new CuoreUI.Controls.cuiTextBox2();
             TaskText = new CuoreUI.Controls.cuiTextBox2();
             PriorityList = new TransparentListBox();
+            Focuslabel3 = new CuoreUI.Controls.cuiLabel();
             SuspendLayout();
             // 
             // StartDatePicker
@@ -282,7 +283,7 @@
             DescriptionText.BorderSize = 2;
             DescriptionText.Content = "";
             DescriptionText.Font = new Font("Microsoft Sans Serif", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            DescriptionText.ForeColor = SystemColors.ButtonShadow;
+            DescriptionText.ForeColor = Color.Black;
             DescriptionText.Location = new Point(32, 140);
             DescriptionText.Margin = new Padding(4);
             DescriptionText.Multiline = true;
@@ -306,7 +307,7 @@
             TaskText.BorderSize = 2;
             TaskText.Content = "";
             TaskText.Font = new Font("Microsoft Sans Serif", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            TaskText.ForeColor = SystemColors.ButtonShadow;
+            TaskText.ForeColor = Color.Black;
             TaskText.Location = new Point(32, 75);
             TaskText.Margin = new Padding(4);
             TaskText.Multiline = false;
@@ -345,12 +346,25 @@
             PriorityList.Size = new Size(156, 54);
             PriorityList.TabIndex = 0;
             // 
+            // Focuslabel3
+            // 
+            Focuslabel3.BackColor = Color.Transparent;
+            Focuslabel3.Content = "";
+            Focuslabel3.ForeColor = Color.Transparent;
+            Focuslabel3.HorizontalAlignment = CuoreUI.Controls.cuiLabel.HorizontalAlignments.Center;
+            Focuslabel3.Location = new Point(860, 29);
+            Focuslabel3.Margin = new Padding(4, 3, 4, 3);
+            Focuslabel3.Name = "Focuslabel3";
+            Focuslabel3.Size = new Size(71, 41);
+            Focuslabel3.TabIndex = 43;
+            // 
             // NewTask
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveBorder;
             ClientSize = new Size(953, 650);
+            Controls.Add(Focuslabel3);
             Controls.Add(PriorityList);
             Controls.Add(TaskText);
             Controls.Add(DescriptionText);
@@ -362,9 +376,12 @@
             Controls.Add(TaskLabel);
             Controls.Add(EndDatePicker);
             Controls.Add(StartDatePicker);
+            DoubleBuffered = true;
+            MaximumSize = new Size(969, 689);
             MinimumSize = new Size(261, 61);
             Name = "NewTask";
             Text = "New Task";
+            MouseClick += NewTask_MouseClick;
             ResumeLayout(false);
         }
 
@@ -380,5 +397,6 @@
         private CuoreUI.Controls.cuiTextBox2 DescriptionText;
         private CuoreUI.Controls.cuiTextBox2 TaskText;
         private TransparentListBox PriorityList;
+        private CuoreUI.Controls.cuiLabel Focuslabel3;
     }
 }

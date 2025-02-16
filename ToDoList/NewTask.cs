@@ -15,8 +15,7 @@ namespace ToDoList
 {
     public partial class NewTask : Form
     {
-        private string CurrentUser { get; set; }
-
+        private string CurrentUser { get; set; }      
         public NewTask(string userName)
         {
             InitializeComponent();
@@ -46,10 +45,11 @@ namespace ToDoList
             }
             return userId;
         }
-        protected override void OnPaint(PaintEventArgs e)
+        protected override void OnPaintBackground(PaintEventArgs e)
         {
+            base.OnPaintBackground(e);
             Register newTask = new Register();
-            newTask.PaintForm(e);
+            newTask.PaintForm(e.Graphics);
         }
 
         private void AddTask_Click(object sender, EventArgs e)
@@ -82,7 +82,7 @@ namespace ToDoList
                     using (SqlCommand cmd = new SqlCommand(addTask, conn))
                     {
                         cmd.Parameters.AddWithValue("@TASK", TaskText.Content);                //Insert these values to the database 
-                        cmd.Parameters.AddWithValue("@DESCRIPTION", DescriptionText.Text);
+                        cmd.Parameters.AddWithValue("@DESCRIPTION", DescriptionText.Content);
                         cmd.Parameters.AddWithValue("@PRIORITY", PriorityList.Text);
                         cmd.Parameters.AddWithValue("@USER_ID", userId);
                         cmd.Parameters.AddWithValue("@DATESTART", StartDatePicker.Value.Date);
@@ -104,6 +104,10 @@ namespace ToDoList
                     MessageBox.Show("An error occured " + ex.Message);
                 }
             }
-        }  
+        }
+        private void NewTask_MouseClick(object sender, MouseEventArgs e)
+        {
+            Focuslabel3.Focus();
+        }
     }
 }

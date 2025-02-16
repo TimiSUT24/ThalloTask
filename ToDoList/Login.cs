@@ -14,10 +14,10 @@ using Microsoft.Data.SqlClient;
 namespace ToDoList
 {
     public partial class Login : Form
-    {
+    {       
         public Login(string userName, string password)
         {
-            InitializeComponent();
+            InitializeComponent();          
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -43,19 +43,20 @@ namespace ToDoList
                         string storedHash = cmd.ExecuteScalar() as string;
                         conn.Close();
                         if (storedHash != null && storedHash == passwordHash)
-                        {
-                            UserMenu usermenu = new UserMenu(userName);
+                        {                           
                             MessageBox.Show("Successful login");
-                            usermenu.Show();
                             this.Hide();
+                            UserMenu usermenu = new UserMenu(userName);
+                            usermenu.ShowDialog();
+                            this.Close();
                             return true; // Passwords match
                         }
                         else
                         {
                             MessageBox.Show("Wrong password or username");
                             return false;
-                        }
-                    }
+                        }                       
+                    }                   
                 }
                 catch (Exception ex)
                 {
@@ -73,26 +74,27 @@ namespace ToDoList
                 return Convert.ToBase64String(bytes);
             }
         }
-        private void button2_Click(object sender, EventArgs e)
+        private void RegisterMenu_Click(object sender, EventArgs e)
         {
-            Register register = new Register();
-            register.Show();
             this.Hide();
-
+            Register register = new Register();
+            register.ShowDialog();
+            this.Close();          
         }
-        private void button3_Click(object sender, EventArgs e)
+        private void ExitBtn_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
         private void Login_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+           // Application.Exit();
         }
-        protected override void OnPaint(PaintEventArgs e)
+        protected override void OnPaintBackground(PaintEventArgs e)
         {
-            var paint = new Register();
-            paint.PaintForm(e);
+            base.OnPaintBackground(e); 
+           var paint = new Register();
+           paint.PaintForm(e.Graphics);
         }
 
     }

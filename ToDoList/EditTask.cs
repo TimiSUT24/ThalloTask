@@ -41,7 +41,7 @@ namespace ToDoList
                     {
                         while (reader.Read())
                         {
-                            DescriptionText.Text = reader["DESCRIPTION"].ToString();
+                            DescriptionText.Content = reader["DESCRIPTION"].ToString();
                             PriorityList.Text = reader["PRIORITY"].ToString();
                             DateStart.Value = Convert.ToDateTime(reader["DATESTART"]).Date;
                             DateEnd.Value = Convert.ToDateTime(reader["DATEEND"]).Date;
@@ -69,18 +69,19 @@ namespace ToDoList
                 }
                 conn.Close();
             }
-        }      
+        }
         private void EdittedDetails()
         {
-            Description = DescriptionText.Text;
+            Description = DescriptionText.Content;
             Priority = PriorityList.Text;
             dateStart = DateStart.Value.Date;
             dateEnd = DateEnd.Value.Date;
         }
         protected override void OnPaint(PaintEventArgs e)
         {
+            base.OnPaintBackground(e);
             Register newTask = new Register();
-            newTask.PaintForm(e);
+            newTask.PaintForm(e.Graphics);
         }
 
         private void EditsTask_Click(object sender, EventArgs e)
@@ -88,6 +89,11 @@ namespace ToDoList
             EdittedDetails();
             EditTasks();
             MessageBox.Show("Sucessful edit");
+        }
+
+        private void EditTask_MouseClick(object sender, MouseEventArgs e)
+        {
+           Focuslabel2.Focus();
         }
     }
 }

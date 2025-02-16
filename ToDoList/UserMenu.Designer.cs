@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserMenu));
-            focuslb = new Label();
             DeleteButton = new CuoreUI.Controls.cuiButton();
             EditTask = new CuoreUI.Controls.cuiButton();
             NewTask = new CuoreUI.Controls.cuiButton();
@@ -43,14 +42,6 @@
             cuiBorder2 = new CuoreUI.Controls.cuiBorder();
             ReloadButton = new CuoreUI.Controls.cuiButton();
             SuspendLayout();
-            // 
-            // focuslb
-            // 
-            focuslb.AutoSize = true;
-            focuslb.Location = new Point(116, 0);
-            focuslb.Name = "focuslb";
-            focuslb.Size = new Size(0, 15);
-            focuslb.TabIndex = 26;
             // 
             // DeleteButton
             // 
@@ -436,8 +427,7 @@
             // 
             // UserMenu
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             BackColor = SystemColors.ActiveBorder;
             BackgroundImageLayout = ImageLayout.None;
             ClientSize = new Size(1382, 839);
@@ -452,10 +442,11 @@
             Controls.Add(NewTask);
             Controls.Add(EditTask);
             Controls.Add(DeleteButton);
-            Controls.Add(focuslb);
             Controls.Add(cuiBorder2);
+            DoubleBuffered = true;
             MaximumSize = new Size(1398, 878);
             Name = "UserMenu";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "UserMenu";
             FormClosing += UserMenu_FormClosing;
             MouseClick += UserMenu_MouseClick;
@@ -464,7 +455,6 @@
         }
 
         #endregion
-        private Label focuslb; 
         private CuoreUI.Controls.cuiButton DeleteButton;
         private CuoreUI.Controls.cuiButton EditTask;
         private CuoreUI.Controls.cuiButton NewTask;

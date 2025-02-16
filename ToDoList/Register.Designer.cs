@@ -40,7 +40,7 @@
             SuspendLayout();
             // 
             // UsernameText
-            //                       
+            // 
             UsernameText.BackColor = SystemColors.Window;
             UsernameText.Location = new Point(564, 216);
             UsernameText.Margin = new Padding(4);
@@ -120,7 +120,7 @@
             LoginButton.TabIndex = 6;
             LoginButton.Text = "Login";
             LoginButton.UseVisualStyleBackColor = true;
-            LoginButton.Click += button2_Click;
+            LoginButton.Click += LoginMenu_Click;
             // 
             // ExitButton
             // 
@@ -130,7 +130,7 @@
             ExitButton.TabIndex = 7;
             ExitButton.Text = "Exit";
             ExitButton.UseVisualStyleBackColor = true;
-            ExitButton.Click += button3_Click;
+            ExitButton.Click += ExitBtn_Click;
             // 
             // label1
             // 
@@ -158,6 +158,7 @@
             Controls.Add(PasswordText);
             Controls.Add(UsernameLabel);
             Controls.Add(UsernameText);
+            DoubleBuffered = true;
             Font = new Font("Segoe UI", 12F);
             Margin = new Padding(4);
             MaximumSize = new Size(1398, 878);
