@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace ToDoList
@@ -20,21 +21,29 @@ namespace ToDoList
         private string Priority { get; set; }
         private DateTime dateStart { get; set; }
         private DateTime dateEnd { get; set; }
-        public EditTask(string userName, string Task)
+        public string SubTask { get; set; }
+        public string SubId { get; set; }
+        public string SelectedSubItem { get; set; }
+        public string SbId { get; set; }
+        Dictionary<string, string> C = new Dictionary<string, string>();
+        
+
+        public EditTask(string userName, string Tasks)
         {
             InitializeComponent();
             CurrentUser = userName;
-            task = Task;
+            task = Tasks;
             TaskLabel.Content = "Current Task: \n" + task;
             ShowDetailsInText();
         }
+
         public void ShowDetailsInText()
         {
             using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
             {
                 conn.Open();
-                string ShowDetails = "SELECT DESCRIPTION,PRIORITY,DATESTART,DATEEND FROM TASKS WHERE TASK = @TASK";
-                using (SqlCommand cmd = new SqlCommand(ShowDetails, conn))
+                string showDetails = "SELECT DESCRIPTION,PRIORITY,DATESTART,DATEEND FROM TASKS WHERE TASK = @TASK";
+                using (SqlCommand cmd = new SqlCommand(showDetails, conn))
                 {
                     cmd.Parameters.AddWithValue("@TASK", task);
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -48,6 +57,22 @@ namespace ToDoList
                         }
                     }
                 }
+                string showSubTasks = @"SELECT SUBTASK FROM SUBTASKS
+                                       JOIN TASKS ON TASKS.ID = SUBTASKS.TASKID
+                                       WHERE TASK = @TASK";
+                using (SqlCommand cmd = new SqlCommand(showSubTasks, conn))
+                {
+                    cmd.Parameters.AddWithValue("@TASK", task);
+
+                    using (SqlDataReader reader2 = cmd.ExecuteReader())
+                    {
+                        while (reader2.Read())
+                        {
+                            string subTasks = reader2["SUBTASK"].ToString();
+                            SubTasks.Items.Add(subTasks);
+                        }
+                    }
+                }
                 conn.Close();
             }
         }
@@ -56,7 +81,8 @@ namespace ToDoList
             using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
             {
                 conn.Open();
-                string editTask = "UPDATE TASKS SET DESCRIPTION = @DESCRIPTION, PRIORITY = @PRIORITY, DATESTART = @DATESTART, DATEEND = @DATEEND WHERE TASK = @TASK";
+                string editTask = @"UPDATE TASKS SET DESCRIPTION = @DESCRIPTION, PRIORITY = @PRIORITY, 
+                                   DATESTART = @DATESTART, DATEEND = @DATEEND WHERE TASK = @TASK";                                   
 
                 using (SqlCommand cmd = new SqlCommand(editTask, conn))
                 {
@@ -66,7 +92,7 @@ namespace ToDoList
                     cmd.Parameters.AddWithValue("@DATESTART", dateStart);
                     cmd.Parameters.AddWithValue("@DATEEND", dateEnd);
                     cmd.ExecuteNonQuery();
-                }
+                }                            
                 conn.Close();
             }
         }
@@ -93,7 +119,146 @@ namespace ToDoList
 
         private void EditTask_MouseClick(object sender, MouseEventArgs e)
         {
-           Focuslabel2.Focus();
+            Focuslabel2.Focus();
+        }
+
+        private async void DoneBtn_Click(object sender, EventArgs e)
+        {
+            SelectedSubItem = SubTasks.Items[SubTasks.SelectedIndex].ToString();
+            await SubTaskOperation();
+            SubTasks.Items.Remove(SelectedSubItem);
+        }
+
+        public async Task SubTaskOperation()
+        {
+
+            using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+            {
+                try
+                {
+                    await conn.OpenAsync();
+                    string getTask = @"SELECT SUBTASK,TASKID,ID FROM SUBTASKS WHERE SUBTASK = @SUBTASK ";
+
+                    using (SqlCommand cmd = new SqlCommand(getTask, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@SUBTASK", SelectedSubItem);
+
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                SubTask = reader["SUBTASK"].ToString();
+                                SubId = reader["TASKID"].ToString();
+                                SbId = reader["ID"].ToString();
+                            }
+                        }
+                    }
+
+                    string addComp = @"INSERT INTO COMPLETEDSUBTASKS (SUBTASKDONE,SUBID)
+                                        VALUES (@SUBTASKDONE,@SUBID)";
+                    using (SqlCommand cmd = new SqlCommand(addComp, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@SUBTASKDONE", SelectedSubItem);
+                        cmd.Parameters.AddWithValue("@SUBID", SubId);
+
+                        await cmd.ExecuteNonQueryAsync();
+                    }
+
+                    string deleteSubTask = @"DELETE FROM SUBTASKS WHERE ID = @ID";
+
+                    using (SqlCommand cmd = new SqlCommand(deleteSubTask, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@ID", SbId);
+                        await cmd.ExecuteNonQueryAsync();
+                    }
+                    await conn.CloseAsync();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error:" + ex);
+                }
+            }
+        }
+        public void AddSubTask()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                {
+                    conn.Open();
+                    string sel = @"SELECT ID FROM TASKS WHERE TASK = @TASK";
+                    using (SqlCommand cmd = new SqlCommand(sel, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@TASK", task);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                SubId = reader["ID"].ToString();
+                            }
+                        }
+                    }
+                       
+                    string addTask = @"INSERT INTO SUBTASKS (SUBTASK,TASKID)
+                                     VALUES (@SUBTASK,@TASKID)";
+                    using (SqlCommand cmd = new SqlCommand(addTask,conn))
+                    {
+                        cmd.Parameters.AddWithValue("@TASKID",SubId);
+                        cmd.Parameters.AddWithValue("@SUBTASK",SubTasksText.Content);
+                        cmd.ExecuteNonQuery();
+                    }
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error:" + ex);
+            }
+           
+        }
+
+        public void SubTaskAddBtn_Click(object sender, EventArgs e)
+        {
+            SubTasks.Items.Add(SubTasksText.Content);
+            AddSubTask();
+        }
+  
+        public void DeleteSubTask()
+        {
+            try
+            {             
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                {
+                    conn.Open();
+                    string deleteTask = @"DELETE FROM SUBTASKS WHERE SUBTASK = @SUBTASK";
+
+                    using (SqlCommand cmd2 = new SqlCommand(deleteTask, conn))
+                    {
+                        cmd2.Parameters.AddWithValue("@SUBTASK", SelectedSubItem);
+                        cmd2.ExecuteNonQuery();
+                    }
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error:" + ex);
+            }      
+        }
+
+        public void SubTaskDelBtn_Click(object sender, EventArgs e)
+        {           
+            SelectedSubItem = SubTasks.Items[SubTasks.SelectedIndex].ToString();           
+            SubTasks.Items.Remove(SelectedSubItem);
+            DeleteSubTask();
+        }
+        private void SubTasksText_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (SubTasksText.Content.Length >= 48 && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

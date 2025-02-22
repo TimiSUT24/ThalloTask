@@ -1,6 +1,8 @@
-﻿using CuoreUI.Controls;
+﻿using CuoreUI;
+using CuoreUI.Controls;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -15,6 +17,6 @@ namespace ToDoList
         {
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);         
         }               
-    }         
+    }  
 }
 

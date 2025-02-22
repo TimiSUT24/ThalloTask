@@ -27,19 +27,20 @@ namespace ToDoList
         public string nl = "\r\n \r\n";
 
         public string TaskTxt { get; set; }
-
+  
         public UserMenu(string userName)
         {
             InitializeComponent();
             CurrentUser = userName;
             ShowName();
-            ShowTasks();
-
+            ShowTasks();        
         }
-         public UserMenu(string userName, string taskTxt) : this(userName)
-         {            
-             TaskTxt = taskTxt;
-         }
+        public UserMenu(string userName, string taskTxt) : this(userName)
+        {
+            TaskTxt = taskTxt;
+        }
+
+       
         private void LogoutButton_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -49,13 +50,13 @@ namespace ToDoList
         }
         private void UserMenu_FormClosing(object sender, FormClosingEventArgs e)
         {
-          Application.Exit();
+            Application.Exit();
         }
         private void NewTask_Click(object sender, EventArgs e)
         {
             string userName = CurrentUser;
             NewTask ToDo = new NewTask(userName);
-            ToDo.ShowDialog();          
+            ToDo.ShowDialog();
         }
         public void ShowName()
         {
@@ -79,14 +80,17 @@ namespace ToDoList
         }
         public async void ShowTask_Click(object sender, EventArgs e)
         {
-            
-           await ShowTaskDetails();
-            TaskTextBoxForm textBoxForm = new TaskTextBoxForm(CurrentUser,TaskTxt);
+            if (Tasks.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a task");
+                return;
+            }
+            await ShowTaskDetails();
+            TaskTextBoxForm textBoxForm = new TaskTextBoxForm(CurrentUser, TaskTxt);
             textBoxForm.ShowDialog();
         }
         public async Task ShowTaskDetails()
         {
-
             using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
             {
                 try
@@ -98,22 +102,22 @@ namespace ToDoList
                         cmd.Parameters.AddWithValue("@TASK", task);
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
-                            while (reader.Read())
+                            while (await reader.ReadAsync())
                             {
                                 string task1 = reader["TASK"].ToString();
                                 string description = reader["DESCRIPTION"].ToString();
                                 string priority = reader["PRIORITY"].ToString();
                                 string datestart = reader["DATESTART"].ToString();
-                                string dateEnd = reader["DATEEND"].ToString();
+                                string dateEnd = reader["DATEEND"].ToString();                           
                                 TaskTxt = $"Task: {task1}{nl} Description: {description}{nl} Priority: {priority}{nl} DateStart: {datestart}{nl} DateEnd: {dateEnd}";
                             }
                         }
                     }
-                   await conn.CloseAsync();
+                    await conn.CloseAsync();
                 }
                 catch
                 {
-                    MessageBox.Show("Please Select a Task");
+                    MessageBox.Show("Please select a task");
                 }
             }
         }
@@ -150,20 +154,13 @@ namespace ToDoList
                         }
                     }
                     conn.Close();
-                } 
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error:" + ex);
             }
-              
-            
-        }
-        private void Tasks_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            ShowTaskDetails();
-        }
-
+        }       
         private void EditTask_Click(object sender, EventArgs e)
         {
             try
@@ -187,6 +184,15 @@ namespace ToDoList
         {
             try
             {
+                if (Tasks.Items[Tasks.SelectedIndex].ToString() == null) { }
+            }
+            catch
+            {
+                MessageBox.Show("Please select a task to delete");
+                return;
+            }
+            try
+            {
                 var choice = MessageBox.Show("Are you sure you want to delete?", "Confirm Delete",
                                   MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
                 if (choice == DialogResult.No)
@@ -200,16 +206,16 @@ namespace ToDoList
 
                 using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
                 {
-                    conn.Open();
+                    await conn.OpenAsync();
                     string deleteTask = @"DELETE FROM TASKS WHERE TASK = @TASK";
                     using (SqlCommand cmd = new SqlCommand(deleteTask, conn))
                     {
                         cmd.Parameters.AddWithValue("@TASK", task);
 
-                        cmd.ExecuteNonQuery();
+                        await cmd.ExecuteNonQueryAsync();
 
                     }
-                    conn.Close();
+                   await conn.CloseAsync();
                 }
             }
             catch (Exception ex)
@@ -225,7 +231,7 @@ namespace ToDoList
             ShowTasks();
         }
         private void UserMenu_MouseClick(object sender, MouseEventArgs e)
-        {           
+        {
             Tasks.SelectedIndex = -1;
         }
         protected override void OnPaintBackground(PaintEventArgs e)
@@ -233,8 +239,9 @@ namespace ToDoList
             base.OnPaintBackground(e);
             var paint = new Register();
             paint.PaintForm(e.Graphics);
-        }
-     
+        } 
+        
+       
     }
 }
     

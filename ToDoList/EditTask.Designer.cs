@@ -40,6 +40,11 @@
             EndDateLabel = new CuoreUI.Controls.cuiButton();
             EditsTask = new CuoreUI.Controls.cuiButton();
             Focuslabel2 = new CuoreUI.Controls.cuiLabel();
+            SubTasks = new TransparentListBox();
+            SubTaskDelBtn = new CuoreUI.Controls.cuiButton();
+            SubTaskAddBtn = new CuoreUI.Controls.cuiButton();
+            SubTasksText = new CuoreUI.Controls.cuiTextBox2();
+            DoneBtn = new CuoreUI.Controls.cuiButton();
             SuspendLayout();
             // 
             // DateEnd
@@ -319,12 +324,176 @@
             Focuslabel2.Size = new Size(71, 41);
             Focuslabel2.TabIndex = 42;
             // 
+            // SubTasks
+            // 
+            SubTasks.BackColor = Color.Transparent;
+            SubTasks.BackgroundColor = Color.White;
+            SubTasks.BorderStyle = BorderStyle.None;
+            SubTasks.ColumnWidth = 300;
+            SubTasks.DrawMode = DrawMode.OwnerDrawFixed;
+            SubTasks.Font = new Font("Microsoft YaHei UI", 9.5F);
+            SubTasks.ForeColor = Color.Black;
+            SubTasks.ForegroundColor = Color.Black;
+            SubTasks.FormattingEnabled = true;
+            SubTasks.ItemHeight = 34;
+            SubTasks.ItemHoveredBackgroundColor = Color.White;
+            SubTasks.ItemHoveredForegroundColor = Color.Black;
+            SubTasks.ItemRounding = 8;
+            SubTasks.ItemSelectedBackgroundColor = SystemColors.ActiveCaption;
+            SubTasks.Location = new Point(508, 305);
+            SubTasks.Name = "SubTasks";
+            SubTasks.RightToLeft = RightToLeft.No;
+            SubTasks.Rounding = 8;
+            SubTasks.SelectedForegroundColor = Color.Black;
+            SubTasks.Size = new Size(415, 204);
+            SubTasks.TabIndex = 55;
+            // 
+            // SubTaskDelBtn
+            // 
+            SubTaskDelBtn.BackColor = Color.Transparent;
+            SubTaskDelBtn.CheckButton = false;
+            SubTaskDelBtn.Checked = false;
+            SubTaskDelBtn.CheckedBackground = Color.White;
+            SubTaskDelBtn.CheckedForeColor = Color.White;
+            SubTaskDelBtn.CheckedImageTint = Color.White;
+            SubTaskDelBtn.CheckedOutline = Color.WhiteSmoke;
+            SubTaskDelBtn.Content = "Delete";
+            SubTaskDelBtn.DialogResult = DialogResult.None;
+            SubTaskDelBtn.Font = new Font("Microsoft Sans Serif", 9.75F);
+            SubTaskDelBtn.ForeColor = Color.White;
+            SubTaskDelBtn.HoverBackground = Color.Transparent;
+            SubTaskDelBtn.HoveredImageTint = Color.White;
+            SubTaskDelBtn.HoverForeColor = Color.White;
+            SubTaskDelBtn.HoverOutline = Color.Empty;
+            SubTaskDelBtn.Image = null;
+            SubTaskDelBtn.ImageAutoCenter = true;
+            SubTaskDelBtn.ImageExpand = new Point(0, 0);
+            SubTaskDelBtn.ImageOffset = new Point(0, 0);
+            SubTaskDelBtn.ImageTint = Color.White;
+            SubTaskDelBtn.Location = new Point(738, 208);
+            SubTaskDelBtn.Name = "SubTaskDelBtn";
+            SubTaskDelBtn.NormalBackground = Color.Transparent;
+            SubTaskDelBtn.NormalOutline = Color.WhiteSmoke;
+            SubTaskDelBtn.OutlineThickness = 1.6F;
+            SubTaskDelBtn.PressedBackground = Color.Transparent;
+            SubTaskDelBtn.PressedForeColor = Color.White;
+            SubTaskDelBtn.PressedImageTint = Color.White;
+            SubTaskDelBtn.PressedOutline = Color.Empty;
+            SubTaskDelBtn.Rounding = new Padding(8);
+            SubTaskDelBtn.Size = new Size(69, 29);
+            SubTaskDelBtn.TabIndex = 54;
+            SubTaskDelBtn.TextOffset = new Point(0, 0);
+            SubTaskDelBtn.Click += SubTaskDelBtn_Click;
+            // 
+            // SubTaskAddBtn
+            // 
+            SubTaskAddBtn.BackColor = Color.Transparent;
+            SubTaskAddBtn.CheckButton = false;
+            SubTaskAddBtn.Checked = false;
+            SubTaskAddBtn.CheckedBackground = Color.White;
+            SubTaskAddBtn.CheckedForeColor = Color.White;
+            SubTaskAddBtn.CheckedImageTint = Color.White;
+            SubTaskAddBtn.CheckedOutline = Color.WhiteSmoke;
+            SubTaskAddBtn.Content = "Add";
+            SubTaskAddBtn.DialogResult = DialogResult.None;
+            SubTaskAddBtn.Font = new Font("Microsoft Sans Serif", 9.75F);
+            SubTaskAddBtn.ForeColor = Color.White;
+            SubTaskAddBtn.HoverBackground = Color.Transparent;
+            SubTaskAddBtn.HoveredImageTint = Color.White;
+            SubTaskAddBtn.HoverForeColor = Color.White;
+            SubTaskAddBtn.HoverOutline = Color.Empty;
+            SubTaskAddBtn.Image = null;
+            SubTaskAddBtn.ImageAutoCenter = true;
+            SubTaskAddBtn.ImageExpand = new Point(0, 0);
+            SubTaskAddBtn.ImageOffset = new Point(0, 0);
+            SubTaskAddBtn.ImageTint = Color.White;
+            SubTaskAddBtn.Location = new Point(738, 249);
+            SubTaskAddBtn.Name = "SubTaskAddBtn";
+            SubTaskAddBtn.NormalBackground = Color.Transparent;
+            SubTaskAddBtn.NormalOutline = Color.WhiteSmoke;
+            SubTaskAddBtn.OutlineThickness = 1.6F;
+            SubTaskAddBtn.PressedBackground = Color.Transparent;
+            SubTaskAddBtn.PressedForeColor = Color.White;
+            SubTaskAddBtn.PressedImageTint = Color.White;
+            SubTaskAddBtn.PressedOutline = Color.Empty;
+            SubTaskAddBtn.Rounding = new Padding(8);
+            SubTaskAddBtn.Size = new Size(69, 29);
+            SubTaskAddBtn.TabIndex = 53;
+            SubTaskAddBtn.TextOffset = new Point(0, 0);
+            SubTaskAddBtn.Click += SubTaskAddBtn_Click;
+            // 
+            // SubTasksText
+            // 
+            SubTasksText.BackColor = Color.White;
+            SubTasksText.BorderColor = Color.WhiteSmoke;
+            SubTasksText.BorderFocusColor = Color.Gray;
+            SubTasksText.BorderSize = 2;
+            SubTasksText.Content = "";
+            SubTasksText.Font = new Font("Microsoft Sans Serif", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 5);
+            SubTasksText.ForeColor = Color.Gray;
+            SubTasksText.Location = new Point(508, 242);
+            SubTasksText.Margin = new Padding(4);
+            SubTasksText.Multiline = false;
+            SubTasksText.Name = "SubTasksText";
+            SubTasksText.Padding = new Padding(15, 15, 15, 0);
+            SubTasksText.PasswordChar = false;
+            SubTasksText.PlaceholderColor = Color.Transparent;
+            SubTasksText.PlaceholderText = "";
+            SubTasksText.Rounding = 8;
+            SubTasksText.Size = new Size(223, 45);
+            SubTasksText.TabIndex = 52;
+            SubTasksText.TextOffset = new Size(0, 0);
+            SubTasksText.UnderlinedStyle = false;
+            SubTasksText.KeyPress += SubTasksText_KeyPress;
+            // 
+            // DoneBtn
+            // 
+            DoneBtn.BackColor = Color.Transparent;
+            DoneBtn.CheckButton = false;
+            DoneBtn.Checked = false;
+            DoneBtn.CheckedBackground = Color.White;
+            DoneBtn.CheckedForeColor = Color.White;
+            DoneBtn.CheckedImageTint = Color.White;
+            DoneBtn.CheckedOutline = Color.WhiteSmoke;
+            DoneBtn.Content = "Done";
+            DoneBtn.DialogResult = DialogResult.None;
+            DoneBtn.Font = new Font("Microsoft Sans Serif", 9.75F);
+            DoneBtn.ForeColor = Color.White;
+            DoneBtn.HoverBackground = Color.Transparent;
+            DoneBtn.HoveredImageTint = Color.White;
+            DoneBtn.HoverForeColor = Color.White;
+            DoneBtn.HoverOutline = Color.Empty;
+            DoneBtn.Image = null;
+            DoneBtn.ImageAutoCenter = true;
+            DoneBtn.ImageExpand = new Point(0, 0);
+            DoneBtn.ImageOffset = new Point(0, 0);
+            DoneBtn.ImageTint = Color.White;
+            DoneBtn.Location = new Point(813, 249);
+            DoneBtn.Name = "DoneBtn";
+            DoneBtn.NormalBackground = Color.Transparent;
+            DoneBtn.NormalOutline = Color.WhiteSmoke;
+            DoneBtn.OutlineThickness = 1.6F;
+            DoneBtn.PressedBackground = Color.Transparent;
+            DoneBtn.PressedForeColor = Color.White;
+            DoneBtn.PressedImageTint = Color.White;
+            DoneBtn.PressedOutline = Color.Empty;
+            DoneBtn.Rounding = new Padding(8);
+            DoneBtn.Size = new Size(69, 29);
+            DoneBtn.TabIndex = 56;
+            DoneBtn.TextOffset = new Point(0, 0);
+            DoneBtn.Click += DoneBtn_Click;
+            // 
             // EditTask
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveBorder;
             ClientSize = new Size(953, 650);
+            Controls.Add(DoneBtn);
+            Controls.Add(SubTasks);
+            Controls.Add(SubTaskDelBtn);
+            Controls.Add(SubTaskAddBtn);
+            Controls.Add(SubTasksText);
             Controls.Add(Focuslabel2);
             Controls.Add(EditsTask);
             Controls.Add(EndDateLabel);
@@ -360,5 +529,10 @@
         private CuoreUI.Controls.cuiButton EndDateLabel;
         private CuoreUI.Controls.cuiButton EditsTask;
         private CuoreUI.Controls.cuiLabel Focuslabel2;
+        private TransparentListBox SubTasks;
+        private CuoreUI.Controls.cuiButton SubTaskDelBtn;
+        private CuoreUI.Controls.cuiButton SubTaskAddBtn;
+        private CuoreUI.Controls.cuiTextBox2 SubTasksText;
+        private CuoreUI.Controls.cuiButton DoneBtn;
     }
 }

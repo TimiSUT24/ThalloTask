@@ -41,6 +41,7 @@
             cuiBorder1 = new CuoreUI.Controls.cuiBorder();
             cuiBorder2 = new CuoreUI.Controls.cuiBorder();
             ReloadButton = new CuoreUI.Controls.cuiButton();
+            SubTasksa = new TransparentListBox();
             SuspendLayout();
             // 
             // DeleteButton
@@ -286,7 +287,6 @@
             Tasks.Size = new Size(198, 238);
             Tasks.TabIndex = 37;
             Tasks.SelectedIndexChanged += Tasks_SelectedIndexChanged;
-            Tasks.MouseDoubleClick += Tasks_MouseDoubleClick;
             // 
             // WelcomeText
             // 
@@ -425,12 +425,37 @@
             ReloadButton.TextOffset = new Point(0, 0);
             ReloadButton.Click += ReloadButton_Click_1;
             // 
+            // SubTasksa
+            // 
+            SubTasksa.BackColor = Color.Transparent;
+            SubTasksa.BackgroundColor = Color.White;
+            SubTasksa.BorderStyle = BorderStyle.None;
+            SubTasksa.ColumnWidth = 300;
+            SubTasksa.DrawMode = DrawMode.OwnerDrawFixed;
+            SubTasksa.Font = new Font("Microsoft YaHei UI", 9.5F);
+            SubTasksa.ForeColor = Color.Black;
+            SubTasksa.ForegroundColor = Color.Black;
+            SubTasksa.FormattingEnabled = true;
+            SubTasksa.ItemHeight = 34;
+            SubTasksa.ItemHoveredBackgroundColor = Color.White;
+            SubTasksa.ItemHoveredForegroundColor = Color.Black;
+            SubTasksa.ItemRounding = 8;
+            SubTasksa.ItemSelectedBackgroundColor = SystemColors.ActiveCaption;
+            SubTasksa.Location = new Point(43, 433);
+            SubTasksa.Name = "SubTasksa";
+            SubTasksa.RightToLeft = RightToLeft.No;
+            SubTasksa.Rounding = 8;
+            SubTasksa.SelectedForegroundColor = Color.Black;
+            SubTasksa.Size = new Size(415, 204);
+            SubTasksa.TabIndex = 56;
+            // 
             // UserMenu
             // 
             AutoScaleMode = AutoScaleMode.None;
             BackColor = SystemColors.ActiveBorder;
             BackgroundImageLayout = ImageLayout.None;
             ClientSize = new Size(1382, 839);
+            Controls.Add(SubTasksa);
             Controls.Add(ReloadButton);
             Controls.Add(cuiBorder1);
             Controls.Add(TextUser);
@@ -467,5 +492,6 @@
         private CuoreUI.Controls.cuiBorder cuiBorder1;
         private CuoreUI.Controls.cuiBorder cuiBorder2;
         private CuoreUI.Controls.cuiButton ReloadButton;
+        private TransparentListBox SubTasksa;
     }
 }

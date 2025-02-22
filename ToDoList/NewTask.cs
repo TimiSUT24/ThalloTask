@@ -1,4 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.Identity.Client;
+using Microsoft.VisualBasic.Devices;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,11 +17,12 @@ namespace ToDoList
 {
     public partial class NewTask : Form
     {
-        private string CurrentUser { get; set; }      
+        private string CurrentUser { get; set; }
+        private string SubList { get; set; }
         public NewTask(string userName)
         {
             InitializeComponent();
-            CurrentUser = userName;
+            CurrentUser = userName;         
         }
         public int GetUserID(string userName)
         {
@@ -52,7 +55,11 @@ namespace ToDoList
             newTask.PaintForm(e.Graphics);
         }
 
-        private void AddTask_Click(object sender, EventArgs e)
+        private async void AddTask_Click(object sender, EventArgs e)
+        {
+            await AddTask();
+        }
+        public async Task AddTask()
         {
             if (string.IsNullOrEmpty(TaskText.Content) || string.IsNullOrWhiteSpace(TaskText.Content))
             {
@@ -72,13 +79,18 @@ namespace ToDoList
             }
             int userId = GetUserID(CurrentUser);
 
+            int taskId = -1;
+            
             using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
             {
                 try
                 {
-                    conn.Open();
+                     await conn.OpenAsync();
 
-                    string addTask = "INSERT INTO TASKS(TASK,DESCRIPTION,PRIORITY,DATESTART,DATEEND,USER_ID) VALUES (@TASK,@DESCRIPTION,@PRIORITY,@DATESTART,@DATEEND,@USER_ID)";
+                    string addTask = @"INSERT INTO TASKS(TASK,DESCRIPTION,PRIORITY,DATESTART,DATEEND,USER_ID) 
+                                     OUTPUT INSERTED.ID
+                                     VALUES (@TASK,@DESCRIPTION,@PRIORITY,@DATESTART,@DATEEND,@USER_ID)";
+                    
                     using (SqlCommand cmd = new SqlCommand(addTask, conn))
                     {
                         cmd.Parameters.AddWithValue("@TASK", TaskText.Content);                //Insert these values to the database 
@@ -86,9 +98,9 @@ namespace ToDoList
                         cmd.Parameters.AddWithValue("@PRIORITY", PriorityList.Text);
                         cmd.Parameters.AddWithValue("@USER_ID", userId);
                         cmd.Parameters.AddWithValue("@DATESTART", StartDatePicker.Value.Date);
-                        cmd.Parameters.AddWithValue("@DATEEND", EndDatePicker.Value.Date);
-                        int rows = cmd.ExecuteNonQuery();
-                        if (rows > 0)
+                        cmd.Parameters.AddWithValue("@DATEEND", EndDatePicker.Value.Date);                                           
+                        taskId = (int)await cmd.ExecuteScalarAsync();
+                        if (taskId > 0)
                         {
                             MessageBox.Show("Task added");
                         }
@@ -97,7 +109,17 @@ namespace ToDoList
                             MessageBox.Show("Error");
                         }
                     }
-                    conn.Close();
+                    string addList = @"INSERT INTO SUBTASKS(SUBTASK,TASKID) VALUES(@SUBTASK,@TASKID)";
+                    foreach(var items in SubTasks.Items)
+                    {
+                        using (SqlCommand cmd = new SqlCommand(addList, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@TASKID",taskId);
+                            cmd.Parameters.AddWithValue("@SUBTASK",items.ToString());
+                            await cmd.ExecuteNonQueryAsync();
+                        }
+                    }
+                   await conn.CloseAsync();
                 }
                 catch (Exception ex)
                 {
@@ -109,5 +131,21 @@ namespace ToDoList
         {
             Focuslabel3.Focus();
         }
+        private void SubTaskAddBtn_Click(object sender, EventArgs e)
+        {
+            SubTasks.Items.Add(SubTasksText.Content);
+        }
+        private void SubTaskText_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (SubTasksText.Content.Length >= 48 && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+        private void SubTaskDelBtn_Click(object sender, EventArgs e)
+        {
+            SubList = SubTasks.Items[SubTasks.SelectedIndex].ToString();
+            SubTasks.Items.Remove(SubList);
+        }         
     }
 }
