@@ -35,13 +35,16 @@
             LogoutButton = new CuoreUI.Controls.cuiButton();
             ShowTask = new CuoreUI.Controls.cuiButton();
             ActiveTasks = new CuoreUI.Controls.cuiButton();
-            Tasks = new TransparentListBox();
             WelcomeText = new CuoreUI.Controls.cuiButton();
             TextUser = new CuoreUI.Controls.cuiButton();
             cuiBorder1 = new CuoreUI.Controls.cuiBorder();
-            cuiBorder2 = new CuoreUI.Controls.cuiBorder();
             ReloadButton = new CuoreUI.Controls.cuiButton();
-            SubTasksa = new TransparentListBox();
+            CompletedSubTasks = new ReaLTaiizor.Controls.MetroListBox();
+            FinishedTaskBorder = new CuoreUI.Controls.cuiBorder();
+            cuiButton1 = new CuoreUI.Controls.cuiButton();
+            TaskBorder = new CuoreUI.Controls.cuiBorder();
+            Tasks = new ReaLTaiizor.Controls.MetroListBox();
+            TaskBorder.SuspendLayout();
             SuspendLayout();
             // 
             // DeleteButton
@@ -55,7 +58,7 @@
             DeleteButton.CheckedOutline = Color.Transparent;
             DeleteButton.Content = "Delete Task";
             DeleteButton.DialogResult = DialogResult.None;
-            DeleteButton.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            DeleteButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             DeleteButton.ForeColor = Color.White;
             DeleteButton.HoverBackground = Color.Transparent;
             DeleteButton.HoveredImageTint = Color.White;
@@ -66,7 +69,7 @@
             DeleteButton.ImageExpand = new Point(0, 0);
             DeleteButton.ImageOffset = new Point(0, 0);
             DeleteButton.ImageTint = Color.White;
-            DeleteButton.Location = new Point(639, 85);
+            DeleteButton.Location = new Point(639, 78);
             DeleteButton.Name = "DeleteButton";
             DeleteButton.NormalBackground = Color.Transparent;
             DeleteButton.NormalOutline = Color.WhiteSmoke;
@@ -92,7 +95,7 @@
             EditTask.CheckedOutline = Color.Transparent;
             EditTask.Content = "Edit Task";
             EditTask.DialogResult = DialogResult.None;
-            EditTask.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            EditTask.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             EditTask.ForeColor = Color.White;
             EditTask.HoverBackground = Color.Transparent;
             EditTask.HoveredImageTint = Color.White;
@@ -103,7 +106,7 @@
             EditTask.ImageExpand = new Point(0, 0);
             EditTask.ImageOffset = new Point(0, 0);
             EditTask.ImageTint = Color.White;
-            EditTask.Location = new Point(476, 85);
+            EditTask.Location = new Point(476, 78);
             EditTask.Name = "EditTask";
             EditTask.NormalBackground = Color.Transparent;
             EditTask.NormalOutline = Color.WhiteSmoke;
@@ -129,7 +132,7 @@
             NewTask.CheckedOutline = Color.Transparent;
             NewTask.Content = "New Task";
             NewTask.DialogResult = DialogResult.None;
-            NewTask.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            NewTask.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             NewTask.ForeColor = Color.White;
             NewTask.HoverBackground = Color.Transparent;
             NewTask.HoveredImageTint = Color.White;
@@ -140,7 +143,7 @@
             NewTask.ImageExpand = new Point(0, 0);
             NewTask.ImageOffset = new Point(0, 0);
             NewTask.ImageTint = Color.White;
-            NewTask.Location = new Point(314, 85);
+            NewTask.Location = new Point(314, 78);
             NewTask.Name = "NewTask";
             NewTask.NormalBackground = Color.Transparent;
             NewTask.NormalOutline = Color.WhiteSmoke;
@@ -166,7 +169,7 @@
             LogoutButton.CheckedOutline = Color.Transparent;
             LogoutButton.Content = "Logout";
             LogoutButton.DialogResult = DialogResult.None;
-            LogoutButton.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            LogoutButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             LogoutButton.ForeColor = Color.White;
             LogoutButton.HoverBackground = Color.Transparent;
             LogoutButton.HoveredImageTint = Color.White;
@@ -203,7 +206,7 @@
             ShowTask.CheckedOutline = Color.Transparent;
             ShowTask.Content = "Show";
             ShowTask.DialogResult = DialogResult.None;
-            ShowTask.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ShowTask.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ShowTask.ForeColor = Color.White;
             ShowTask.HoverBackground = Color.Transparent;
             ShowTask.HoveredImageTint = Color.White;
@@ -214,7 +217,7 @@
             ShowTask.ImageExpand = new Point(0, 0);
             ShowTask.ImageOffset = new Point(0, 0);
             ShowTask.ImageTint = Color.White;
-            ShowTask.Location = new Point(127, 374);
+            ShowTask.Location = new Point(127, 383);
             ShowTask.Name = "ShowTask";
             ShowTask.NormalBackground = Color.Transparent;
             ShowTask.NormalOutline = Color.WhiteSmoke;
@@ -240,7 +243,7 @@
             ActiveTasks.CheckedOutline = Color.Transparent;
             ActiveTasks.Content = "Active Tasks";
             ActiveTasks.DialogResult = DialogResult.None;
-            ActiveTasks.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ActiveTasks.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ActiveTasks.ForeColor = Color.White;
             ActiveTasks.HoverBackground = Color.Transparent;
             ActiveTasks.HoveredImageTint = Color.White;
@@ -251,7 +254,7 @@
             ActiveTasks.ImageExpand = new Point(0, 0);
             ActiveTasks.ImageOffset = new Point(0, 0);
             ActiveTasks.ImageTint = Color.White;
-            ActiveTasks.Location = new Point(127, 85);
+            ActiveTasks.Location = new Point(127, 78);
             ActiveTasks.Name = "ActiveTasks";
             ActiveTasks.NormalBackground = Color.Transparent;
             ActiveTasks.NormalOutline = Color.WhiteSmoke;
@@ -264,29 +267,6 @@
             ActiveTasks.Size = new Size(144, 26);
             ActiveTasks.TabIndex = 33;
             ActiveTasks.TextOffset = new Point(0, 0);
-            // 
-            // Tasks
-            // 
-            Tasks.BackColor = Color.Transparent;
-            Tasks.BackgroundColor = Color.Transparent;
-            Tasks.BorderStyle = BorderStyle.None;
-            Tasks.DrawMode = DrawMode.OwnerDrawFixed;
-            Tasks.Font = new Font("Microsoft YaHei UI", 9F);
-            Tasks.ForeColor = Color.Black;
-            Tasks.ForegroundColor = Color.Black;
-            Tasks.FormattingEnabled = true;
-            Tasks.ItemHeight = 34;
-            Tasks.ItemHoveredBackgroundColor = Color.Transparent;
-            Tasks.ItemHoveredForegroundColor = Color.Black;
-            Tasks.ItemRounding = 8;
-            Tasks.ItemSelectedBackgroundColor = Color.DarkGray;
-            Tasks.Location = new Point(104, 124);
-            Tasks.Name = "Tasks";
-            Tasks.Rounding = 8;
-            Tasks.SelectedForegroundColor = Color.Black;
-            Tasks.Size = new Size(198, 238);
-            Tasks.TabIndex = 37;
-            Tasks.SelectedIndexChanged += Tasks_SelectedIndexChanged;
             // 
             // WelcomeText
             // 
@@ -366,7 +346,7 @@
             // cuiBorder1
             // 
             cuiBorder1.BackColor = Color.Transparent;
-            cuiBorder1.Location = new Point(0, 413);
+            cuiBorder1.Location = new Point(1, 443);
             cuiBorder1.Name = "cuiBorder1";
             cuiBorder1.OutlineThickness = 2F;
             cuiBorder1.PanelColor = Color.White;
@@ -374,18 +354,6 @@
             cuiBorder1.Rounding = new Padding(0);
             cuiBorder1.Size = new Size(1382, 2);
             cuiBorder1.TabIndex = 36;
-            // 
-            // cuiBorder2
-            // 
-            cuiBorder2.BackColor = Color.Transparent;
-            cuiBorder2.Location = new Point(99, 117);
-            cuiBorder2.Name = "cuiBorder2";
-            cuiBorder2.OutlineThickness = 3F;
-            cuiBorder2.PanelColor = Color.Transparent;
-            cuiBorder2.PanelOutlineColor = Color.WhiteSmoke;
-            cuiBorder2.Rounding = new Padding(8);
-            cuiBorder2.Size = new Size(210, 251);
-            cuiBorder2.TabIndex = 38;
             // 
             // ReloadButton
             // 
@@ -410,7 +378,7 @@
             ReloadButton.ImageExpand = new Point(5, 5);
             ReloadButton.ImageOffset = new Point(0, 0);
             ReloadButton.ImageTint = Color.Black;
-            ReloadButton.Location = new Point(68, 124);
+            ReloadButton.Location = new Point(57, 117);
             ReloadButton.Name = "ReloadButton";
             ReloadButton.NormalBackground = Color.Transparent;
             ReloadButton.NormalOutline = Color.Empty;
@@ -425,29 +393,125 @@
             ReloadButton.TextOffset = new Point(0, 0);
             ReloadButton.Click += ReloadButton_Click_1;
             // 
-            // SubTasksa
+            // CompletedSubTasks
             // 
-            SubTasksa.BackColor = Color.Transparent;
-            SubTasksa.BackgroundColor = Color.White;
-            SubTasksa.BorderStyle = BorderStyle.None;
-            SubTasksa.ColumnWidth = 300;
-            SubTasksa.DrawMode = DrawMode.OwnerDrawFixed;
-            SubTasksa.Font = new Font("Microsoft YaHei UI", 9.5F);
-            SubTasksa.ForeColor = Color.Black;
-            SubTasksa.ForegroundColor = Color.Black;
-            SubTasksa.FormattingEnabled = true;
-            SubTasksa.ItemHeight = 34;
-            SubTasksa.ItemHoveredBackgroundColor = Color.White;
-            SubTasksa.ItemHoveredForegroundColor = Color.Black;
-            SubTasksa.ItemRounding = 8;
-            SubTasksa.ItemSelectedBackgroundColor = SystemColors.ActiveCaption;
-            SubTasksa.Location = new Point(43, 433);
-            SubTasksa.Name = "SubTasksa";
-            SubTasksa.RightToLeft = RightToLeft.No;
-            SubTasksa.Rounding = 8;
-            SubTasksa.SelectedForegroundColor = Color.Black;
-            SubTasksa.Size = new Size(415, 204);
-            SubTasksa.TabIndex = 56;
+            CompletedSubTasks.BackColor = Color.Transparent;
+            CompletedSubTasks.BorderColor = Color.Transparent;
+            CompletedSubTasks.DisabledBackColor = Color.Transparent;
+            CompletedSubTasks.DisabledForeColor = Color.Transparent;
+            CompletedSubTasks.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            CompletedSubTasks.HoveredItemBackColor = Color.Transparent;
+            CompletedSubTasks.HoveredItemColor = Color.Black;
+            CompletedSubTasks.IsDerivedStyle = false;
+            CompletedSubTasks.ItemHeight = 30;
+            CompletedSubTasks.Location = new Point(99, 512);
+            CompletedSubTasks.MultiSelect = false;
+            CompletedSubTasks.Name = "CompletedSubTasks";
+            CompletedSubTasks.SelectedIndex = -1;
+            CompletedSubTasks.SelectedItem = null;
+            CompletedSubTasks.SelectedItemBackColor = Color.Transparent;
+            CompletedSubTasks.SelectedItemColor = Color.Black;
+            CompletedSubTasks.SelectedText = null;
+            CompletedSubTasks.SelectedValue = null;
+            CompletedSubTasks.ShowBorder = false;
+            CompletedSubTasks.ShowScrollBar = true;
+            CompletedSubTasks.Size = new Size(203, 244);
+            CompletedSubTasks.Style = ReaLTaiizor.Enum.Metro.Style.Custom;
+            CompletedSubTasks.StyleManager = null;
+            CompletedSubTasks.TabIndex = 57;
+            CompletedSubTasks.ThemeAuthor = "Taiizor";
+            CompletedSubTasks.ThemeName = "MetroLight";
+            // 
+            // FinishedTaskBorder
+            // 
+            FinishedTaskBorder.BackColor = Color.Transparent;
+            FinishedTaskBorder.Location = new Point(93, 506);
+            FinishedTaskBorder.Name = "FinishedTaskBorder";
+            FinishedTaskBorder.OutlineThickness = 2F;
+            FinishedTaskBorder.PanelColor = Color.Transparent;
+            FinishedTaskBorder.PanelOutlineColor = Color.WhiteSmoke;
+            FinishedTaskBorder.Rounding = new Padding(8);
+            FinishedTaskBorder.Size = new Size(216, 257);
+            FinishedTaskBorder.TabIndex = 58;
+            // 
+            // cuiButton1
+            // 
+            cuiButton1.BackColor = Color.Transparent;
+            cuiButton1.CheckButton = false;
+            cuiButton1.Checked = false;
+            cuiButton1.CheckedBackground = Color.Transparent;
+            cuiButton1.CheckedForeColor = Color.White;
+            cuiButton1.CheckedImageTint = Color.White;
+            cuiButton1.CheckedOutline = Color.Transparent;
+            cuiButton1.Content = "Completed SubTasks";
+            cuiButton1.DialogResult = DialogResult.None;
+            cuiButton1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cuiButton1.ForeColor = Color.White;
+            cuiButton1.HoverBackground = Color.Transparent;
+            cuiButton1.HoveredImageTint = Color.White;
+            cuiButton1.HoverForeColor = Color.White;
+            cuiButton1.HoverOutline = Color.WhiteSmoke;
+            cuiButton1.Image = null;
+            cuiButton1.ImageAutoCenter = true;
+            cuiButton1.ImageExpand = new Point(0, 0);
+            cuiButton1.ImageOffset = new Point(0, 0);
+            cuiButton1.ImageTint = Color.White;
+            cuiButton1.Location = new Point(99, 474);
+            cuiButton1.Name = "cuiButton1";
+            cuiButton1.NormalBackground = Color.Transparent;
+            cuiButton1.NormalOutline = Color.WhiteSmoke;
+            cuiButton1.OutlineThickness = 1.6F;
+            cuiButton1.PressedBackground = Color.Transparent;
+            cuiButton1.PressedForeColor = Color.White;
+            cuiButton1.PressedImageTint = Color.White;
+            cuiButton1.PressedOutline = Color.WhiteSmoke;
+            cuiButton1.Rounding = new Padding(8);
+            cuiButton1.Size = new Size(203, 26);
+            cuiButton1.TabIndex = 59;
+            cuiButton1.TextOffset = new Point(0, 0);
+            // 
+            // TaskBorder
+            // 
+            TaskBorder.BackColor = Color.Transparent;
+            TaskBorder.Controls.Add(Tasks);
+            TaskBorder.Location = new Point(93, 110);
+            TaskBorder.Name = "TaskBorder";
+            TaskBorder.OutlineThickness = 2F;
+            TaskBorder.PanelColor = Color.Transparent;
+            TaskBorder.PanelOutlineColor = Color.WhiteSmoke;
+            TaskBorder.Rounding = new Padding(8);
+            TaskBorder.Size = new Size(216, 264);
+            TaskBorder.TabIndex = 61;
+            // 
+            // Tasks
+            // 
+            Tasks.BackColor = Color.Transparent;
+            Tasks.BorderColor = Color.Transparent;
+            Tasks.DisabledBackColor = Color.Transparent;
+            Tasks.DisabledForeColor = Color.Transparent;
+            Tasks.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Tasks.HoveredItemBackColor = SystemColors.ActiveCaption;
+            Tasks.HoveredItemColor = Color.Black;
+            Tasks.IsDerivedStyle = false;
+            Tasks.ItemHeight = 30;
+            Tasks.Location = new Point(6, 18);
+            Tasks.MultiSelect = false;
+            Tasks.Name = "Tasks";
+            Tasks.SelectedIndex = -1;
+            Tasks.SelectedItem = null;
+            Tasks.SelectedItemBackColor = SystemColors.ActiveCaption;
+            Tasks.SelectedItemColor = Color.Black;
+            Tasks.SelectedText = null;
+            Tasks.SelectedValue = null;
+            Tasks.ShowBorder = false;
+            Tasks.ShowScrollBar = true;
+            Tasks.Size = new Size(197, 229);
+            Tasks.Style = ReaLTaiizor.Enum.Metro.Style.Custom;
+            Tasks.StyleManager = null;
+            Tasks.TabIndex = 60;
+            Tasks.ThemeAuthor = "Taiizor";
+            Tasks.ThemeName = "MetroLight";
+            Tasks.SelectedIndexChanged += Tasks_SelectedIndexChanged;
             // 
             // UserMenu
             // 
@@ -455,19 +519,20 @@
             BackColor = SystemColors.ActiveBorder;
             BackgroundImageLayout = ImageLayout.None;
             ClientSize = new Size(1382, 839);
-            Controls.Add(SubTasksa);
+            Controls.Add(TaskBorder);
+            Controls.Add(cuiButton1);
+            Controls.Add(CompletedSubTasks);
             Controls.Add(ReloadButton);
             Controls.Add(cuiBorder1);
             Controls.Add(TextUser);
             Controls.Add(WelcomeText);
-            Controls.Add(Tasks);
             Controls.Add(ActiveTasks);
             Controls.Add(ShowTask);
             Controls.Add(LogoutButton);
             Controls.Add(NewTask);
             Controls.Add(EditTask);
             Controls.Add(DeleteButton);
-            Controls.Add(cuiBorder2);
+            Controls.Add(FinishedTaskBorder);
             DoubleBuffered = true;
             MaximumSize = new Size(1398, 878);
             Name = "UserMenu";
@@ -475,6 +540,7 @@
             Text = "UserMenu";
             FormClosing += UserMenu_FormClosing;
             MouseClick += UserMenu_MouseClick;
+            TaskBorder.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -486,12 +552,14 @@
         private CuoreUI.Controls.cuiButton LogoutButton;
         private CuoreUI.Controls.cuiButton ShowTask;
         private CuoreUI.Controls.cuiButton ActiveTasks;
-        private TransparentListBox Tasks;
         private CuoreUI.Controls.cuiButton WelcomeText;
         private CuoreUI.Controls.cuiButton TextUser;
         private CuoreUI.Controls.cuiBorder cuiBorder1;
-        private CuoreUI.Controls.cuiBorder cuiBorder2;
         private CuoreUI.Controls.cuiButton ReloadButton;
-        private TransparentListBox SubTasksa;
+        private ReaLTaiizor.Controls.MetroListBox CompletedSubTasks;
+        private CuoreUI.Controls.cuiBorder FinishedTaskBorder;
+        private CuoreUI.Controls.cuiButton cuiButton1;
+        private CuoreUI.Controls.cuiBorder TaskBorder;
+        private ReaLTaiizor.Controls.MetroListBox Tasks;
     }
 }

@@ -25,8 +25,7 @@ namespace ToDoList
         public string SubId { get; set; }
         public string SelectedSubItem { get; set; }
         public string SbId { get; set; }
-        Dictionary<string, string> C = new Dictionary<string, string>();
-        
+
 
         public EditTask(string userName, string Tasks)
         {
@@ -41,59 +40,75 @@ namespace ToDoList
         {
             using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
             {
-                conn.Open();
-                string showDetails = "SELECT DESCRIPTION,PRIORITY,DATESTART,DATEEND FROM TASKS WHERE TASK = @TASK";
-                using (SqlCommand cmd = new SqlCommand(showDetails, conn))
+                try
                 {
-                    cmd.Parameters.AddWithValue("@TASK", task);
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    conn.Open();
+                    string showDetails = "SELECT DESCRIPTION,PRIORITY,DATESTART,DATEEND FROM TASKS WHERE TASK = @TASK";
+                    using (SqlCommand cmd = new SqlCommand(showDetails, conn))
                     {
-                        while (reader.Read())
+                        cmd.Parameters.AddWithValue("@TASK", task);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            DescriptionText.Content = reader["DESCRIPTION"].ToString();
-                            PriorityList.Text = reader["PRIORITY"].ToString();
-                            DateStart.Value = Convert.ToDateTime(reader["DATESTART"]).Date;
-                            DateEnd.Value = Convert.ToDateTime(reader["DATEEND"]).Date;
+                            while (reader.Read())
+                            {
+                                DescriptionText.Content = reader["DESCRIPTION"].ToString();
+                                PriorityList.Text = reader["PRIORITY"].ToString();
+                                DateStart.Value = Convert.ToDateTime(reader["DATESTART"]).Date;
+                                DateEnd.Value = Convert.ToDateTime(reader["DATEEND"]).Date;
+                            }
                         }
                     }
-                }
-                string showSubTasks = @"SELECT SUBTASK FROM SUBTASKS
+                    string showSubTasks = @"SELECT SUBTASK FROM SUBTASKS
                                        JOIN TASKS ON TASKS.ID = SUBTASKS.TASKID
                                        WHERE TASK = @TASK";
-                using (SqlCommand cmd = new SqlCommand(showSubTasks, conn))
-                {
-                    cmd.Parameters.AddWithValue("@TASK", task);
-
-                    using (SqlDataReader reader2 = cmd.ExecuteReader())
+                    using (SqlCommand cmd = new SqlCommand(showSubTasks, conn))
                     {
-                        while (reader2.Read())
+                        cmd.Parameters.AddWithValue("@TASK", task);
+
+                        using (SqlDataReader reader2 = cmd.ExecuteReader())
                         {
-                            string subTasks = reader2["SUBTASK"].ToString();
-                            SubTasks.Items.Add(subTasks);
+                            while (reader2.Read())
+                            {
+                                string subTasks = reader2["SUBTASK"].ToString();
+                                SubTasks.Items.Add(subTasks);
+                            }
                         }
                     }
+                    conn.Close();
                 }
-                conn.Close();
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error:" + ex);
+                }
+
             }
         }
         private void EditTasks()
         {
             using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
             {
-                conn.Open();
-                string editTask = @"UPDATE TASKS SET DESCRIPTION = @DESCRIPTION, PRIORITY = @PRIORITY, 
-                                   DATESTART = @DATESTART, DATEEND = @DATEEND WHERE TASK = @TASK";                                   
-
-                using (SqlCommand cmd = new SqlCommand(editTask, conn))
+                try
                 {
-                    cmd.Parameters.AddWithValue("@TASK", task);
-                    cmd.Parameters.AddWithValue("@DESCRIPTION", Description);
-                    cmd.Parameters.AddWithValue("@PRIORITY", Priority);
-                    cmd.Parameters.AddWithValue("@DATESTART", dateStart);
-                    cmd.Parameters.AddWithValue("@DATEEND", dateEnd);
-                    cmd.ExecuteNonQuery();
-                }                            
-                conn.Close();
+                    conn.Open();
+                    string editTask = @"UPDATE TASKS SET DESCRIPTION = @DESCRIPTION, PRIORITY = @PRIORITY, 
+                                   DATESTART = @DATESTART, DATEEND = @DATEEND WHERE TASK = @TASK";
+
+                    using (SqlCommand cmd = new SqlCommand(editTask, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@TASK", task);
+                        cmd.Parameters.AddWithValue("@DESCRIPTION", Description);
+                        cmd.Parameters.AddWithValue("@PRIORITY", Priority);
+                        cmd.Parameters.AddWithValue("@DATESTART", dateStart);
+                        cmd.Parameters.AddWithValue("@DATEEND", dateEnd);
+                        cmd.ExecuteNonQuery();
+                    }
+                    conn.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error:" + ex);
+                }
+
             }
         }
         private void EdittedDetails()
@@ -120,6 +135,7 @@ namespace ToDoList
         private void EditTask_MouseClick(object sender, MouseEventArgs e)
         {
             Focuslabel2.Focus();
+            SubTasks.SelectedIndex = -1;
         }
 
         private async void DoneBtn_Click(object sender, EventArgs e)
@@ -199,13 +215,13 @@ namespace ToDoList
                             }
                         }
                     }
-                       
+
                     string addTask = @"INSERT INTO SUBTASKS (SUBTASK,TASKID)
                                      VALUES (@SUBTASK,@TASKID)";
-                    using (SqlCommand cmd = new SqlCommand(addTask,conn))
+                    using (SqlCommand cmd = new SqlCommand(addTask, conn))
                     {
-                        cmd.Parameters.AddWithValue("@TASKID",SubId);
-                        cmd.Parameters.AddWithValue("@SUBTASK",SubTasksText.Content);
+                        cmd.Parameters.AddWithValue("@TASKID", SubId);
+                        cmd.Parameters.AddWithValue("@SUBTASK", SubTasksText.Content);
                         cmd.ExecuteNonQuery();
                     }
                     conn.Close();
@@ -215,7 +231,7 @@ namespace ToDoList
             {
                 MessageBox.Show("Error:" + ex);
             }
-           
+
         }
 
         public void SubTaskAddBtn_Click(object sender, EventArgs e)
@@ -223,11 +239,11 @@ namespace ToDoList
             SubTasks.Items.Add(SubTasksText.Content);
             AddSubTask();
         }
-  
+
         public void DeleteSubTask()
         {
             try
-            {             
+            {
                 using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
                 {
                     conn.Open();
@@ -244,12 +260,12 @@ namespace ToDoList
             catch (Exception ex)
             {
                 MessageBox.Show("Error:" + ex);
-            }      
+            }
         }
 
         public void SubTaskDelBtn_Click(object sender, EventArgs e)
-        {           
-            SelectedSubItem = SubTasks.Items[SubTasks.SelectedIndex].ToString();           
+        {
+            SelectedSubItem = SubTasks.Items[SubTasks.SelectedIndex].ToString();
             SubTasks.Items.Remove(SelectedSubItem);
             DeleteSubTask();
         }
@@ -260,5 +276,6 @@ namespace ToDoList
                 e.Handled = true;
             }
         }
+      
     }
 }

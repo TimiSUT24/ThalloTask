@@ -40,23 +40,25 @@
             EndDateLabel = new CuoreUI.Controls.cuiButton();
             EditsTask = new CuoreUI.Controls.cuiButton();
             Focuslabel2 = new CuoreUI.Controls.cuiLabel();
-            SubTasks = new TransparentListBox();
             SubTaskDelBtn = new CuoreUI.Controls.cuiButton();
             SubTaskAddBtn = new CuoreUI.Controls.cuiButton();
             SubTasksText = new CuoreUI.Controls.cuiTextBox2();
             DoneBtn = new CuoreUI.Controls.cuiButton();
+            SubTasks = new ReaLTaiizor.Controls.MetroListBox();
+            cuiBorder3 = new CuoreUI.Controls.cuiBorder();
+            SubTaskButton = new CuoreUI.Controls.cuiButton();
             SuspendLayout();
             // 
             // DateEnd
             // 
-            DateEnd.Location = new Point(33, 442);
+            DateEnd.Location = new Point(33, 461);
             DateEnd.Name = "DateEnd";
             DateEnd.Size = new Size(200, 23);
             DateEnd.TabIndex = 28;
             // 
             // DateStart
             // 
-            DateStart.Location = new Point(33, 379);
+            DateStart.Location = new Point(33, 383);
             DateStart.Name = "DateStart";
             DateStart.Size = new Size(200, 23);
             DateStart.TabIndex = 0;
@@ -82,7 +84,7 @@
             DescriptionLabel.CheckedOutline = Color.Transparent;
             DescriptionLabel.Content = "Description";
             DescriptionLabel.DialogResult = DialogResult.None;
-            DescriptionLabel.Font = new Font("Segoe UI", 12F);
+            DescriptionLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             DescriptionLabel.ForeColor = Color.White;
             DescriptionLabel.HoverBackground = Color.Transparent;
             DescriptionLabel.HoveredImageTint = Color.White;
@@ -111,13 +113,13 @@
             // 
             TaskLabel.BackColor = Color.Transparent;
             TaskLabel.Content = "";
-            TaskLabel.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            TaskLabel.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             TaskLabel.ForeColor = Color.White;
             TaskLabel.HorizontalAlignment = CuoreUI.Controls.cuiLabel.HorizontalAlignments.Left;
             TaskLabel.Location = new Point(33, 49);
             TaskLabel.Margin = new Padding(4, 3, 4, 3);
             TaskLabel.Name = "TaskLabel";
-            TaskLabel.Size = new Size(238, 56);
+            TaskLabel.Size = new Size(327, 56);
             TaskLabel.TabIndex = 35;
             // 
             // DescriptionText
@@ -225,7 +227,7 @@
             StartDateLabel.ImageExpand = new Point(0, 0);
             StartDateLabel.ImageOffset = new Point(0, 0);
             StartDateLabel.ImageTint = Color.White;
-            StartDateLabel.Location = new Point(31, 349);
+            StartDateLabel.Location = new Point(31, 353);
             StartDateLabel.Name = "StartDateLabel";
             StartDateLabel.NormalBackground = Color.Transparent;
             StartDateLabel.NormalOutline = Color.WhiteSmoke;
@@ -235,7 +237,7 @@
             StartDateLabel.PressedImageTint = Color.White;
             StartDateLabel.PressedOutline = Color.WhiteSmoke;
             StartDateLabel.Rounding = new Padding(8);
-            StartDateLabel.Size = new Size(80, 26);
+            StartDateLabel.Size = new Size(86, 26);
             StartDateLabel.TabIndex = 39;
             StartDateLabel.TextOffset = new Point(0, 0);
             // 
@@ -261,7 +263,7 @@
             EndDateLabel.ImageExpand = new Point(0, 0);
             EndDateLabel.ImageOffset = new Point(0, 0);
             EndDateLabel.ImageTint = Color.White;
-            EndDateLabel.Location = new Point(33, 410);
+            EndDateLabel.Location = new Point(33, 429);
             EndDateLabel.Name = "EndDateLabel";
             EndDateLabel.NormalBackground = Color.Transparent;
             EndDateLabel.NormalOutline = Color.WhiteSmoke;
@@ -271,7 +273,7 @@
             EndDateLabel.PressedImageTint = Color.White;
             EndDateLabel.PressedOutline = Color.WhiteSmoke;
             EndDateLabel.Rounding = new Padding(8);
-            EndDateLabel.Size = new Size(80, 26);
+            EndDateLabel.Size = new Size(86, 26);
             EndDateLabel.TabIndex = 40;
             EndDateLabel.TextOffset = new Point(0, 0);
             // 
@@ -297,7 +299,7 @@
             EditsTask.ImageExpand = new Point(0, 0);
             EditsTask.ImageOffset = new Point(0, 0);
             EditsTask.ImageTint = Color.White;
-            EditsTask.Location = new Point(33, 481);
+            EditsTask.Location = new Point(32, 508);
             EditsTask.Name = "EditsTask";
             EditsTask.NormalBackground = Color.Transparent;
             EditsTask.NormalOutline = Color.WhiteSmoke;
@@ -318,35 +320,11 @@
             Focuslabel2.Content = "";
             Focuslabel2.ForeColor = Color.Transparent;
             Focuslabel2.HorizontalAlignment = CuoreUI.Controls.cuiLabel.HorizontalAlignments.Center;
-            Focuslabel2.Location = new Point(836, 23);
+            Focuslabel2.Location = new Point(883, 12);
             Focuslabel2.Margin = new Padding(4, 3, 4, 3);
             Focuslabel2.Name = "Focuslabel2";
-            Focuslabel2.Size = new Size(71, 41);
+            Focuslabel2.Size = new Size(57, 29);
             Focuslabel2.TabIndex = 42;
-            // 
-            // SubTasks
-            // 
-            SubTasks.BackColor = Color.Transparent;
-            SubTasks.BackgroundColor = Color.White;
-            SubTasks.BorderStyle = BorderStyle.None;
-            SubTasks.ColumnWidth = 300;
-            SubTasks.DrawMode = DrawMode.OwnerDrawFixed;
-            SubTasks.Font = new Font("Microsoft YaHei UI", 9.5F);
-            SubTasks.ForeColor = Color.Black;
-            SubTasks.ForegroundColor = Color.Black;
-            SubTasks.FormattingEnabled = true;
-            SubTasks.ItemHeight = 34;
-            SubTasks.ItemHoveredBackgroundColor = Color.White;
-            SubTasks.ItemHoveredForegroundColor = Color.Black;
-            SubTasks.ItemRounding = 8;
-            SubTasks.ItemSelectedBackgroundColor = SystemColors.ActiveCaption;
-            SubTasks.Location = new Point(508, 305);
-            SubTasks.Name = "SubTasks";
-            SubTasks.RightToLeft = RightToLeft.No;
-            SubTasks.Rounding = 8;
-            SubTasks.SelectedForegroundColor = Color.Black;
-            SubTasks.Size = new Size(415, 204);
-            SubTasks.TabIndex = 55;
             // 
             // SubTaskDelBtn
             // 
@@ -359,7 +337,7 @@
             SubTaskDelBtn.CheckedOutline = Color.WhiteSmoke;
             SubTaskDelBtn.Content = "Delete";
             SubTaskDelBtn.DialogResult = DialogResult.None;
-            SubTaskDelBtn.Font = new Font("Microsoft Sans Serif", 9.75F);
+            SubTaskDelBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             SubTaskDelBtn.ForeColor = Color.White;
             SubTaskDelBtn.HoverBackground = Color.Transparent;
             SubTaskDelBtn.HoveredImageTint = Color.White;
@@ -370,7 +348,7 @@
             SubTaskDelBtn.ImageExpand = new Point(0, 0);
             SubTaskDelBtn.ImageOffset = new Point(0, 0);
             SubTaskDelBtn.ImageTint = Color.White;
-            SubTaskDelBtn.Location = new Point(738, 208);
+            SubTaskDelBtn.Location = new Point(842, 351);
             SubTaskDelBtn.Name = "SubTaskDelBtn";
             SubTaskDelBtn.NormalBackground = Color.Transparent;
             SubTaskDelBtn.NormalOutline = Color.WhiteSmoke;
@@ -396,7 +374,7 @@
             SubTaskAddBtn.CheckedOutline = Color.WhiteSmoke;
             SubTaskAddBtn.Content = "Add";
             SubTaskAddBtn.DialogResult = DialogResult.None;
-            SubTaskAddBtn.Font = new Font("Microsoft Sans Serif", 9.75F);
+            SubTaskAddBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             SubTaskAddBtn.ForeColor = Color.White;
             SubTaskAddBtn.HoverBackground = Color.Transparent;
             SubTaskAddBtn.HoveredImageTint = Color.White;
@@ -407,7 +385,7 @@
             SubTaskAddBtn.ImageExpand = new Point(0, 0);
             SubTaskAddBtn.ImageOffset = new Point(0, 0);
             SubTaskAddBtn.ImageTint = Color.White;
-            SubTaskAddBtn.Location = new Point(738, 249);
+            SubTaskAddBtn.Location = new Point(767, 351);
             SubTaskAddBtn.Name = "SubTaskAddBtn";
             SubTaskAddBtn.NormalBackground = Color.Transparent;
             SubTaskAddBtn.NormalOutline = Color.WhiteSmoke;
@@ -431,7 +409,7 @@
             SubTasksText.Content = "";
             SubTasksText.Font = new Font("Microsoft Sans Serif", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 5);
             SubTasksText.ForeColor = Color.Gray;
-            SubTasksText.Location = new Point(508, 242);
+            SubTasksText.Location = new Point(525, 341);
             SubTasksText.Margin = new Padding(4);
             SubTasksText.Multiline = false;
             SubTasksText.Name = "SubTasksText";
@@ -457,7 +435,7 @@
             DoneBtn.CheckedOutline = Color.WhiteSmoke;
             DoneBtn.Content = "Done";
             DoneBtn.DialogResult = DialogResult.None;
-            DoneBtn.Font = new Font("Microsoft Sans Serif", 9.75F);
+            DoneBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             DoneBtn.ForeColor = Color.White;
             DoneBtn.HoverBackground = Color.Transparent;
             DoneBtn.HoveredImageTint = Color.White;
@@ -468,7 +446,7 @@
             DoneBtn.ImageExpand = new Point(0, 0);
             DoneBtn.ImageOffset = new Point(0, 0);
             DoneBtn.ImageTint = Color.White;
-            DoneBtn.Location = new Point(813, 249);
+            DoneBtn.Location = new Point(804, 313);
             DoneBtn.Name = "DoneBtn";
             DoneBtn.NormalBackground = Color.Transparent;
             DoneBtn.NormalOutline = Color.WhiteSmoke;
@@ -483,14 +461,92 @@
             DoneBtn.TextOffset = new Point(0, 0);
             DoneBtn.Click += DoneBtn_Click;
             // 
+            // SubTasks
+            // 
+            SubTasks.BackColor = Color.Transparent;
+            SubTasks.BorderColor = Color.Transparent;
+            SubTasks.DisabledBackColor = Color.Transparent;
+            SubTasks.DisabledForeColor = Color.Transparent;
+            SubTasks.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            SubTasks.HoveredItemBackColor = SystemColors.ActiveCaption;
+            SubTasks.HoveredItemColor = Color.Black;
+            SubTasks.IsDerivedStyle = false;
+            SubTasks.ItemHeight = 30;
+            SubTasks.Location = new Point(525, 410);
+            SubTasks.MultiSelect = true;
+            SubTasks.Name = "SubTasks";
+            SubTasks.SelectedIndex = -1;
+            SubTasks.SelectedItem = null;
+            SubTasks.SelectedItemBackColor = SystemColors.ActiveCaption;
+            SubTasks.SelectedItemColor = Color.Black;
+            SubTasks.SelectedText = null;
+            SubTasks.SelectedValue = null;
+            SubTasks.ShowBorder = false;
+            SubTasks.ShowScrollBar = true;
+            SubTasks.Size = new Size(399, 98);
+            SubTasks.Style = ReaLTaiizor.Enum.Metro.Style.Custom;
+            SubTasks.StyleManager = null;
+            SubTasks.TabIndex = 59;
+            SubTasks.ThemeAuthor = "Taiizor";
+            SubTasks.ThemeName = "MetroLight";
+            // 
+            // cuiBorder3
+            // 
+            cuiBorder3.BackColor = Color.Transparent;
+            cuiBorder3.Location = new Point(512, 393);
+            cuiBorder3.Name = "cuiBorder3";
+            cuiBorder3.OutlineThickness = 2F;
+            cuiBorder3.PanelColor = Color.Transparent;
+            cuiBorder3.PanelOutlineColor = Color.WhiteSmoke;
+            cuiBorder3.Rounding = new Padding(8);
+            cuiBorder3.Size = new Size(425, 130);
+            cuiBorder3.TabIndex = 60;
+            // 
+            // SubTaskButton
+            // 
+            SubTaskButton.BackColor = Color.Transparent;
+            SubTaskButton.CheckButton = false;
+            SubTaskButton.Checked = false;
+            SubTaskButton.CheckedBackground = Color.FromArgb(255, 106, 0);
+            SubTaskButton.CheckedForeColor = Color.White;
+            SubTaskButton.CheckedImageTint = Color.White;
+            SubTaskButton.CheckedOutline = Color.Transparent;
+            SubTaskButton.Content = "SubTasks";
+            SubTaskButton.DialogResult = DialogResult.None;
+            SubTaskButton.Font = new Font("Segoe UI", 12F);
+            SubTaskButton.ForeColor = Color.White;
+            SubTaskButton.HoverBackground = Color.Transparent;
+            SubTaskButton.HoveredImageTint = Color.White;
+            SubTaskButton.HoverForeColor = Color.White;
+            SubTaskButton.HoverOutline = Color.WhiteSmoke;
+            SubTaskButton.Image = null;
+            SubTaskButton.ImageAutoCenter = true;
+            SubTaskButton.ImageExpand = new Point(0, 0);
+            SubTaskButton.ImageOffset = new Point(0, 0);
+            SubTaskButton.ImageTint = Color.White;
+            SubTaskButton.Location = new Point(567, 294);
+            SubTaskButton.Name = "SubTaskButton";
+            SubTaskButton.NormalBackground = Color.Transparent;
+            SubTaskButton.NormalOutline = Color.WhiteSmoke;
+            SubTaskButton.OutlineThickness = 1F;
+            SubTaskButton.PressedBackground = Color.Transparent;
+            SubTaskButton.PressedForeColor = Color.White;
+            SubTaskButton.PressedImageTint = Color.White;
+            SubTaskButton.PressedOutline = Color.WhiteSmoke;
+            SubTaskButton.Rounding = new Padding(8);
+            SubTaskButton.Size = new Size(143, 40);
+            SubTaskButton.TabIndex = 61;
+            SubTaskButton.TextOffset = new Point(0, 0);
+            // 
             // EditTask
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveBorder;
             ClientSize = new Size(953, 650);
-            Controls.Add(DoneBtn);
+            Controls.Add(SubTaskButton);
             Controls.Add(SubTasks);
+            Controls.Add(DoneBtn);
             Controls.Add(SubTaskDelBtn);
             Controls.Add(SubTaskAddBtn);
             Controls.Add(SubTasksText);
@@ -506,6 +562,7 @@
             Controls.Add(DateEnd);
             Controls.Add(DateStart);
             Controls.Add(label2);
+            Controls.Add(cuiBorder3);
             DoubleBuffered = true;
             MaximumSize = new Size(969, 689);
             Name = "EditTask";
@@ -529,10 +586,12 @@
         private CuoreUI.Controls.cuiButton EndDateLabel;
         private CuoreUI.Controls.cuiButton EditsTask;
         private CuoreUI.Controls.cuiLabel Focuslabel2;
-        private TransparentListBox SubTasks;
         private CuoreUI.Controls.cuiButton SubTaskDelBtn;
         private CuoreUI.Controls.cuiButton SubTaskAddBtn;
         private CuoreUI.Controls.cuiTextBox2 SubTasksText;
         private CuoreUI.Controls.cuiButton DoneBtn;
+        private ReaLTaiizor.Controls.MetroListBox SubTasks;
+        private CuoreUI.Controls.cuiBorder cuiBorder3;
+        private CuoreUI.Controls.cuiButton SubTaskButton;
     }
 }

@@ -11,6 +11,7 @@
   <ItemGroup>
     <PackageReference Include="CuoreUI.Winforms" Version="2025.2.3.2" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
+    <PackageReference Include="ReaLTaiizor" Version="3.8.1.1" />
   </ItemGroup>
 
   <ItemGroup>

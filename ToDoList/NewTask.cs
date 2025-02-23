@@ -130,6 +130,7 @@ namespace ToDoList
         private void NewTask_MouseClick(object sender, MouseEventArgs e)
         {
             Focuslabel3.Focus();
+            SubTasks.SelectedIndex = -1;
         }
         private void SubTaskAddBtn_Click(object sender, EventArgs e)
         {

@@ -26,21 +26,19 @@ namespace ToDoList
 
         public string nl = "\r\n \r\n";
 
-        public string TaskTxt { get; set; }
-  
+        public string TaskTxt { get; set; }       
         public UserMenu(string userName)
         {
             InitializeComponent();
             CurrentUser = userName;
             ShowName();
-            ShowTasks();        
+            ShowTasks();
         }
         public UserMenu(string userName, string taskTxt) : this(userName)
         {
             TaskTxt = taskTxt;
         }
 
-       
         private void LogoutButton_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -66,9 +64,8 @@ namespace ToDoList
             }
             TextUser.Content = "Logged in as " + CurrentUser;
         }
-
-        public void Tasks_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        public void Tasks_SelectedIndexChanged(object sender)
+        {           
             if (Tasks.SelectedIndex != -1)
             {
                 task = Tasks.Items[Tasks.SelectedIndex].ToString(); //Gets the selected task
@@ -77,6 +74,8 @@ namespace ToDoList
             {
                 return;
             }
+            CompletedSubTasks.Items.Clear();
+            ShowSubTasks();
         }
         public async void ShowTask_Click(object sender, EventArgs e)
         {
@@ -108,7 +107,7 @@ namespace ToDoList
                                 string description = reader["DESCRIPTION"].ToString();
                                 string priority = reader["PRIORITY"].ToString();
                                 string datestart = reader["DATESTART"].ToString();
-                                string dateEnd = reader["DATEEND"].ToString();                           
+                                string dateEnd = reader["DATEEND"].ToString();
                                 TaskTxt = $"Task: {task1}{nl} Description: {description}{nl} Priority: {priority}{nl} DateStart: {datestart}{nl} DateEnd: {dateEnd}";
                             }
                         }
@@ -160,7 +159,7 @@ namespace ToDoList
             {
                 MessageBox.Show("Error:" + ex);
             }
-        }       
+        }
         private void EditTask_Click(object sender, EventArgs e)
         {
             try
@@ -178,7 +177,7 @@ namespace ToDoList
         }
         public async Task DeleteConformation()
         {
-            await Task.Delay(1000);
+            await System.Threading.Tasks.Task.Delay(1000);
         }
         private async void DeleteButton_Click(object sender, EventArgs e)
         {
@@ -215,7 +214,7 @@ namespace ToDoList
                         await cmd.ExecuteNonQueryAsync();
 
                     }
-                   await conn.CloseAsync();
+                    await conn.CloseAsync();
                 }
             }
             catch (Exception ex)
@@ -239,9 +238,41 @@ namespace ToDoList
             base.OnPaintBackground(e);
             var paint = new Register();
             paint.PaintForm(e.Graphics);
-        } 
-        
-       
+        }
+
+        public void ShowSubTasks()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                {
+                    conn.Open();
+                    string ShowSubTask = @"SELECT SUBTASKDONE FROM COMPLETEDSUBTASKS
+                                       JOIN TASKS ON TASKS.ID = COMPLETEDSUBTASKS.SUBID
+                                       WHERE TASK = @TASK
+                                       ORDER BY SUBTASKDONE ASC";
+
+                    using (SqlCommand cmd = new SqlCommand(ShowSubTask, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@TASK", task);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string subTasks = reader["SUBTASKDONE"].ToString();
+                                CompletedSubTasks.Items.Add(subTasks);
+
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error:" + ex);
+            }
+        }         
     }
 }
     
