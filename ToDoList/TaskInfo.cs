@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace ToDoList
 {
-    public partial class TaskTextBoxForm : Form
+    public partial class TaskInfo : Form
     {
 
-        public TaskTextBoxForm(string userName, string taskTxt)
+        public TaskInfo(string userName, string taskTxt)
         {
             InitializeComponent();
             TaskTxtBox.Content = taskTxt;

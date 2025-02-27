@@ -3,6 +3,7 @@ using CuoreUI.Controls;
 using Microsoft.Data.SqlClient;
 using Microsoft.Identity.Client;
 using Microsoft.VisualBasic.ApplicationServices;
+using ReaLTaiizor.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,6 +11,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -26,7 +28,7 @@ namespace ToDoList
 
         public string nl = "\r\n \r\n";
 
-        public string TaskTxt { get; set; }       
+        public string TaskTxt { get; set; }
         public UserMenu(string userName)
         {
             InitializeComponent();
@@ -38,7 +40,6 @@ namespace ToDoList
         {
             TaskTxt = taskTxt;
         }
-
         private void LogoutButton_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -65,7 +66,7 @@ namespace ToDoList
             TextUser.Content = "Logged in as " + CurrentUser;
         }
         public void Tasks_SelectedIndexChanged(object sender)
-        {           
+        {
             if (Tasks.SelectedIndex != -1)
             {
                 task = Tasks.Items[Tasks.SelectedIndex].ToString(); //Gets the selected task
@@ -74,8 +75,11 @@ namespace ToDoList
             {
                 return;
             }
+            ActiveSubList.Clear();
             CompletedSubTasks.Items.Clear();
-            ShowSubTasks();
+            ShowSubTasksCompleted();
+            ShowActiveSubTasks();
+
         }
         public async void ShowTask_Click(object sender, EventArgs e)
         {
@@ -85,7 +89,7 @@ namespace ToDoList
                 return;
             }
             await ShowTaskDetails();
-            TaskTextBoxForm textBoxForm = new TaskTextBoxForm(CurrentUser, TaskTxt);
+            TaskInfo textBoxForm = new TaskInfo(CurrentUser, TaskTxt);
             textBoxForm.ShowDialog();
         }
         public async Task ShowTaskDetails()
@@ -108,7 +112,7 @@ namespace ToDoList
                                 string priority = reader["PRIORITY"].ToString();
                                 string datestart = reader["DATESTART"].ToString();
                                 string dateEnd = reader["DATEEND"].ToString();
-                                TaskTxt = $"Task: {task1}{nl} Description: {description}{nl} Priority: {priority}{nl} DateStart: {datestart}{nl} DateEnd: {dateEnd}";
+                                TaskTxt = $"Task: {task1}{nl}Description: {description}{nl}Priority: {priority}{nl}DateStart: {datestart}{nl}DateEnd: {dateEnd}";
                             }
                         }
                     }
@@ -148,7 +152,7 @@ namespace ToDoList
                             while (reader.Read())                   //read from database to code and add items to list
                             {
                                 AllTasks = reader["TASK"].ToString();
-                                Tasks.Items.Add(AllTasks);
+                                Tasks.Items.Add(AllTasks);                               
                             }
                         }
                     }
@@ -240,7 +244,7 @@ namespace ToDoList
             paint.PaintForm(e.Graphics);
         }
 
-        public void ShowSubTasks()
+        public void ShowSubTasksCompleted()
         {
             try
             {
@@ -270,9 +274,40 @@ namespace ToDoList
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error:" + ex);
+                MessageBox.Show("Error: " + ex);
             }
-        }         
+        }
+
+        public void ShowActiveSubTasks()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                {
+                    conn.Open();
+                    string ActiveSubTask = @"SELECT SUBTASK FROM SUBTASKS
+                                       JOIN TASKS ON TASKS.ID = SUBTASKS.TASKID
+                                       WHERE TASK = @TASK";
+                    using (SqlCommand cmd = new SqlCommand(ActiveSubTask,conn))
+                    {
+                        cmd.Parameters.AddWithValue("@TASK", task);
+
+                        using(SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string ActiveSubTasks = reader["SUBTASK"].ToString();
+                                ActiveSubList.Items.Add(ActiveSubTasks);
+                            }
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex);
+            }
+        }
     }
-}
-    
+}   

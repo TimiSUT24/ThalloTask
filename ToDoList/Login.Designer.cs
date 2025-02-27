@@ -42,12 +42,12 @@
             // 
             LoginLabel.AutoSize = true;
             LoginLabel.BackColor = Color.Transparent;
-            LoginLabel.Font = new Font("Segoe UI", 15F);
+            LoginLabel.Font = new Font("Segoe UI", 18F);
             LoginLabel.Location = new Point(588, 75);
             LoginLabel.Margin = new Padding(4, 0, 4, 0);
             LoginLabel.MinimumSize = new Size(129, 0);
             LoginLabel.Name = "LoginLabel";
-            LoginLabel.Size = new Size(129, 28);
+            LoginLabel.Size = new Size(129, 32);
             LoginLabel.TabIndex = 11;
             LoginLabel.Text = "Login";
             // 
@@ -143,6 +143,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
             ClientSize = new Size(1382, 839);
             Controls.Add(ExitButton);
             Controls.Add(RegisterButton);
@@ -155,6 +156,7 @@
             DoubleBuffered = true;
             MaximumSize = new Size(1398, 878);
             Name = "Login";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
             FormClosing += Login_FormClosing;
             ResumeLayout(false);

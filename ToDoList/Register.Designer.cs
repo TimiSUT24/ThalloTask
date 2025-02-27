@@ -147,6 +147,7 @@
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
             BackColor = Color.FromArgb(245, 245, 245);
             ClientSize = new Size(1382, 839);
             Controls.Add(label1);
@@ -163,6 +164,8 @@
             Margin = new Padding(4);
             MaximumSize = new Size(1398, 878);
             Name = "Register";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Register";
             FormClosing += Register_FormClosing;
             ResumeLayout(false);
             PerformLayout();

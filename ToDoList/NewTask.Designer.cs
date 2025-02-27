@@ -543,6 +543,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
             BackColor = SystemColors.ActiveBorder;
             ClientSize = new Size(953, 650);
             Controls.Add(SubTaskButton);
@@ -567,6 +568,7 @@
             MaximumSize = new Size(969, 689);
             MinimumSize = new Size(261, 61);
             Name = "NewTask";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "New Task";
             MouseClick += NewTask_MouseClick;
             ResumeLayout(false);

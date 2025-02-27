@@ -542,6 +542,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
             BackColor = SystemColors.ActiveBorder;
             ClientSize = new Size(953, 650);
             Controls.Add(SubTaskButton);
@@ -566,6 +567,8 @@
             DoubleBuffered = true;
             MaximumSize = new Size(969, 689);
             Name = "EditTask";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Edit Task";
             MouseClick += EditTask_MouseClick;
             ResumeLayout(false);
             PerformLayout();

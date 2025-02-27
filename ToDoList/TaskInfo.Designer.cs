@@ -1,6 +1,6 @@
 ﻿namespace ToDoList
 {
-    partial class TaskTextBoxForm
+    partial class TaskInfo
     {
         /// <summary>
         /// Required designer variable.
@@ -34,34 +34,35 @@
             // 
             // TextBoxTaskButton
             // 
+            TextBoxTaskButton.BackColor = Color.Transparent;
             TextBoxTaskButton.CheckButton = false;
             TextBoxTaskButton.Checked = false;
-            TextBoxTaskButton.CheckedBackground = Color.FromArgb(255, 106, 0);
-            TextBoxTaskButton.CheckedForeColor = Color.White;
-            TextBoxTaskButton.CheckedImageTint = Color.White;
-            TextBoxTaskButton.CheckedOutline = Color.FromArgb(255, 106, 0);
+            TextBoxTaskButton.CheckedBackground = Color.Transparent;
+            TextBoxTaskButton.CheckedForeColor = Color.Transparent;
+            TextBoxTaskButton.CheckedImageTint = Color.Transparent;
+            TextBoxTaskButton.CheckedOutline = Color.Transparent;
             TextBoxTaskButton.Content = "Ok";
             TextBoxTaskButton.DialogResult = DialogResult.None;
             TextBoxTaskButton.Font = new Font("Microsoft Sans Serif", 9.75F);
-            TextBoxTaskButton.ForeColor = Color.White;
-            TextBoxTaskButton.HoverBackground = Color.FromArgb(200, 255, 106, 0);
-            TextBoxTaskButton.HoveredImageTint = Color.White;
-            TextBoxTaskButton.HoverForeColor = Color.White;
+            TextBoxTaskButton.ForeColor = Color.Black;
+            TextBoxTaskButton.HoverBackground = Color.Transparent;
+            TextBoxTaskButton.HoveredImageTint = Color.Transparent;
+            TextBoxTaskButton.HoverForeColor = Color.Black;
             TextBoxTaskButton.HoverOutline = Color.Empty;
             TextBoxTaskButton.Image = null;
             TextBoxTaskButton.ImageAutoCenter = true;
             TextBoxTaskButton.ImageExpand = new Point(0, 0);
             TextBoxTaskButton.ImageOffset = new Point(0, 0);
-            TextBoxTaskButton.ImageTint = Color.White;
+            TextBoxTaskButton.ImageTint = Color.Transparent;
             TextBoxTaskButton.Location = new Point(408, 300);
             TextBoxTaskButton.Name = "TextBoxTaskButton";
-            TextBoxTaskButton.NormalBackground = Color.FromArgb(255, 106, 0);
-            TextBoxTaskButton.NormalOutline = Color.Empty;
+            TextBoxTaskButton.NormalBackground = Color.Transparent;
+            TextBoxTaskButton.NormalOutline = Color.Black;
             TextBoxTaskButton.OutlineThickness = 1.6F;
-            TextBoxTaskButton.PressedBackground = Color.FromArgb(255, 106, 0);
-            TextBoxTaskButton.PressedForeColor = Color.White;
-            TextBoxTaskButton.PressedImageTint = Color.White;
-            TextBoxTaskButton.PressedOutline = Color.Empty;
+            TextBoxTaskButton.PressedBackground = Color.Transparent;
+            TextBoxTaskButton.PressedForeColor = Color.Black;
+            TextBoxTaskButton.PressedImageTint = Color.Transparent;
+            TextBoxTaskButton.PressedOutline = Color.Black;
             TextBoxTaskButton.Rounding = new Padding(8);
             TextBoxTaskButton.Size = new Size(35, 34);
             TextBoxTaskButton.TabIndex = 43;
@@ -72,7 +73,7 @@
             // 
             TaskTxtBox.BackColor = Color.White;
             TaskTxtBox.BorderColor = Color.FromArgb(64, 64, 64);
-            TaskTxtBox.BorderFocusColor = Color.FromArgb(255, 106, 0);
+            TaskTxtBox.BorderFocusColor = Color.White;
             TaskTxtBox.BorderSize = 1;
             TaskTxtBox.Content = "";
             TaskTxtBox.Font = new Font("Microsoft Sans Serif", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -91,16 +92,19 @@
             TaskTxtBox.TextOffset = new Size(0, 0);
             TaskTxtBox.UnderlinedStyle = false;
             // 
-            // TaskTextBoxForm
+            // TaskInfo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
+            BackColor = Color.White;
             ClientSize = new Size(472, 355);
             Controls.Add(TextBoxTaskButton);
             Controls.Add(TaskTxtBox);
-            Name = "TaskTextBoxForm";
+            MaximumSize = new Size(488, 394);
+            Name = "TaskInfo";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "TaskTextBoxForm";         
+            Text = "TaskInfo";
             ResumeLayout(false);
         }
 
