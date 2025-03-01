@@ -38,9 +38,9 @@ namespace ToDoList
 
         public void ShowDetailsInText()
         {
-            using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+            try
             {
-                try
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
                 {
                     conn.Open();
                     string showDetails = "SELECT DESCRIPTION,PRIORITY,DATESTART,DATEEND FROM TASKS WHERE TASK = @TASK";
@@ -74,20 +74,18 @@ namespace ToDoList
                             }
                         }
                     }
-                    conn.Close();
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error:" + ex);
-                }
-
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error:" + ex);
+            }          
         }
         private void EditTasks()
         {
-            using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+            try
             {
-                try
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
                 {
                     conn.Open();
                     string editTask = @"UPDATE TASKS SET DESCRIPTION = @DESCRIPTION, PRIORITY = @PRIORITY, 
@@ -102,14 +100,12 @@ namespace ToDoList
                         cmd.Parameters.AddWithValue("@DATEEND", dateEnd);
                         cmd.ExecuteNonQuery();
                     }
-                    conn.Close();
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error:" + ex);
-                }
-
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error:" + ex);
+            }       
         }
         private void EdittedDetails()
         {
@@ -147,10 +143,9 @@ namespace ToDoList
 
         public async Task SubTaskOperation()
         {
-
-            using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+            try
             {
-                try
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
                 {
                     await conn.OpenAsync();
                     string getTask = @"SELECT SUBTASK,TASKID,ID FROM SUBTASKS WHERE SUBTASK = @SUBTASK ";
@@ -187,13 +182,12 @@ namespace ToDoList
                         cmd.Parameters.AddWithValue("@ID", SbId);
                         await cmd.ExecuteNonQueryAsync();
                     }
-                    await conn.CloseAsync();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error:" + ex);
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error:" + ex);
+            }          
         }
         public void AddSubTask()
         {
@@ -224,7 +218,6 @@ namespace ToDoList
                         cmd.Parameters.AddWithValue("@SUBTASK", SubTasksText.Content);
                         cmd.ExecuteNonQuery();
                     }
-                    conn.Close();
                 }
             }
             catch (Exception ex)
@@ -253,8 +246,7 @@ namespace ToDoList
                     {
                         cmd2.Parameters.AddWithValue("@SUBTASK", SelectedSubItem);
                         cmd2.ExecuteNonQuery();
-                    }
-                    conn.Close();
+                    }       
                 }
             }
             catch (Exception ex)
@@ -275,7 +267,6 @@ namespace ToDoList
             {
                 e.Handled = true;
             }
-        }
-      
+        }    
     }
 }

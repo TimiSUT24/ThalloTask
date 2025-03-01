@@ -165,8 +165,7 @@
             MaximumSize = new Size(1398, 878);
             Name = "Register";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Register";
-            FormClosing += Register_FormClosing;
+            Text = "Register";     
             ResumeLayout(false);
             PerformLayout();
         }

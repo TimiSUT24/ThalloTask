@@ -43,8 +43,7 @@ namespace ToDoList
                     {
                         MessageBox.Show("Error null");
                     }
-                }
-                conn.Close();
+                }               
             }
             return userId;
         }
@@ -80,17 +79,19 @@ namespace ToDoList
             int userId = GetUserID(CurrentUser);
 
             int taskId = -1;
-            
-            using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+
+            try
             {
-                try
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
                 {
-                     await conn.OpenAsync();
+
+
+                    await conn.OpenAsync();
 
                     string addTask = @"INSERT INTO TASKS(TASK,DESCRIPTION,PRIORITY,DATESTART,DATEEND,USER_ID) 
                                      OUTPUT INSERTED.ID
                                      VALUES (@TASK,@DESCRIPTION,@PRIORITY,@DATESTART,@DATEEND,@USER_ID)";
-                    
+
                     using (SqlCommand cmd = new SqlCommand(addTask, conn))
                     {
                         cmd.Parameters.AddWithValue("@TASK", TaskText.Content);                //Insert these values to the database 
@@ -98,7 +99,7 @@ namespace ToDoList
                         cmd.Parameters.AddWithValue("@PRIORITY", PriorityList.Text);
                         cmd.Parameters.AddWithValue("@USER_ID", userId);
                         cmd.Parameters.AddWithValue("@DATESTART", StartDatePicker.Value.Date);
-                        cmd.Parameters.AddWithValue("@DATEEND", EndDatePicker.Value.Date);                                           
+                        cmd.Parameters.AddWithValue("@DATEEND", EndDatePicker.Value.Date);
                         taskId = (int)await cmd.ExecuteScalarAsync();
                         if (taskId > 0)
                         {
@@ -110,22 +111,21 @@ namespace ToDoList
                         }
                     }
                     string addList = @"INSERT INTO SUBTASKS(SUBTASK,TASKID) VALUES(@SUBTASK,@TASKID)";
-                    foreach(var items in SubTasks.Items)
+                    foreach (var items in SubTasks.Items)
                     {
                         using (SqlCommand cmd = new SqlCommand(addList, conn))
                         {
-                            cmd.Parameters.AddWithValue("@TASKID",taskId);
-                            cmd.Parameters.AddWithValue("@SUBTASK",items.ToString());
+                            cmd.Parameters.AddWithValue("@TASKID", taskId);
+                            cmd.Parameters.AddWithValue("@SUBTASK", items.ToString());
                             await cmd.ExecuteNonQueryAsync();
                         }
                     }
-                   await conn.CloseAsync();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("An error occured " + ex.Message);
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occured " + ex.Message);
+            }         
         }
         private void NewTask_MouseClick(object sender, MouseEventArgs e)
         {

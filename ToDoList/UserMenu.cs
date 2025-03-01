@@ -2,6 +2,7 @@
 using CuoreUI.Controls;
 using Microsoft.Data.SqlClient;
 using Microsoft.Identity.Client;
+using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.ApplicationServices;
 using ReaLTaiizor.Controls;
 using System;
@@ -27,14 +28,23 @@ namespace ToDoList
         public string AllTasks { get; set; }
 
         public string nl = "\r\n \r\n";
-
         public string TaskTxt { get; set; }
+        public string CompTask { get; set; }
+        public string CompDesc { get; set; }
+        public string CompPri { get; set; }
+        public DateTime CompDateSt { get; set; }
+        public DateTime CompDateEnd { get; set; }
+        public string CompSubTask { get; set; }
+        public string CompIndex { get; set; }
+
         public UserMenu(string userName)
         {
             InitializeComponent();
             CurrentUser = userName;
             ShowName();
             ShowTasks();
+            DueDates();
+            ShowCompTasks();
         }
         public UserMenu(string userName, string taskTxt) : this(userName)
         {
@@ -67,6 +77,7 @@ namespace ToDoList
         }
         public void Tasks_SelectedIndexChanged(object sender)
         {
+            RecurringTaskList.SelectedIndex = -1;
             if (Tasks.SelectedIndex != -1)
             {
                 task = Tasks.Items[Tasks.SelectedIndex].ToString(); //Gets the selected task
@@ -94,9 +105,9 @@ namespace ToDoList
         }
         public async Task ShowTaskDetails()
         {
-            using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+            try
             {
-                try
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
                 {
                     await conn.OpenAsync();
                     string showTask = "SELECT ID,TASK,DESCRIPTION,PRIORITY,DATESTART,DATEEND FROM TASKS WHERE TASK = @TASK"; //Shows the selected task details
@@ -116,13 +127,12 @@ namespace ToDoList
                             }
                         }
                     }
-                    await conn.CloseAsync();
-                }
-                catch
-                {
-                    MessageBox.Show("Please select a task");
                 }
             }
+            catch
+            {
+                MessageBox.Show("Please select a task");
+            }        
         }
         public void ShowTasks()
         {
@@ -152,11 +162,10 @@ namespace ToDoList
                             while (reader.Read())                   //read from database to code and add items to list
                             {
                                 AllTasks = reader["TASK"].ToString();
-                                Tasks.Items.Add(AllTasks);                               
+                                Tasks.Items.Add(AllTasks);
                             }
                         }
                     }
-                    conn.Close();
                 }
             }
             catch (Exception ex)
@@ -218,7 +227,6 @@ namespace ToDoList
                         await cmd.ExecuteNonQueryAsync();
 
                     }
-                    await conn.CloseAsync();
                 }
             }
             catch (Exception ex)
@@ -230,12 +238,17 @@ namespace ToDoList
         }
         private void ReloadButton_Click_1(object sender, EventArgs e)
         {
+            DueDatesList.Items.Clear();
             Tasks.Items.Clear();
+            RecurringTaskList.Items.Clear();
             ShowTasks();
+            DueDates();
+            ShowCompTasks();
         }
         private void UserMenu_MouseClick(object sender, MouseEventArgs e)
         {
             Tasks.SelectedIndex = -1;
+            RecurringTaskList.SelectedIndex = -1;
         }
         protected override void OnPaintBackground(PaintEventArgs e)
         {
@@ -288,11 +301,11 @@ namespace ToDoList
                     string ActiveSubTask = @"SELECT SUBTASK FROM SUBTASKS
                                        JOIN TASKS ON TASKS.ID = SUBTASKS.TASKID
                                        WHERE TASK = @TASK";
-                    using (SqlCommand cmd = new SqlCommand(ActiveSubTask,conn))
+                    using (SqlCommand cmd = new SqlCommand(ActiveSubTask, conn))
                     {
                         cmd.Parameters.AddWithValue("@TASK", task);
 
-                        using(SqlDataReader reader = cmd.ExecuteReader())
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
                             {
@@ -300,7 +313,6 @@ namespace ToDoList
                                 ActiveSubList.Items.Add(ActiveSubTasks);
                             }
                         }
-
                     }
                 }
             }
@@ -309,5 +321,278 @@ namespace ToDoList
                 MessageBox.Show("Error: " + ex);
             }
         }
+
+        public void DueDates()
+        {
+            try
+            {
+                NewTask to = new NewTask(CurrentUser);
+                UserId = to.GetUserID(CurrentUser);
+
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                {
+                    conn.Open();
+                    string DueDate = @"SELECT DATEEND,TASK
+                                     FROM TASKS
+                                     WHERE DATEDIFF(DAY,GETDATE(),DATEEND) BETWEEN 0 AND 3
+                                     AND USER_ID = @USER_ID";
+                    using (SqlCommand cmd = new SqlCommand(DueDate, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@USER_ID", UserId);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string dates = reader["DATEEND"].ToString();
+                                string tasks = reader["TASK"].ToString();
+                                DueDatesList.Items.Add(tasks + ": " + dates);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex);
+            }
+        }
+
+        private async void MarkAsCompBtn_Click(object sender, EventArgs e)
+        {          
+            await CompletedTasks();
+            RecurringTaskList.Items.Clear();
+            ShowCompTasks();
+        }
+
+        public async Task CompletedTasks()
+        {
+            try
+            {
+                NewTask to = new NewTask(CurrentUser);
+                UserId = to.GetUserID(CurrentUser);
+                int CompTaskId = -1;
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                {
+                    await conn.OpenAsync();
+                    string selectTask = @"SELECT TASK,DESCRIPTION,PRIORITY
+                                        FROM TASKS                                         
+                                        WHERE TASK = @TASK";
+                    using (SqlCommand cmd = new SqlCommand(selectTask, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@TASK", task);
+
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                CompDesc = reader["DESCRIPTION"].ToString();
+                                CompPri = reader["PRIORITY"].ToString();
+
+                            }
+                        }
+                    }
+                    string compTask = @"INSERT INTO COMPLETEDTASKS(COMPTASK,COMPDESCRIPTION,COMPPRIORITY,USERID)
+                                       OUTPUT INSERTED.ID
+                                       VALUES(@COMPTASK,@COMPDESCRIPTION,@COMPPRIORITY,@USERID)";
+                    using (SqlCommand cmd2 = new SqlCommand(compTask, conn))
+                    {
+                        cmd2.Parameters.AddWithValue("@COMPTASK", task);
+                        cmd2.Parameters.AddWithValue("@COMPDESCRIPTION", CompDesc);
+                        cmd2.Parameters.AddWithValue("@COMPPRIORITY", CompPri);
+                        cmd2.Parameters.AddWithValue("@USERID", UserId);
+
+                        CompTaskId = (int) await cmd2.ExecuteScalarAsync();
+
+                    }
+
+                    if (CompletedSubTasks.Items.Count > 0)
+                    {
+                        string reccurSubTask = @"INSERT INTO RECURRINGSUBTASK (COMPSUBTASK,COMPTASKID) 
+                                           VALUES (@COMPSUBTASK,@COMPTASKID)";
+
+                        foreach (var item in CompletedSubTasks.Items)
+                        {
+                            using (SqlCommand cmd3 = new SqlCommand(reccurSubTask, conn))
+                            {
+                                cmd3.Parameters.AddWithValue("@COMPSUBTASK", item.ToString());
+                                cmd3.Parameters.AddWithValue("@COMPTASKID", CompTaskId);
+
+                                await cmd3.ExecuteNonQueryAsync();
+                            }
+                        }
+                    }
+
+                    string deleteCurrentTask = @"DELETE FROM TASKS WHERE TASK = @TASK";
+                    using (SqlCommand cmd4 = new SqlCommand(deleteCurrentTask, conn))
+                    {
+                        cmd4.Parameters.AddWithValue("@TASK", task);
+                        await cmd4.ExecuteNonQueryAsync();
+                        Tasks.Items.Clear();
+                        ShowTasks();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex);
+            }
+        }
+
+        private void CompDeleteBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (RecurringTaskList.Items[RecurringTaskList.SelectedIndex].ToString() == null) { }               
+                CompDelete();
+            }
+            catch
+            {
+                MessageBox.Show("Select available task");
+            }          
+        }
+
+        public void CompDelete()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                {
+                    conn.Open();
+                    string CompDel = @"DELETE FROM COMPLETEDTASKS WHERE COMPTASK = @COMPTASK";
+
+                    using (SqlCommand cmd = new SqlCommand(CompDel, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@COMPTASK", CompIndex);
+                        cmd.ExecuteNonQuery();
+                        RecurringTaskList.Items.Remove(CompIndex);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex);
+            }
+        }
+        public void ShowCompTasks()
+        {
+            try
+            {
+                NewTask to = new NewTask(CurrentUser);
+                UserId = to.GetUserID(CurrentUser);
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                {
+                    conn.Open();
+                    string ShowComp = @"SELECT COMPTASK FROM COMPLETEDTASKS WHERE USERID = @USERID";
+
+                    using (SqlCommand cmd = new SqlCommand(ShowComp, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@USERID", UserId);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string compTask = reader["COMPTASK"].ToString();
+                                RecurringTaskList.Items.Add(compTask);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex);
+            }
+        }
+        private void RecurringTaskList_SelectedIndexChanged(object sender)
+        {
+            Tasks.SelectedIndex = -1;
+            if (RecurringTaskList.SelectedIndex != -1 && RecurringTaskList.SelectedIndex != null)
+            {
+                CompIndex = RecurringTaskList.Items[RecurringTaskList.SelectedIndex].ToString();
+            }
+            else
+            {
+                return;
+            }
+
+        }
+        public async Task RecurrTask()
+        {
+            try
+            {
+                int taskId = -1;
+                NewTask to = new NewTask(CurrentUser);
+                UserId = to.GetUserID(CurrentUser);
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                {
+                   await conn.OpenAsync();
+
+                    string selectCompTask = @"SELECT COMPTASK,COMPDESCRIPTION,COMPPRIORITY,COMPSUBTASK FROM COMPLETEDTASKS 
+                                            JOIN RECURRINGSUBTASK ON RECURRINGSUBTASK.COMPTASKID = COMPLETEDTASKS.ID
+                                            WHERE COMPTASK = @COMPTASK AND USERID = @USERID";
+                    using (SqlCommand cmd = new SqlCommand(selectCompTask, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@COMPTASK", CompIndex);
+                        cmd.Parameters.AddWithValue("@USERID", UserId);
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {                               
+                                CompDesc = reader["COMPDESCRIPTION"].ToString();
+                                CompPri = reader["COMPPRIORITY"].ToString();
+                                CompSubTask = reader["COMPSUBTASK"].ToString();
+
+                            }
+                        }
+                    }
+                    string insertComp = @"INSERT INTO TASKS(TASK,DESCRIPTION,PRIORITY,DATESTART,DATEEND,USER_ID)
+                                        OUTPUT INSERTED.ID
+                                        VALUES(@TASK,@DESCRIPTION,@PRIORITY,@DATESTART,@DATEEND,@USER_ID)";
+
+                    using (SqlCommand cmd2 = new SqlCommand(insertComp, conn))
+                    {
+                        cmd2.Parameters.AddWithValue("@TASK", CompIndex);
+                        cmd2.Parameters.AddWithValue("@DESCRIPTION", CompDesc);
+                        cmd2.Parameters.AddWithValue("@PRIORITY", CompPri);
+                        cmd2.Parameters.AddWithValue("@USER_ID", UserId);
+                        cmd2.Parameters.AddWithValue("@DATESTART", DateTime.Now);
+                        cmd2.Parameters.AddWithValue("@DATEEND", DateTime.Now);
+                        taskId = (int) await cmd2.ExecuteScalarAsync();
+                    }
+
+                    if(CompSubTask != null)
+                    {
+                        string insertCompSub = @"INSERT INTO SUBTASKS (SUBTASK,TASKID) VALUES (@SUBTASK,@TASKID)";
+                        using (SqlCommand cmd3 = new SqlCommand(insertCompSub, conn))
+                        {
+                            cmd3.Parameters.AddWithValue("@SUBTASK", CompSubTask);
+                            cmd3.Parameters.AddWithValue("@TASKID", taskId);
+                           await cmd3.ExecuteNonQueryAsync();
+                        }
+                    }                 
+                    Tasks.Items.Clear();
+                    ShowTasks();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex);
+            }
+        }
+        private async void RecurringBtn_Click_1(object sender, EventArgs e)
+        {          
+            try
+            {
+                if (RecurringTaskList.Items[RecurringTaskList.SelectedIndex].ToString() == null) { }                                                
+                await RecurrTask();
+                CompDelete();
+            }
+            catch
+            {
+                MessageBox.Show("Select available task");
+            }                               
+        }      
     }
 }   

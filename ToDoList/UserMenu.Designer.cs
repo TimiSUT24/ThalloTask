@@ -47,6 +47,15 @@
             ActiveSubTasksLb = new CuoreUI.Controls.cuiButton();
             ActiveSubList = new ReaLTaiizor.Controls.MetroListBox();
             ActiveSubBorder = new CuoreUI.Controls.cuiBorder();
+            DueDateLb = new CuoreUI.Controls.cuiButton();
+            DueDatesList = new ReaLTaiizor.Controls.MetroListBox();
+            DueDatesBorder = new CuoreUI.Controls.cuiBorder();
+            RecurringTaskLb = new CuoreUI.Controls.cuiButton();
+            RecurringTaskList = new ReaLTaiizor.Controls.MetroListBox();
+            RecurringTaskBorder = new CuoreUI.Controls.cuiBorder();
+            RecurringBtn = new CuoreUI.Controls.cuiButton();
+            MarkAsCompBtn = new CuoreUI.Controls.cuiButton();
+            CompDeleteBtn = new CuoreUI.Controls.cuiButton();
             TaskBorder.SuspendLayout();
             SuspendLayout();
             // 
@@ -224,7 +233,7 @@
             ShowTask.Name = "ShowTask";
             ShowTask.NormalBackground = Color.Transparent;
             ShowTask.NormalOutline = Color.WhiteSmoke;
-            ShowTask.OutlineThickness = 1.6F;
+            ShowTask.OutlineThickness = 1F;
             ShowTask.PressedBackground = Color.Transparent;
             ShowTask.PressedForeColor = Color.White;
             ShowTask.PressedImageTint = Color.White;
@@ -261,7 +270,7 @@
             ActiveTasks.Name = "ActiveTasks";
             ActiveTasks.NormalBackground = Color.Transparent;
             ActiveTasks.NormalOutline = Color.WhiteSmoke;
-            ActiveTasks.OutlineThickness = 1.6F;
+            ActiveTasks.OutlineThickness = 1F;
             ActiveTasks.PressedBackground = Color.Transparent;
             ActiveTasks.PressedForeColor = Color.White;
             ActiveTasks.PressedImageTint = Color.White;
@@ -406,7 +415,7 @@
             CompletedSubTasks.HoveredItemBackColor = Color.Transparent;
             CompletedSubTasks.HoveredItemColor = Color.Black;
             CompletedSubTasks.IsDerivedStyle = false;
-            CompletedSubTasks.ItemHeight = 30;
+            CompletedSubTasks.ItemHeight = 40;
             CompletedSubTasks.Location = new Point(408, 506);
             CompletedSubTasks.MultiSelect = false;
             CompletedSubTasks.Name = "CompletedSubTasks";
@@ -496,7 +505,7 @@
             Tasks.HoveredItemBackColor = SystemColors.ActiveCaption;
             Tasks.HoveredItemColor = Color.Black;
             Tasks.IsDerivedStyle = false;
-            Tasks.ItemHeight = 30;
+            Tasks.ItemHeight = 40;
             Tasks.Location = new Point(6, 18);
             Tasks.MultiSelect = false;
             Tasks.Name = "Tasks";
@@ -562,7 +571,7 @@
             ActiveSubList.HoveredItemBackColor = Color.Transparent;
             ActiveSubList.HoveredItemColor = Color.Black;
             ActiveSubList.IsDerivedStyle = false;
-            ActiveSubList.ItemHeight = 30;
+            ActiveSubList.ItemHeight = 40;
             ActiveSubList.Location = new Point(93, 506);
             ActiveSubList.MultiSelect = false;
             ActiveSubList.Name = "ActiveSubList";
@@ -593,6 +602,272 @@
             ActiveSubBorder.Size = new Size(216, 257);
             ActiveSubBorder.TabIndex = 63;
             // 
+            // DueDateLb
+            // 
+            DueDateLb.BackColor = Color.Transparent;
+            DueDateLb.CheckButton = false;
+            DueDateLb.Checked = false;
+            DueDateLb.CheckedBackground = Color.Transparent;
+            DueDateLb.CheckedForeColor = Color.White;
+            DueDateLb.CheckedImageTint = Color.White;
+            DueDateLb.CheckedOutline = Color.Transparent;
+            DueDateLb.Content = "Due Dates";
+            DueDateLb.DialogResult = DialogResult.None;
+            DueDateLb.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            DueDateLb.ForeColor = Color.White;
+            DueDateLb.HoverBackground = Color.Transparent;
+            DueDateLb.HoveredImageTint = Color.White;
+            DueDateLb.HoverForeColor = Color.White;
+            DueDateLb.HoverOutline = Color.WhiteSmoke;
+            DueDateLb.Image = null;
+            DueDateLb.ImageAutoCenter = true;
+            DueDateLb.ImageExpand = new Point(0, 0);
+            DueDateLb.ImageOffset = new Point(0, 0);
+            DueDateLb.ImageTint = Color.White;
+            DueDateLb.Location = new Point(697, 468);
+            DueDateLb.Name = "DueDateLb";
+            DueDateLb.NormalBackground = Color.Transparent;
+            DueDateLb.NormalOutline = Color.WhiteSmoke;
+            DueDateLb.OutlineThickness = 1.6F;
+            DueDateLb.PressedBackground = Color.Transparent;
+            DueDateLb.PressedForeColor = Color.White;
+            DueDateLb.PressedImageTint = Color.White;
+            DueDateLb.PressedOutline = Color.WhiteSmoke;
+            DueDateLb.Rounding = new Padding(8);
+            DueDateLb.Size = new Size(203, 26);
+            DueDateLb.TabIndex = 67;
+            DueDateLb.TextOffset = new Point(0, 0);
+            // 
+            // DueDatesList
+            // 
+            DueDatesList.BackColor = Color.Transparent;
+            DueDatesList.BorderColor = Color.Transparent;
+            DueDatesList.DisabledBackColor = Color.Transparent;
+            DueDatesList.DisabledForeColor = Color.Transparent;
+            DueDatesList.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            DueDatesList.HoveredItemBackColor = Color.Transparent;
+            DueDatesList.HoveredItemColor = Color.Black;
+            DueDatesList.IsDerivedStyle = false;
+            DueDatesList.ItemHeight = 50;
+            DueDatesList.Location = new Point(697, 506);
+            DueDatesList.MultiSelect = false;
+            DueDatesList.Name = "DueDatesList";
+            DueDatesList.SelectedIndex = -1;
+            DueDatesList.SelectedItem = null;
+            DueDatesList.SelectedItemBackColor = Color.Transparent;
+            DueDatesList.SelectedItemColor = Color.Black;
+            DueDatesList.SelectedText = null;
+            DueDatesList.SelectedValue = null;
+            DueDatesList.ShowBorder = false;
+            DueDatesList.ShowScrollBar = true;
+            DueDatesList.Size = new Size(203, 244);
+            DueDatesList.Style = ReaLTaiizor.Enum.Metro.Style.Custom;
+            DueDatesList.StyleManager = null;
+            DueDatesList.TabIndex = 65;
+            DueDatesList.ThemeAuthor = "Taiizor";
+            DueDatesList.ThemeName = "MetroLight";
+            // 
+            // DueDatesBorder
+            // 
+            DueDatesBorder.BackColor = Color.Transparent;
+            DueDatesBorder.Location = new Point(691, 500);
+            DueDatesBorder.Name = "DueDatesBorder";
+            DueDatesBorder.OutlineThickness = 2F;
+            DueDatesBorder.PanelColor = Color.Transparent;
+            DueDatesBorder.PanelOutlineColor = Color.WhiteSmoke;
+            DueDatesBorder.Rounding = new Padding(8);
+            DueDatesBorder.Size = new Size(216, 257);
+            DueDatesBorder.TabIndex = 66;
+            // 
+            // RecurringTaskLb
+            // 
+            RecurringTaskLb.BackColor = Color.Transparent;
+            RecurringTaskLb.CheckButton = false;
+            RecurringTaskLb.Checked = false;
+            RecurringTaskLb.CheckedBackground = Color.Transparent;
+            RecurringTaskLb.CheckedForeColor = Color.White;
+            RecurringTaskLb.CheckedImageTint = Color.White;
+            RecurringTaskLb.CheckedOutline = Color.Transparent;
+            RecurringTaskLb.Content = "Completed Tasks";
+            RecurringTaskLb.DialogResult = DialogResult.None;
+            RecurringTaskLb.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            RecurringTaskLb.ForeColor = Color.White;
+            RecurringTaskLb.HoverBackground = Color.Transparent;
+            RecurringTaskLb.HoveredImageTint = Color.White;
+            RecurringTaskLb.HoverForeColor = Color.White;
+            RecurringTaskLb.HoverOutline = Color.WhiteSmoke;
+            RecurringTaskLb.Image = null;
+            RecurringTaskLb.ImageAutoCenter = true;
+            RecurringTaskLb.ImageExpand = new Point(0, 0);
+            RecurringTaskLb.ImageOffset = new Point(0, 0);
+            RecurringTaskLb.ImageTint = Color.White;
+            RecurringTaskLb.Location = new Point(1019, 468);
+            RecurringTaskLb.Name = "RecurringTaskLb";
+            RecurringTaskLb.NormalBackground = Color.Transparent;
+            RecurringTaskLb.NormalOutline = Color.WhiteSmoke;
+            RecurringTaskLb.OutlineThickness = 1.6F;
+            RecurringTaskLb.PressedBackground = Color.Transparent;
+            RecurringTaskLb.PressedForeColor = Color.White;
+            RecurringTaskLb.PressedImageTint = Color.White;
+            RecurringTaskLb.PressedOutline = Color.WhiteSmoke;
+            RecurringTaskLb.Rounding = new Padding(8);
+            RecurringTaskLb.Size = new Size(203, 26);
+            RecurringTaskLb.TabIndex = 70;
+            RecurringTaskLb.TextOffset = new Point(0, 0);
+            // 
+            // RecurringTaskList
+            // 
+            RecurringTaskList.BackColor = Color.Transparent;
+            RecurringTaskList.BorderColor = Color.Transparent;
+            RecurringTaskList.DisabledBackColor = Color.Transparent;
+            RecurringTaskList.DisabledForeColor = Color.Transparent;
+            RecurringTaskList.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            RecurringTaskList.HoveredItemBackColor = SystemColors.ActiveCaption;
+            RecurringTaskList.HoveredItemColor = Color.Black;
+            RecurringTaskList.IsDerivedStyle = false;
+            RecurringTaskList.ItemHeight = 40;
+            RecurringTaskList.Location = new Point(1019, 506);
+            RecurringTaskList.MultiSelect = false;
+            RecurringTaskList.Name = "RecurringTaskList";
+            RecurringTaskList.SelectedIndex = -1;
+            RecurringTaskList.SelectedItem = null;
+            RecurringTaskList.SelectedItemBackColor = SystemColors.ActiveCaption;
+            RecurringTaskList.SelectedItemColor = Color.Black;
+            RecurringTaskList.SelectedText = null;
+            RecurringTaskList.SelectedValue = null;
+            RecurringTaskList.ShowBorder = false;
+            RecurringTaskList.ShowScrollBar = true;
+            RecurringTaskList.Size = new Size(203, 244);
+            RecurringTaskList.Style = ReaLTaiizor.Enum.Metro.Style.Custom;
+            RecurringTaskList.StyleManager = null;
+            RecurringTaskList.TabIndex = 68;
+            RecurringTaskList.ThemeAuthor = "Taiizor";
+            RecurringTaskList.ThemeName = "MetroLight";
+            RecurringTaskList.SelectedIndexChanged += RecurringTaskList_SelectedIndexChanged;
+            // 
+            // RecurringTaskBorder
+            // 
+            RecurringTaskBorder.BackColor = Color.Transparent;
+            RecurringTaskBorder.Location = new Point(1013, 500);
+            RecurringTaskBorder.Name = "RecurringTaskBorder";
+            RecurringTaskBorder.OutlineThickness = 2F;
+            RecurringTaskBorder.PanelColor = Color.Transparent;
+            RecurringTaskBorder.PanelOutlineColor = Color.WhiteSmoke;
+            RecurringTaskBorder.Rounding = new Padding(8);
+            RecurringTaskBorder.Size = new Size(216, 257);
+            RecurringTaskBorder.TabIndex = 69;
+            // 
+            // RecurringBtn
+            // 
+            RecurringBtn.BackColor = Color.Transparent;
+            RecurringBtn.CheckButton = false;
+            RecurringBtn.Checked = false;
+            RecurringBtn.CheckedBackground = Color.Transparent;
+            RecurringBtn.CheckedForeColor = Color.White;
+            RecurringBtn.CheckedImageTint = Color.White;
+            RecurringBtn.CheckedOutline = Color.Transparent;
+            RecurringBtn.Content = "Recur";
+            RecurringBtn.DialogResult = DialogResult.None;
+            RecurringBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            RecurringBtn.ForeColor = Color.White;
+            RecurringBtn.HoverBackground = Color.Transparent;
+            RecurringBtn.HoveredImageTint = Color.White;
+            RecurringBtn.HoverForeColor = Color.White;
+            RecurringBtn.HoverOutline = Color.Transparent;
+            RecurringBtn.Image = null;
+            RecurringBtn.ImageAutoCenter = true;
+            RecurringBtn.ImageExpand = new Point(0, 0);
+            RecurringBtn.ImageOffset = new Point(0, 0);
+            RecurringBtn.ImageTint = Color.White;
+            RecurringBtn.Location = new Point(1121, 763);
+            RecurringBtn.Name = "RecurringBtn";
+            RecurringBtn.NormalBackground = Color.Transparent;
+            RecurringBtn.NormalOutline = Color.WhiteSmoke;
+            RecurringBtn.OutlineThickness = 1.6F;
+            RecurringBtn.PressedBackground = Color.Transparent;
+            RecurringBtn.PressedForeColor = Color.White;
+            RecurringBtn.PressedImageTint = Color.White;
+            RecurringBtn.PressedOutline = Color.Transparent;
+            RecurringBtn.Rounding = new Padding(8);
+            RecurringBtn.Size = new Size(101, 26);
+            RecurringBtn.TabIndex = 71;
+            RecurringBtn.TextOffset = new Point(0, 0);
+            RecurringBtn.Click += RecurringBtn_Click_1;
+            // 
+            // MarkAsCompBtn
+            // 
+            MarkAsCompBtn.BackColor = Color.Transparent;
+            MarkAsCompBtn.CheckButton = false;
+            MarkAsCompBtn.Checked = false;
+            MarkAsCompBtn.CheckedBackground = Color.Transparent;
+            MarkAsCompBtn.CheckedForeColor = Color.White;
+            MarkAsCompBtn.CheckedImageTint = Color.White;
+            MarkAsCompBtn.CheckedOutline = Color.Transparent;
+            MarkAsCompBtn.Content = "Mark As Complete";
+            MarkAsCompBtn.DialogResult = DialogResult.None;
+            MarkAsCompBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            MarkAsCompBtn.ForeColor = Color.White;
+            MarkAsCompBtn.HoverBackground = Color.Transparent;
+            MarkAsCompBtn.HoveredImageTint = Color.White;
+            MarkAsCompBtn.HoverForeColor = Color.White;
+            MarkAsCompBtn.HoverOutline = Color.Transparent;
+            MarkAsCompBtn.Image = null;
+            MarkAsCompBtn.ImageAutoCenter = true;
+            MarkAsCompBtn.ImageExpand = new Point(0, 0);
+            MarkAsCompBtn.ImageOffset = new Point(0, 0);
+            MarkAsCompBtn.ImageTint = Color.White;
+            MarkAsCompBtn.Location = new Point(315, 338);
+            MarkAsCompBtn.Name = "MarkAsCompBtn";
+            MarkAsCompBtn.NormalBackground = Color.Transparent;
+            MarkAsCompBtn.NormalOutline = Color.WhiteSmoke;
+            MarkAsCompBtn.OutlineThickness = 1F;
+            MarkAsCompBtn.PressedBackground = Color.Transparent;
+            MarkAsCompBtn.PressedForeColor = Color.White;
+            MarkAsCompBtn.PressedImageTint = Color.White;
+            MarkAsCompBtn.PressedOutline = Color.Transparent;
+            MarkAsCompBtn.Rounding = new Padding(8);
+            MarkAsCompBtn.Size = new Size(143, 36);
+            MarkAsCompBtn.TabIndex = 72;
+            MarkAsCompBtn.TextOffset = new Point(0, 0);
+            MarkAsCompBtn.Click += MarkAsCompBtn_Click;
+            // 
+            // CompDeleteBtn
+            // 
+            CompDeleteBtn.BackColor = Color.Transparent;
+            CompDeleteBtn.CheckButton = false;
+            CompDeleteBtn.Checked = false;
+            CompDeleteBtn.CheckedBackground = Color.Transparent;
+            CompDeleteBtn.CheckedForeColor = Color.White;
+            CompDeleteBtn.CheckedImageTint = Color.White;
+            CompDeleteBtn.CheckedOutline = Color.Transparent;
+            CompDeleteBtn.Content = "Delete";
+            CompDeleteBtn.DialogResult = DialogResult.None;
+            CompDeleteBtn.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            CompDeleteBtn.ForeColor = Color.White;
+            CompDeleteBtn.HoverBackground = Color.Transparent;
+            CompDeleteBtn.HoveredImageTint = Color.White;
+            CompDeleteBtn.HoverForeColor = Color.White;
+            CompDeleteBtn.HoverOutline = Color.Transparent;
+            CompDeleteBtn.Image = null;
+            CompDeleteBtn.ImageAutoCenter = true;
+            CompDeleteBtn.ImageExpand = new Point(0, 0);
+            CompDeleteBtn.ImageOffset = new Point(0, 0);
+            CompDeleteBtn.ImageTint = Color.White;
+            CompDeleteBtn.Location = new Point(1013, 763);
+            CompDeleteBtn.Name = "CompDeleteBtn";
+            CompDeleteBtn.NormalBackground = Color.Transparent;
+            CompDeleteBtn.NormalOutline = Color.WhiteSmoke;
+            CompDeleteBtn.OutlineThickness = 1.6F;
+            CompDeleteBtn.PressedBackground = Color.Transparent;
+            CompDeleteBtn.PressedForeColor = Color.White;
+            CompDeleteBtn.PressedImageTint = Color.White;
+            CompDeleteBtn.PressedOutline = Color.Transparent;
+            CompDeleteBtn.Rounding = new Padding(8);
+            CompDeleteBtn.Size = new Size(101, 26);
+            CompDeleteBtn.TabIndex = 73;
+            CompDeleteBtn.TextOffset = new Point(0, 0);
+            CompDeleteBtn.Click += CompDeleteBtn_Click;
+            // 
             // UserMenu
             // 
             AutoScaleMode = AutoScaleMode.None;
@@ -600,6 +875,15 @@
             BackColor = SystemColors.ActiveBorder;
             BackgroundImageLayout = ImageLayout.None;
             ClientSize = new Size(1382, 839);
+            Controls.Add(CompDeleteBtn);
+            Controls.Add(MarkAsCompBtn);
+            Controls.Add(RecurringBtn);
+            Controls.Add(RecurringTaskLb);
+            Controls.Add(RecurringTaskList);
+            Controls.Add(RecurringTaskBorder);
+            Controls.Add(DueDateLb);
+            Controls.Add(DueDatesList);
+            Controls.Add(DueDatesBorder);
             Controls.Add(ActiveSubTasksLb);
             Controls.Add(ActiveSubList);
             Controls.Add(ActiveSubBorder);
@@ -648,5 +932,14 @@
         private CuoreUI.Controls.cuiButton ActiveSubTasksLb;
         private ReaLTaiizor.Controls.MetroListBox ActiveSubList;
         private CuoreUI.Controls.cuiBorder ActiveSubBorder;
+        private CuoreUI.Controls.cuiButton DueDateLb;
+        private ReaLTaiizor.Controls.MetroListBox DueDatesList;
+        private CuoreUI.Controls.cuiBorder DueDatesBorder;
+        private CuoreUI.Controls.cuiButton RecurringTaskLb;
+        private ReaLTaiizor.Controls.MetroListBox RecurringTaskList;
+        private CuoreUI.Controls.cuiBorder RecurringTaskBorder;
+        private CuoreUI.Controls.cuiButton RecurringBtn;
+        private CuoreUI.Controls.cuiButton MarkAsCompBtn;
+        private CuoreUI.Controls.cuiButton CompDeleteBtn;
     }
 }

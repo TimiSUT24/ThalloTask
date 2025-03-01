@@ -31,9 +31,9 @@ namespace ToDoList
             string passwordHash = HashPassword(password);
 
             // Query the database to get the stored password hash
-            using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft SQL Server"].ConnectionString))
+            try
             {
-                try
+                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft SQL Server"].ConnectionString))
                 {
                     conn.Open();
                     string query = "SELECT PasswordHash FROM Users WHERE UserName = @UserName";
@@ -43,7 +43,7 @@ namespace ToDoList
                         string storedHash = cmd.ExecuteScalar() as string;
                         conn.Close();
                         if (storedHash != null && storedHash == passwordHash)
-                        {                           
+                        {
                             MessageBox.Show("Successful login");
                             this.Hide();
                             UserMenu usermenu = new UserMenu(userName);
@@ -55,15 +55,14 @@ namespace ToDoList
                         {
                             MessageBox.Show("Wrong password or username");
                             return false;
-                        }                       
-                    }                   
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"An error occurred: {ex.Message}");
+                        }
+                    }
                 }
             }
-
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }          
             return false; // Passwords don't match or user doesn't exist
         }
         private string HashPassword(string password)

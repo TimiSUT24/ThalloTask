@@ -41,9 +41,9 @@ namespace ToDoList
             string passwordHash = HashPassword(_password);
 
             // Save to the database
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Microsoft SQL Server"].ConnectionString))
+            try
             {
-                try
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Microsoft SQL Server"].ConnectionString))
                 {
                     conn.Open();
 
@@ -71,7 +71,7 @@ namespace ToDoList
                         {
                             MessageBox.Show("Registration successful!");
                             this.Hide();
-                            Login login = new Login(_userName, _password);                                                     
+                            Login login = new Login(_userName, _password);
                             login.ShowDialog();
                             this.Close();
                         }
@@ -79,16 +79,14 @@ namespace ToDoList
                         {
                             MessageBox.Show("Registration failed. Please try again.");
                         }
-                    }
-                    conn.Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"An error occurred: {ex.Message}");
+                    }                  
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }         
         }
-
         private string HashPassword(string password)
         {
             using (var sha256 = SHA256.Create())
@@ -109,13 +107,7 @@ namespace ToDoList
         private void ExitBtn_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void Register_FormClosing(object sender, FormClosingEventArgs e)
-        {
-           // Application.Exit();
-        }
-        
+        }            
         public void PaintForm(Graphics g)
         {           
             Color color1 = ColorTranslator.FromHtml("#E6DADA"); // Gradient color
