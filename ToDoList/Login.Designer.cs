@@ -43,13 +43,14 @@
             LoginLabel.AutoSize = true;
             LoginLabel.BackColor = Color.Transparent;
             LoginLabel.Font = new Font("Segoe UI", 18F);
-            LoginLabel.Location = new Point(588, 75);
+            LoginLabel.Location = new Point(557, 75);
             LoginLabel.Margin = new Padding(4, 0, 4, 0);
             LoginLabel.MinimumSize = new Size(129, 0);
             LoginLabel.Name = "LoginLabel";
             LoginLabel.Size = new Size(129, 32);
             LoginLabel.TabIndex = 11;
             LoginLabel.Text = "Login";
+            LoginLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // LoginButton
             // 
@@ -62,7 +63,7 @@
             LoginButton.TabIndex = 10;
             LoginButton.Text = "Login";
             LoginButton.UseVisualStyleBackColor = false;
-            LoginButton.Click += button1_Click_1;
+            LoginButton.Click += LoginBtn_Click_1;
             // 
             // PasswordLabel
             // 
@@ -75,7 +76,7 @@
             PasswordLabel.Name = "PasswordLabel";
             PasswordLabel.Size = new Size(129, 19);
             PasswordLabel.TabIndex = 9;
-            PasswordLabel.Text = "Enter password";
+            PasswordLabel.Text = "Enter Password";
             // 
             // PasswordText
             // 
@@ -100,7 +101,7 @@
             UsernameLabel.Name = "UsernameLabel";
             UsernameLabel.Size = new Size(129, 19);
             UsernameLabel.TabIndex = 7;
-            UsernameLabel.Text = "Enter username";
+            UsernameLabel.Text = "Enter Username";
             // 
             // UsernameText
             // 

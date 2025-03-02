@@ -14,12 +14,12 @@ using Microsoft.Data.SqlClient;
 namespace ToDoList
 {
     public partial class Login : Form
-    {       
+    {
         public Login(string userName, string password)
         {
-            InitializeComponent();          
+            InitializeComponent();
         }
-        private void button1_Click_1(object sender, EventArgs e)
+        private void LoginBtn_Click_1(object sender, EventArgs e)
         {
             string username = UsernameText.Text;
             string password = PasswordText.Text;
@@ -44,7 +44,7 @@ namespace ToDoList
                         conn.Close();
                         if (storedHash != null && storedHash == passwordHash)
                         {
-                            MessageBox.Show("Successful login");
+                            MessageBox.Show("Successful Login");
                             this.Hide();
                             UserMenu usermenu = new UserMenu(userName);
                             usermenu.ShowDialog();
@@ -53,7 +53,7 @@ namespace ToDoList
                         }
                         else
                         {
-                            MessageBox.Show("Wrong password or username");
+                            MessageBox.Show("Wrong Password Or Username");
                             return false;
                         }
                     }
@@ -61,8 +61,8 @@ namespace ToDoList
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred: {ex.Message}");
-            }          
+                MessageBox.Show($"An Error Occurred: {ex.Message}");
+            }
             return false; // Passwords don't match or user doesn't exist
         }
         private string HashPassword(string password)
@@ -78,7 +78,7 @@ namespace ToDoList
             this.Hide();
             Register register = new Register();
             register.ShowDialog();
-            this.Close();          
+            this.Close();
         }
         private void ExitBtn_Click(object sender, EventArgs e)
         {
@@ -87,14 +87,13 @@ namespace ToDoList
 
         private void Login_FormClosing(object sender, FormClosingEventArgs e)
         {
-           // Application.Exit();
+            // Application.Exit();
         }
         protected override void OnPaintBackground(PaintEventArgs e)
         {
-            base.OnPaintBackground(e); 
-           var paint = new Register();
-           paint.PaintForm(e.Graphics);
-        }
-
+            base.OnPaintBackground(e);
+            var paint = new Register();
+            paint.PaintForm(e.Graphics);
+        }    
     }
 }

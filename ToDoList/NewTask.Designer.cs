@@ -52,14 +52,14 @@
             // 
             StartDatePicker.CalendarForeColor = Color.Black;
             StartDatePicker.CalendarTitleForeColor = Color.Black;
-            StartDatePicker.Location = new Point(32, 381);
+            StartDatePicker.Location = new Point(32, 403);
             StartDatePicker.Name = "StartDatePicker";
             StartDatePicker.Size = new Size(200, 23);
             StartDatePicker.TabIndex = 14;
             // 
             // EndDatePicker
             // 
-            EndDatePicker.Location = new Point(32, 460);
+            EndDatePicker.Location = new Point(32, 482);
             EndDatePicker.Name = "EndDatePicker";
             EndDatePicker.Size = new Size(200, 23);
             EndDatePicker.TabIndex = 16;
@@ -122,7 +122,7 @@
             DescLabel.ImageExpand = new Point(0, 0);
             DescLabel.ImageOffset = new Point(0, 0);
             DescLabel.ImageTint = Color.White;
-            DescLabel.Location = new Point(32, 109);
+            DescLabel.Location = new Point(32, 131);
             DescLabel.Name = "DescLabel";
             DescLabel.NormalBackground = Color.Transparent;
             DescLabel.NormalOutline = Color.WhiteSmoke;
@@ -158,7 +158,7 @@
             PriorityLabel.ImageExpand = new Point(0, 0);
             PriorityLabel.ImageOffset = new Point(0, 0);
             PriorityLabel.ImageTint = Color.White;
-            PriorityLabel.Location = new Point(32, 243);
+            PriorityLabel.Location = new Point(32, 265);
             PriorityLabel.Name = "PriorityLabel";
             PriorityLabel.NormalBackground = Color.Transparent;
             PriorityLabel.NormalOutline = Color.WhiteSmoke;
@@ -194,7 +194,7 @@
             StartDateLabel.ImageExpand = new Point(0, 0);
             StartDateLabel.ImageOffset = new Point(0, 0);
             StartDateLabel.ImageTint = Color.White;
-            StartDateLabel.Location = new Point(32, 349);
+            StartDateLabel.Location = new Point(32, 371);
             StartDateLabel.Name = "StartDateLabel";
             StartDateLabel.NormalBackground = Color.Transparent;
             StartDateLabel.NormalOutline = Color.WhiteSmoke;
@@ -230,7 +230,7 @@
             EndDateLabel.ImageExpand = new Point(0, 0);
             EndDateLabel.ImageOffset = new Point(0, 0);
             EndDateLabel.ImageTint = Color.White;
-            EndDateLabel.Location = new Point(32, 428);
+            EndDateLabel.Location = new Point(32, 450);
             EndDateLabel.Name = "EndDateLabel";
             EndDateLabel.NormalBackground = Color.Transparent;
             EndDateLabel.NormalOutline = Color.WhiteSmoke;
@@ -266,7 +266,7 @@
             cuiButton6.ImageExpand = new Point(0, 0);
             cuiButton6.ImageOffset = new Point(0, 0);
             cuiButton6.ImageTint = Color.White;
-            cuiButton6.Location = new Point(32, 508);
+            cuiButton6.Location = new Point(32, 530);
             cuiButton6.Name = "cuiButton6";
             cuiButton6.NormalBackground = Color.Transparent;
             cuiButton6.NormalOutline = Color.WhiteSmoke;
@@ -283,6 +283,7 @@
             // 
             // DescriptionText
             // 
+            DescriptionText.AutoScroll = true;
             DescriptionText.BackColor = Color.White;
             DescriptionText.BorderColor = Color.WhiteSmoke;
             DescriptionText.BorderFocusColor = Color.Gray;
@@ -290,7 +291,7 @@
             DescriptionText.Content = "";
             DescriptionText.Font = new Font("Microsoft Sans Serif", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 0);
             DescriptionText.ForeColor = Color.Black;
-            DescriptionText.Location = new Point(32, 140);
+            DescriptionText.Location = new Point(32, 162);
             DescriptionText.Margin = new Padding(4);
             DescriptionText.Multiline = true;
             DescriptionText.Name = "DescriptionText";
@@ -316,14 +317,14 @@
             TaskText.ForeColor = Color.Black;
             TaskText.Location = new Point(32, 75);
             TaskText.Margin = new Padding(4);
-            TaskText.Multiline = false;
+            TaskText.Multiline = true;
             TaskText.Name = "TaskText";
-            TaskText.Padding = new Padding(15, 6, 15, 0);
+            TaskText.Padding = new Padding(15, 5, 15, 5);
             TaskText.PasswordChar = false;
             TaskText.PlaceholderColor = Color.Transparent;
             TaskText.PlaceholderText = "";
             TaskText.Rounding = 8;
-            TaskText.Size = new Size(204, 27);
+            TaskText.Size = new Size(204, 44);
             TaskText.TabIndex = 0;
             TaskText.TextOffset = new Size(0, 0);
             TaskText.UnderlinedStyle = false;
@@ -344,7 +345,7 @@
             PriorityList.ItemRounding = 8;
             PriorityList.Items.AddRange(new object[] { "High", "Medium", "Low" });
             PriorityList.ItemSelectedBackgroundColor = SystemColors.ActiveCaption;
-            PriorityList.Location = new Point(32, 277);
+            PriorityList.Location = new Point(32, 299);
             PriorityList.Margin = new Padding(1);
             PriorityList.Name = "PriorityList";
             PriorityList.Rounding = 8;
@@ -372,17 +373,17 @@
             SubTasksText.BorderSize = 2;
             SubTasksText.Content = "";
             SubTasksText.Font = new Font("Microsoft Sans Serif", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 5);
-            SubTasksText.ForeColor = Color.Gray;
+            SubTasksText.ForeColor = Color.Black;
             SubTasksText.Location = new Point(532, 336);
             SubTasksText.Margin = new Padding(4);
-            SubTasksText.Multiline = false;
+            SubTasksText.Multiline = true;
             SubTasksText.Name = "SubTasksText";
-            SubTasksText.Padding = new Padding(15, 15, 15, 0);
+            SubTasksText.Padding = new Padding(15, 5, 15, 5);
             SubTasksText.PasswordChar = false;
             SubTasksText.PlaceholderColor = Color.Transparent;
             SubTasksText.PlaceholderText = "";
             SubTasksText.Rounding = 8;
-            SubTasksText.Size = new Size(223, 45);
+            SubTasksText.Size = new Size(223, 50);
             SubTasksText.TabIndex = 47;
             SubTasksText.TextOffset = new Size(0, 0);
             SubTasksText.UnderlinedStyle = false;
@@ -473,7 +474,7 @@
             SubTasks.HoveredItemColor = Color.Black;
             SubTasks.IsDerivedStyle = false;
             SubTasks.ItemHeight = 30;
-            SubTasks.Location = new Point(532, 408);
+            SubTasks.Location = new Point(529, 410);
             SubTasks.MultiSelect = true;
             SubTasks.Name = "SubTasks";
             SubTasks.SelectedIndex = -1;
@@ -483,7 +484,7 @@
             SubTasks.SelectedText = null;
             SubTasks.SelectedValue = null;
             SubTasks.ShowBorder = false;
-            SubTasks.ShowScrollBar = true;
+            SubTasks.ShowScrollBar = false;
             SubTasks.Size = new Size(399, 98);
             SubTasks.Style = ReaLTaiizor.Enum.Metro.Style.Custom;
             SubTasks.StyleManager = null;
@@ -494,7 +495,7 @@
             // cuiBorder3
             // 
             cuiBorder3.BackColor = Color.Transparent;
-            cuiBorder3.Location = new Point(519, 391);
+            cuiBorder3.Location = new Point(516, 393);
             cuiBorder3.Name = "cuiBorder3";
             cuiBorder3.OutlineThickness = 2F;
             cuiBorder3.PanelColor = Color.Transparent;

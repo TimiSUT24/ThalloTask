@@ -81,11 +81,11 @@
             DeleteButton.ImageExpand = new Point(0, 0);
             DeleteButton.ImageOffset = new Point(0, 0);
             DeleteButton.ImageTint = Color.White;
-            DeleteButton.Location = new Point(639, 78);
+            DeleteButton.Location = new Point(316, 207);
             DeleteButton.Name = "DeleteButton";
             DeleteButton.NormalBackground = Color.Transparent;
             DeleteButton.NormalOutline = Color.WhiteSmoke;
-            DeleteButton.OutlineThickness = 1F;
+            DeleteButton.OutlineThickness = 1.6F;
             DeleteButton.PressedBackground = Color.Transparent;
             DeleteButton.PressedForeColor = Color.White;
             DeleteButton.PressedImageTint = Color.White;
@@ -118,11 +118,11 @@
             EditTask.ImageExpand = new Point(0, 0);
             EditTask.ImageOffset = new Point(0, 0);
             EditTask.ImageTint = Color.White;
-            EditTask.Location = new Point(476, 78);
+            EditTask.Location = new Point(316, 162);
             EditTask.Name = "EditTask";
             EditTask.NormalBackground = Color.Transparent;
             EditTask.NormalOutline = Color.WhiteSmoke;
-            EditTask.OutlineThickness = 1F;
+            EditTask.OutlineThickness = 1.6F;
             EditTask.PressedBackground = Color.Transparent;
             EditTask.PressedForeColor = Color.White;
             EditTask.PressedImageTint = Color.White;
@@ -155,11 +155,11 @@
             NewTask.ImageExpand = new Point(0, 0);
             NewTask.ImageOffset = new Point(0, 0);
             NewTask.ImageTint = Color.White;
-            NewTask.Location = new Point(314, 78);
+            NewTask.Location = new Point(315, 117);
             NewTask.Name = "NewTask";
             NewTask.NormalBackground = Color.Transparent;
             NewTask.NormalOutline = Color.WhiteSmoke;
-            NewTask.OutlineThickness = 1F;
+            NewTask.OutlineThickness = 1.6F;
             NewTask.PressedBackground = Color.Transparent;
             NewTask.PressedForeColor = Color.White;
             NewTask.PressedImageTint = Color.White;
@@ -192,11 +192,11 @@
             LogoutButton.ImageExpand = new Point(0, 0);
             LogoutButton.ImageOffset = new Point(0, 0);
             LogoutButton.ImageTint = Color.White;
-            LogoutButton.Location = new Point(803, 78);
+            LogoutButton.Location = new Point(316, 383);
             LogoutButton.Name = "LogoutButton";
             LogoutButton.NormalBackground = Color.Transparent;
             LogoutButton.NormalOutline = Color.WhiteSmoke;
-            LogoutButton.OutlineThickness = 1F;
+            LogoutButton.OutlineThickness = 1.6F;
             LogoutButton.PressedBackground = Color.Transparent;
             LogoutButton.PressedForeColor = Color.White;
             LogoutButton.PressedImageTint = Color.White;
@@ -233,7 +233,7 @@
             ShowTask.Name = "ShowTask";
             ShowTask.NormalBackground = Color.Transparent;
             ShowTask.NormalOutline = Color.WhiteSmoke;
-            ShowTask.OutlineThickness = 1F;
+            ShowTask.OutlineThickness = 1.6F;
             ShowTask.PressedBackground = Color.Transparent;
             ShowTask.PressedForeColor = Color.White;
             ShowTask.PressedImageTint = Color.White;
@@ -270,7 +270,7 @@
             ActiveTasks.Name = "ActiveTasks";
             ActiveTasks.NormalBackground = Color.Transparent;
             ActiveTasks.NormalOutline = Color.WhiteSmoke;
-            ActiveTasks.OutlineThickness = 1F;
+            ActiveTasks.OutlineThickness = 1.6F;
             ActiveTasks.PressedBackground = Color.Transparent;
             ActiveTasks.PressedForeColor = Color.White;
             ActiveTasks.PressedImageTint = Color.White;
@@ -291,7 +291,7 @@
             WelcomeText.CheckedOutline = Color.Transparent;
             WelcomeText.Content = "Welcome";
             WelcomeText.DialogResult = DialogResult.None;
-            WelcomeText.Font = new Font("Microsoft Sans Serif", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            WelcomeText.Font = new Font("Microsoft Sans Serif", 21.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             WelcomeText.ForeColor = Color.White;
             WelcomeText.HoverBackground = Color.Transparent;
             WelcomeText.HoveredImageTint = Color.Transparent;
@@ -340,7 +340,7 @@
             TextUser.ImageExpand = new Point(0, 0);
             TextUser.ImageOffset = new Point(0, 0);
             TextUser.ImageTint = Color.Transparent;
-            TextUser.Location = new Point(1081, 12);
+            TextUser.Location = new Point(1109, 12);
             TextUser.Name = "TextUser";
             TextUser.NormalBackground = Color.Transparent;
             TextUser.NormalOutline = Color.WhiteSmoke;
@@ -350,7 +350,7 @@
             TextUser.PressedImageTint = Color.Transparent;
             TextUser.PressedOutline = Color.WhiteSmoke;
             TextUser.Rounding = new Padding(8);
-            TextUser.Size = new Size(261, 25);
+            TextUser.Size = new Size(261, 57);
             TextUser.TabIndex = 35;
             TextUser.TabStop = false;
             TextUser.TextOffset = new Point(0, 0);
@@ -426,7 +426,7 @@
             CompletedSubTasks.SelectedText = null;
             CompletedSubTasks.SelectedValue = null;
             CompletedSubTasks.ShowBorder = false;
-            CompletedSubTasks.ShowScrollBar = true;
+            CompletedSubTasks.ShowScrollBar = false;
             CompletedSubTasks.Size = new Size(203, 244);
             CompletedSubTasks.Style = ReaLTaiizor.Enum.Metro.Style.Custom;
             CompletedSubTasks.StyleManager = null;
@@ -516,7 +516,7 @@
             Tasks.SelectedText = null;
             Tasks.SelectedValue = null;
             Tasks.ShowBorder = false;
-            Tasks.ShowScrollBar = true;
+            Tasks.ShowScrollBar = false;
             Tasks.Size = new Size(197, 229);
             Tasks.Style = ReaLTaiizor.Enum.Metro.Style.Custom;
             Tasks.StyleManager = null;
@@ -582,7 +582,7 @@
             ActiveSubList.SelectedText = null;
             ActiveSubList.SelectedValue = null;
             ActiveSubList.ShowBorder = false;
-            ActiveSubList.ShowScrollBar = true;
+            ActiveSubList.ShowScrollBar = false;
             ActiveSubList.Size = new Size(203, 244);
             ActiveSubList.Style = ReaLTaiizor.Enum.Metro.Style.Custom;
             ActiveSubList.StyleManager = null;
@@ -624,7 +624,7 @@
             DueDateLb.ImageExpand = new Point(0, 0);
             DueDateLb.ImageOffset = new Point(0, 0);
             DueDateLb.ImageTint = Color.White;
-            DueDateLb.Location = new Point(697, 468);
+            DueDateLb.Location = new Point(724, 468);
             DueDateLb.Name = "DueDateLb";
             DueDateLb.NormalBackground = Color.Transparent;
             DueDateLb.NormalOutline = Color.WhiteSmoke;
@@ -649,7 +649,7 @@
             DueDatesList.HoveredItemColor = Color.Black;
             DueDatesList.IsDerivedStyle = false;
             DueDatesList.ItemHeight = 50;
-            DueDatesList.Location = new Point(697, 506);
+            DueDatesList.Location = new Point(724, 506);
             DueDatesList.MultiSelect = false;
             DueDatesList.Name = "DueDatesList";
             DueDatesList.SelectedIndex = -1;
@@ -659,7 +659,7 @@
             DueDatesList.SelectedText = null;
             DueDatesList.SelectedValue = null;
             DueDatesList.ShowBorder = false;
-            DueDatesList.ShowScrollBar = true;
+            DueDatesList.ShowScrollBar = false;
             DueDatesList.Size = new Size(203, 244);
             DueDatesList.Style = ReaLTaiizor.Enum.Metro.Style.Custom;
             DueDatesList.StyleManager = null;
@@ -670,7 +670,7 @@
             // DueDatesBorder
             // 
             DueDatesBorder.BackColor = Color.Transparent;
-            DueDatesBorder.Location = new Point(691, 500);
+            DueDatesBorder.Location = new Point(718, 500);
             DueDatesBorder.Name = "DueDatesBorder";
             DueDatesBorder.OutlineThickness = 2F;
             DueDatesBorder.PanelColor = Color.Transparent;
@@ -701,7 +701,7 @@
             RecurringTaskLb.ImageExpand = new Point(0, 0);
             RecurringTaskLb.ImageOffset = new Point(0, 0);
             RecurringTaskLb.ImageTint = Color.White;
-            RecurringTaskLb.Location = new Point(1019, 468);
+            RecurringTaskLb.Location = new Point(1033, 468);
             RecurringTaskLb.Name = "RecurringTaskLb";
             RecurringTaskLb.NormalBackground = Color.Transparent;
             RecurringTaskLb.NormalOutline = Color.WhiteSmoke;
@@ -726,7 +726,7 @@
             RecurringTaskList.HoveredItemColor = Color.Black;
             RecurringTaskList.IsDerivedStyle = false;
             RecurringTaskList.ItemHeight = 40;
-            RecurringTaskList.Location = new Point(1019, 506);
+            RecurringTaskList.Location = new Point(1033, 506);
             RecurringTaskList.MultiSelect = false;
             RecurringTaskList.Name = "RecurringTaskList";
             RecurringTaskList.SelectedIndex = -1;
@@ -736,7 +736,7 @@
             RecurringTaskList.SelectedText = null;
             RecurringTaskList.SelectedValue = null;
             RecurringTaskList.ShowBorder = false;
-            RecurringTaskList.ShowScrollBar = true;
+            RecurringTaskList.ShowScrollBar = false;
             RecurringTaskList.Size = new Size(203, 244);
             RecurringTaskList.Style = ReaLTaiizor.Enum.Metro.Style.Custom;
             RecurringTaskList.StyleManager = null;
@@ -748,7 +748,7 @@
             // RecurringTaskBorder
             // 
             RecurringTaskBorder.BackColor = Color.Transparent;
-            RecurringTaskBorder.Location = new Point(1013, 500);
+            RecurringTaskBorder.Location = new Point(1027, 500);
             RecurringTaskBorder.Name = "RecurringTaskBorder";
             RecurringTaskBorder.OutlineThickness = 2F;
             RecurringTaskBorder.PanelColor = Color.Transparent;
@@ -779,7 +779,7 @@
             RecurringBtn.ImageExpand = new Point(0, 0);
             RecurringBtn.ImageOffset = new Point(0, 0);
             RecurringBtn.ImageTint = Color.White;
-            RecurringBtn.Location = new Point(1121, 763);
+            RecurringBtn.Location = new Point(1142, 763);
             RecurringBtn.Name = "RecurringBtn";
             RecurringBtn.NormalBackground = Color.Transparent;
             RecurringBtn.NormalOutline = Color.WhiteSmoke;
@@ -816,17 +816,17 @@
             MarkAsCompBtn.ImageExpand = new Point(0, 0);
             MarkAsCompBtn.ImageOffset = new Point(0, 0);
             MarkAsCompBtn.ImageTint = Color.White;
-            MarkAsCompBtn.Location = new Point(315, 338);
+            MarkAsCompBtn.Location = new Point(315, 252);
             MarkAsCompBtn.Name = "MarkAsCompBtn";
             MarkAsCompBtn.NormalBackground = Color.Transparent;
             MarkAsCompBtn.NormalOutline = Color.WhiteSmoke;
-            MarkAsCompBtn.OutlineThickness = 1F;
+            MarkAsCompBtn.OutlineThickness = 1.6F;
             MarkAsCompBtn.PressedBackground = Color.Transparent;
             MarkAsCompBtn.PressedForeColor = Color.White;
             MarkAsCompBtn.PressedImageTint = Color.White;
             MarkAsCompBtn.PressedOutline = Color.Transparent;
             MarkAsCompBtn.Rounding = new Padding(8);
-            MarkAsCompBtn.Size = new Size(143, 36);
+            MarkAsCompBtn.Size = new Size(144, 26);
             MarkAsCompBtn.TabIndex = 72;
             MarkAsCompBtn.TextOffset = new Point(0, 0);
             MarkAsCompBtn.Click += MarkAsCompBtn_Click;
@@ -853,7 +853,7 @@
             CompDeleteBtn.ImageExpand = new Point(0, 0);
             CompDeleteBtn.ImageOffset = new Point(0, 0);
             CompDeleteBtn.ImageTint = Color.White;
-            CompDeleteBtn.Location = new Point(1013, 763);
+            CompDeleteBtn.Location = new Point(1027, 763);
             CompDeleteBtn.Name = "CompDeleteBtn";
             CompDeleteBtn.NormalBackground = Color.Transparent;
             CompDeleteBtn.NormalOutline = Color.WhiteSmoke;

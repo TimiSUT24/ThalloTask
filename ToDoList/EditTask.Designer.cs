@@ -408,12 +408,12 @@
             SubTasksText.BorderSize = 2;
             SubTasksText.Content = "";
             SubTasksText.Font = new Font("Microsoft Sans Serif", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 5);
-            SubTasksText.ForeColor = Color.Gray;
+            SubTasksText.ForeColor = Color.Black;
             SubTasksText.Location = new Point(525, 341);
             SubTasksText.Margin = new Padding(4);
-            SubTasksText.Multiline = false;
+            SubTasksText.Multiline = true;
             SubTasksText.Name = "SubTasksText";
-            SubTasksText.Padding = new Padding(15, 15, 15, 0);
+            SubTasksText.Padding = new Padding(15, 5, 15, 5);
             SubTasksText.PasswordChar = false;
             SubTasksText.PlaceholderColor = Color.Transparent;
             SubTasksText.PlaceholderText = "";
@@ -482,7 +482,7 @@
             SubTasks.SelectedText = null;
             SubTasks.SelectedValue = null;
             SubTasks.ShowBorder = false;
-            SubTasks.ShowScrollBar = true;
+            SubTasks.ShowScrollBar = false;
             SubTasks.Size = new Size(399, 98);
             SubTasks.Style = ReaLTaiizor.Enum.Metro.Style.Custom;
             SubTasks.StyleManager = null;

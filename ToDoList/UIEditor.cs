@@ -17,7 +17,6 @@ namespace ToDoList
     {
         public TransparentListBox()
         {
-
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
         }
     }  

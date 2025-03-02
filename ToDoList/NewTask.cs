@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.Identity.Client;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.VisualBasic.Devices;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace ToDoList
             InitializeComponent();
             CurrentUser = userName;         
         }
+        //MAIN SECTION
         public int GetUserID(string userName)
         {
             int userId = -1;
@@ -41,7 +43,7 @@ namespace ToDoList
                     }
                     else
                     {
-                        MessageBox.Show("Error null");
+                        MessageBox.Show("Error Null");
                     }
                 }               
             }
@@ -62,7 +64,7 @@ namespace ToDoList
         {
             if (string.IsNullOrEmpty(TaskText.Content) || string.IsNullOrWhiteSpace(TaskText.Content))
             {
-                MessageBox.Show("Task cannot be empty");
+                MessageBox.Show("Task Cannot Be Empty!");
                 return;
             }
             var task = new UserMenu(CurrentUser);
@@ -94,7 +96,7 @@ namespace ToDoList
 
                     using (SqlCommand cmd = new SqlCommand(addTask, conn))
                     {
-                        cmd.Parameters.AddWithValue("@TASK", TaskText.Content);                //Insert these values to the database 
+                        cmd.Parameters.AddWithValue("@TASK", TaskText.Content);               //MAIN TASK
                         cmd.Parameters.AddWithValue("@DESCRIPTION", DescriptionText.Content);
                         cmd.Parameters.AddWithValue("@PRIORITY", PriorityList.Text);
                         cmd.Parameters.AddWithValue("@USER_ID", userId);
@@ -103,28 +105,31 @@ namespace ToDoList
                         taskId = (int)await cmd.ExecuteScalarAsync();
                         if (taskId > 0)
                         {
-                            MessageBox.Show("Task added");
+                            MessageBox.Show("Task Added");
                         }
                         else
                         {
                             MessageBox.Show("Error");
                         }
                     }
-                    string addList = @"INSERT INTO SUBTASKS(SUBTASK,TASKID) VALUES(@SUBTASK,@TASKID)";
-                    foreach (var items in SubTasks.Items)
+                    string addList = @"INSERT INTO SUBTASKS(SUBTASK,TASKID) VALUES(@SUBTASK,@TASKID)"; //SUBTASKS
+                    if(SubTasks.Items.Count > 0) 
                     {
-                        using (SqlCommand cmd = new SqlCommand(addList, conn))
+                        foreach (var items in SubTasks.Items)
                         {
-                            cmd.Parameters.AddWithValue("@TASKID", taskId);
-                            cmd.Parameters.AddWithValue("@SUBTASK", items.ToString());
-                            await cmd.ExecuteNonQueryAsync();
+                            using (SqlCommand cmd = new SqlCommand(addList, conn))
+                            {
+                                cmd.Parameters.AddWithValue("@TASKID", taskId);
+                                cmd.Parameters.AddWithValue("@SUBTASK", items.ToString());
+                                await cmd.ExecuteNonQueryAsync();
+                            }
                         }
-                    }
+                    }                  
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occured " + ex.Message);
+                MessageBox.Show("An Error Occured " + ex.Message);
             }         
         }
         private void NewTask_MouseClick(object sender, MouseEventArgs e)
@@ -132,9 +137,19 @@ namespace ToDoList
             Focuslabel3.Focus();
             SubTasks.SelectedIndex = -1;
         }
+        //SUBTASK SECTION
         private void SubTaskAddBtn_Click(object sender, EventArgs e)
         {
-            SubTasks.Items.Add(SubTasksText.Content);
+            if(SubTasksText.Content.IsNullOrEmpty() || string.IsNullOrWhiteSpace(SubTasksText.Content))
+            {
+                return;
+            }
+            else
+            {
+                SubTasks.Items.Add(SubTasksText.Content);
+                SubTasksText.Content = null;
+            }
+           
         }
         private void SubTaskText_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -144,9 +159,17 @@ namespace ToDoList
             }
         }
         private void SubTaskDelBtn_Click(object sender, EventArgs e)
-        {
-            SubList = SubTasks.Items[SubTasks.SelectedIndex].ToString();
-            SubTasks.Items.Remove(SubList);
+        {         
+            try
+            {
+                if (SubTasks.Items[SubTasks.SelectedIndex].ToString() == null) { }
+                SubList = SubTasks.Items[SubTasks.SelectedIndex].ToString();
+                SubTasks.Items.Remove(SubList);
+            }
+            catch
+            {
+                MessageBox.Show("Please Select Subtask To Delete!");
+            }         
         }         
     }
 }

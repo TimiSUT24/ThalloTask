@@ -42,7 +42,7 @@
             // UsernameText
             // 
             UsernameText.BackColor = SystemColors.Window;
-            UsernameText.Location = new Point(564, 216);
+            UsernameText.Location = new Point(564, 240);
             UsernameText.Margin = new Padding(4);
             UsernameText.MaxLength = 50;
             UsernameText.Name = "UsernameText";
@@ -54,31 +54,31 @@
             UsernameLabel.AutoSize = true;
             UsernameLabel.BackColor = Color.Transparent;
             UsernameLabel.Font = new Font("Segoe UI", 10F);
-            UsernameLabel.Location = new Point(564, 184);
+            UsernameLabel.Location = new Point(564, 208);
             UsernameLabel.Margin = new Padding(4, 0, 4, 0);
             UsernameLabel.MinimumSize = new Size(129, 0);
             UsernameLabel.Name = "UsernameLabel";
             UsernameLabel.Size = new Size(129, 19);
             UsernameLabel.TabIndex = 1;
-            UsernameLabel.Text = "Enter username";
+            UsernameLabel.Text = "Enter Username";
             // 
             // PasswordLabel
             // 
             PasswordLabel.AutoSize = true;
             PasswordLabel.BackColor = Color.Transparent;
             PasswordLabel.Font = new Font("Segoe UI", 10F);
-            PasswordLabel.Location = new Point(564, 272);
+            PasswordLabel.Location = new Point(564, 296);
             PasswordLabel.Margin = new Padding(4, 0, 4, 0);
             PasswordLabel.MinimumSize = new Size(129, 0);
             PasswordLabel.Name = "PasswordLabel";
             PasswordLabel.Size = new Size(129, 19);
             PasswordLabel.TabIndex = 3;
-            PasswordLabel.Text = "Enter password";
+            PasswordLabel.Text = "Enter Password";
             // 
             // PasswordText
             // 
             PasswordText.BackColor = SystemColors.Window;
-            PasswordText.Location = new Point(564, 304);
+            PasswordText.Location = new Point(564, 328);
             PasswordText.Margin = new Padding(4);
             PasswordText.MaxLength = 50;
             PasswordText.Name = "PasswordText";
@@ -90,21 +90,21 @@
             // 
             RegisterButton.BackColor = Color.Transparent;
             RegisterButton.Font = new Font("Segoe UI", 12F);
-            RegisterButton.Location = new Point(564, 362);
+            RegisterButton.Location = new Point(564, 386);
             RegisterButton.Margin = new Padding(4);
             RegisterButton.Name = "RegisterButton";
             RegisterButton.Size = new Size(267, 34);
             RegisterButton.TabIndex = 4;
             RegisterButton.Text = "Register";
             RegisterButton.UseVisualStyleBackColor = false;
-            RegisterButton.Click += button1_Click;
+            RegisterButton.Click += RegisterButton_Click;
             // 
             // RegisterLabel
             // 
             RegisterLabel.AutoSize = true;
             RegisterLabel.BackColor = Color.Transparent;
             RegisterLabel.Font = new Font("Segoe UI", 12F);
-            RegisterLabel.Location = new Point(564, 136);
+            RegisterLabel.Location = new Point(564, 162);
             RegisterLabel.Margin = new Padding(4, 0, 4, 0);
             RegisterLabel.MinimumSize = new Size(129, 0);
             RegisterLabel.Name = "RegisterLabel";
@@ -114,7 +114,7 @@
             // 
             // LoginButton
             // 
-            LoginButton.Location = new Point(564, 412);
+            LoginButton.Location = new Point(564, 436);
             LoginButton.Name = "LoginButton";
             LoginButton.Size = new Size(267, 34);
             LoginButton.TabIndex = 6;
@@ -124,7 +124,7 @@
             // 
             // ExitButton
             // 
-            ExitButton.Location = new Point(564, 461);
+            ExitButton.Location = new Point(564, 485);
             ExitButton.Name = "ExitButton";
             ExitButton.Size = new Size(267, 34);
             ExitButton.TabIndex = 7;
@@ -165,7 +165,7 @@
             MaximumSize = new Size(1398, 878);
             Name = "Register";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Register";     
+            Text = "Register";
             ResumeLayout(false);
             PerformLayout();
         }

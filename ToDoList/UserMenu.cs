@@ -29,12 +29,9 @@ namespace ToDoList
 
         public string nl = "\r\n \r\n";
         public string TaskTxt { get; set; }
-        public string CompTask { get; set; }
         public string CompDesc { get; set; }
         public string CompPri { get; set; }
-        public DateTime CompDateSt { get; set; }
-        public DateTime CompDateEnd { get; set; }
-        public string CompSubTask { get; set; }
+        public List<string> CompSubTask = new List<string>();
         public string CompIndex { get; set; }
 
         public UserMenu(string userName)
@@ -50,6 +47,7 @@ namespace ToDoList
         {
             TaskTxt = taskTxt;
         }
+        //MAIN SECTION
         private void LogoutButton_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -68,11 +66,7 @@ namespace ToDoList
             ToDo.ShowDialog();
         }
         public void ShowName()
-        {
-            if (TextUser.Content.Length > TextUser.Content.Length)
-            {
-                ContentAlignment.MiddleLeft.ToString();
-            }
+        {          
             TextUser.Content = "Logged in as " + CurrentUser;
         }
         public void Tasks_SelectedIndexChanged(object sender)
@@ -96,7 +90,7 @@ namespace ToDoList
         {
             if (Tasks.SelectedIndex == -1)
             {
-                MessageBox.Show("Please select a task");
+                MessageBox.Show("Please Select A Task!");
                 return;
             }
             await ShowTaskDetails();
@@ -131,13 +125,13 @@ namespace ToDoList
             }
             catch
             {
-                MessageBox.Show("Please select a task");
-            }        
+                MessageBox.Show("Please Select A Task!");
+            }
         }
         public void ShowTasks()
         {
             try
-            {
+            {                
                 NewTask to = new NewTask(CurrentUser);
                 UserId = to.GetUserID(CurrentUser);     //Get which user is logged in and gets id 
 
@@ -161,12 +155,12 @@ namespace ToDoList
                         {
                             while (reader.Read())                   //read from database to code and add items to list
                             {
-                                AllTasks = reader["TASK"].ToString();
+                                AllTasks = reader["TASK"].ToString();                               
                                 Tasks.Items.Add(AllTasks);
                             }
                         }
                     }
-                }
+                }               
             }
             catch (Exception ex)
             {
@@ -185,7 +179,7 @@ namespace ToDoList
             }
             catch
             {
-                MessageBox.Show("Please Select a task to edit");
+                MessageBox.Show("Please Select A Task To Edit!");
             }
         }
         public async Task DeleteConformation()
@@ -200,12 +194,12 @@ namespace ToDoList
             }
             catch
             {
-                MessageBox.Show("Please select a task to delete");
+                MessageBox.Show("Please Select A Task To Delete!");
                 return;
             }
             try
             {
-                var choice = MessageBox.Show("Are you sure you want to delete?", "Confirm Delete",
+                var choice = MessageBox.Show("Are You Sure You Want To Delete?", "Confirm Delete",
                                   MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
                 if (choice == DialogResult.No)
                 {
@@ -223,9 +217,12 @@ namespace ToDoList
                     using (SqlCommand cmd = new SqlCommand(deleteTask, conn))
                     {
                         cmd.Parameters.AddWithValue("@TASK", task);
-
                         await cmd.ExecuteNonQueryAsync();
-
+                        Tasks.SelectedIndex = -1;
+                        ActiveSubList.Items.Clear();
+                        CompletedSubTasks.Items.Clear();
+                        DueDatesList.Items.Clear();
+                        DueDates();
                     }
                 }
             }
@@ -239,16 +236,25 @@ namespace ToDoList
         private void ReloadButton_Click_1(object sender, EventArgs e)
         {
             DueDatesList.Items.Clear();
+            Tasks.SelectedIndex = -1;
             Tasks.Items.Clear();
             RecurringTaskList.Items.Clear();
+            CompletedSubTasks.Items.Clear();
+            ActiveSubList.Items.Clear();
             ShowTasks();
             DueDates();
             ShowCompTasks();
+            ShowSubTasksCompleted();
         }
         private void UserMenu_MouseClick(object sender, MouseEventArgs e)
         {
             Tasks.SelectedIndex = -1;
             RecurringTaskList.SelectedIndex = -1;
+            DueDatesList.SelectedIndex = -1;
+            CompletedSubTasks.SelectedIndex = -1;
+            ActiveSubList.SelectedIndex = -1;
+            CompletedSubTasks.Items.Clear();
+            ActiveSubList.Items.Clear();
         }
         protected override void OnPaintBackground(PaintEventArgs e)
         {
@@ -257,33 +263,37 @@ namespace ToDoList
             paint.PaintForm(e.Graphics);
         }
 
+        // SUBTASK SECTION 
+
         public void ShowSubTasksCompleted()
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                if(task != null)
                 {
-                    conn.Open();
-                    string ShowSubTask = @"SELECT SUBTASKDONE FROM COMPLETEDSUBTASKS
+                    using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                    {
+                        conn.Open();
+                        string ShowSubTask = @"SELECT SUBTASKDONE FROM COMPLETEDSUBTASKS
                                        JOIN TASKS ON TASKS.ID = COMPLETEDSUBTASKS.SUBID
                                        WHERE TASK = @TASK
                                        ORDER BY SUBTASKDONE ASC";
-
-                    using (SqlCommand cmd = new SqlCommand(ShowSubTask, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@TASK", task);
-
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        using (SqlCommand cmd = new SqlCommand(ShowSubTask, conn))
                         {
-                            while (reader.Read())
-                            {
-                                string subTasks = reader["SUBTASKDONE"].ToString();
-                                CompletedSubTasks.Items.Add(subTasks);
+                            cmd.Parameters.AddWithValue("@TASK", task);
 
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    string subTasks = reader["SUBTASKDONE"].ToString();
+                                    CompletedSubTasks.Items.Add(subTasks);
+
+                                }
                             }
                         }
                     }
-                }
+                }               
             }
             catch (Exception ex)
             {
@@ -299,8 +309,8 @@ namespace ToDoList
                 {
                     conn.Open();
                     string ActiveSubTask = @"SELECT SUBTASK FROM SUBTASKS
-                                       JOIN TASKS ON TASKS.ID = SUBTASKS.TASKID
-                                       WHERE TASK = @TASK";
+                                           JOIN TASKS ON TASKS.ID = SUBTASKS.TASKID
+                                           WHERE TASK = @TASK";
                     using (SqlCommand cmd = new SqlCommand(ActiveSubTask, conn))
                     {
                         cmd.Parameters.AddWithValue("@TASK", task);
@@ -309,7 +319,7 @@ namespace ToDoList
                         {
                             while (reader.Read())
                             {
-                                string ActiveSubTasks = reader["SUBTASK"].ToString();
+                                string ActiveSubTasks = reader["SUBTASK"].ToString();                               
                                 ActiveSubList.Items.Add(ActiveSubTasks);
                             }
                         }
@@ -321,7 +331,8 @@ namespace ToDoList
                 MessageBox.Show("Error: " + ex);
             }
         }
-
+        
+        //DUE DATE METHOD
         public void DueDates()
         {
             try
@@ -345,7 +356,7 @@ namespace ToDoList
                             while (reader.Read())
                             {
                                 string dates = reader["DATEEND"].ToString();
-                                string tasks = reader["TASK"].ToString();
+                                string tasks = reader["TASK"].ToString();                              
                                 DueDatesList.Items.Add(tasks + ": " + dates);
                             }
                         }
@@ -357,12 +368,24 @@ namespace ToDoList
                 MessageBox.Show("Error: " + ex);
             }
         }
-
+        //COMPLETED TASKS SECTION WITH DELETE AND RECUR METHODS
         private async void MarkAsCompBtn_Click(object sender, EventArgs e)
-        {          
-            await CompletedTasks();
-            RecurringTaskList.Items.Clear();
-            ShowCompTasks();
+        {
+            try
+            {
+                if (Tasks.Items[Tasks.SelectedIndex].ToString() == null) { }
+                await CompletedTasks();
+                RecurringTaskList.Items.Clear();
+                CompletedSubTasks.Items.Clear();
+                ActiveSubList.Items.Clear();
+                DueDatesList.Items.Clear();
+                DueDates();
+                ShowCompTasks();
+            }
+            catch
+            {
+                MessageBox.Show("Select A Task To Complete!");
+            }
         }
 
         public async Task CompletedTasks()
@@ -402,14 +425,14 @@ namespace ToDoList
                         cmd2.Parameters.AddWithValue("@COMPPRIORITY", CompPri);
                         cmd2.Parameters.AddWithValue("@USERID", UserId);
 
-                        CompTaskId = (int) await cmd2.ExecuteScalarAsync();
+                        CompTaskId = (int)await cmd2.ExecuteScalarAsync();
 
                     }
 
                     if (CompletedSubTasks.Items.Count > 0)
                     {
                         string reccurSubTask = @"INSERT INTO RECURRINGSUBTASK (COMPSUBTASK,COMPTASKID) 
-                                           VALUES (@COMPSUBTASK,@COMPTASKID)";
+                                               VALUES (@COMPSUBTASK,@COMPTASKID)";
 
                         foreach (var item in CompletedSubTasks.Items)
                         {
@@ -430,6 +453,7 @@ namespace ToDoList
                         await cmd4.ExecuteNonQueryAsync();
                         Tasks.Items.Clear();
                         ShowTasks();
+                        Tasks.SelectedIndex = -1;
                     }
 
                 }
@@ -444,13 +468,13 @@ namespace ToDoList
         {
             try
             {
-                if (RecurringTaskList.Items[RecurringTaskList.SelectedIndex].ToString() == null) { }               
+                if (RecurringTaskList.Items[RecurringTaskList.SelectedIndex].ToString() == null) { }
                 CompDelete();
             }
             catch
             {
-                MessageBox.Show("Select available task");
-            }          
+                MessageBox.Show("Select Available Task!");
+            }
         }
 
         public void CompDelete()
@@ -527,10 +551,10 @@ namespace ToDoList
                 UserId = to.GetUserID(CurrentUser);
                 using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
                 {
-                   await conn.OpenAsync();
+                    await conn.OpenAsync();
 
                     string selectCompTask = @"SELECT COMPTASK,COMPDESCRIPTION,COMPPRIORITY,COMPSUBTASK FROM COMPLETEDTASKS 
-                                            JOIN RECURRINGSUBTASK ON RECURRINGSUBTASK.COMPTASKID = COMPLETEDTASKS.ID
+                                            LEFT JOIN RECURRINGSUBTASK ON RECURRINGSUBTASK.COMPTASKID = COMPLETEDTASKS.ID
                                             WHERE COMPTASK = @COMPTASK AND USERID = @USERID";
                     using (SqlCommand cmd = new SqlCommand(selectCompTask, conn))
                     {
@@ -539,10 +563,11 @@ namespace ToDoList
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
                             while (await reader.ReadAsync())
-                            {                               
+                            {
                                 CompDesc = reader["COMPDESCRIPTION"].ToString();
                                 CompPri = reader["COMPPRIORITY"].ToString();
-                                CompSubTask = reader["COMPSUBTASK"].ToString();
+                                string subTask = reader["COMPSUBTASK"].ToString();
+                                CompSubTask.Add(subTask);
 
                             }
                         }
@@ -559,19 +584,22 @@ namespace ToDoList
                         cmd2.Parameters.AddWithValue("@USER_ID", UserId);
                         cmd2.Parameters.AddWithValue("@DATESTART", DateTime.Now);
                         cmd2.Parameters.AddWithValue("@DATEEND", DateTime.Now);
-                        taskId = (int) await cmd2.ExecuteScalarAsync();
+                        taskId = (int)await cmd2.ExecuteScalarAsync();
                     }
 
-                    if(CompSubTask != null)
+                    if (CompSubTask.Count > 0)
                     {
                         string insertCompSub = @"INSERT INTO SUBTASKS (SUBTASK,TASKID) VALUES (@SUBTASK,@TASKID)";
-                        using (SqlCommand cmd3 = new SqlCommand(insertCompSub, conn))
+                        foreach(var item in CompSubTask)
                         {
-                            cmd3.Parameters.AddWithValue("@SUBTASK", CompSubTask);
-                            cmd3.Parameters.AddWithValue("@TASKID", taskId);
-                           await cmd3.ExecuteNonQueryAsync();
-                        }
-                    }                 
+                            using (SqlCommand cmd3 = new SqlCommand(insertCompSub, conn))
+                            {
+                                cmd3.Parameters.AddWithValue("@SUBTASK", item.ToString());
+                                cmd3.Parameters.AddWithValue("@TASKID", taskId);
+                                await cmd3.ExecuteNonQueryAsync();
+                            }
+                        }                      
+                    }
                     Tasks.Items.Clear();
                     ShowTasks();
                 }
@@ -582,17 +610,20 @@ namespace ToDoList
             }
         }
         private async void RecurringBtn_Click_1(object sender, EventArgs e)
-        {          
+        {
             try
             {
-                if (RecurringTaskList.Items[RecurringTaskList.SelectedIndex].ToString() == null) { }                                                
+                if (RecurringTaskList.Items[RecurringTaskList.SelectedIndex].ToString() == null) { }
                 await RecurrTask();
                 CompDelete();
+                DueDatesList.Items.Clear();
+                DueDates();
+                RecurringTaskList.SelectedIndex = -1;
             }
             catch
             {
-                MessageBox.Show("Select available task");
-            }                               
-        }      
+                MessageBox.Show("Select Available Task!");
+            }
+        }
     }
 }   

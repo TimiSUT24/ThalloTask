@@ -17,7 +17,7 @@ namespace ToDoList
         {
             InitializeComponent();
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void RegisterButton_Click(object sender, EventArgs e)
         {
             _userName = UsernameText.Text?.Trim();
             _password = PasswordText.Text?.Trim();
@@ -27,14 +27,14 @@ namespace ToDoList
                 MessageBox.Show("Empty");
                 return;
             }
-            if (_userName.ToCharArray().Length <= 6 || _password.ToCharArray().Length <= 6)
+            if (_userName.ToCharArray().Length <= 6 || _password.ToCharArray().Length <= 6 || _userName.ToCharArray().Length >= 16 || _password.ToCharArray().Length >= 20)
             {
-                MessageBox.Show("Username and password need to be 7 characters long");
+                MessageBox.Show("Min Characters 7 | Max Characters 16");
                 return;
             }
             if (string.IsNullOrWhiteSpace(_userName) || string.IsNullOrWhiteSpace(_password) || _userName.Contains(" ") || _password.Contains(" "))
             {
-                MessageBox.Show("Cant have spaces");
+                MessageBox.Show("Cant Have Spaces!");
                 return;
             }
 
@@ -55,7 +55,7 @@ namespace ToDoList
 
                         if (userCount > 0)
                         {
-                            MessageBox.Show("Account already exist");
+                            MessageBox.Show("Account Already Exist!");
                             return;
                         }
                     }
@@ -69,7 +69,7 @@ namespace ToDoList
 
                         if (rows > 0)
                         {
-                            MessageBox.Show("Registration successful!");
+                            MessageBox.Show("Registration Successful!");
                             this.Hide();
                             Login login = new Login(_userName, _password);
                             login.ShowDialog();
@@ -77,14 +77,14 @@ namespace ToDoList
                         }
                         else
                         {
-                            MessageBox.Show("Registration failed. Please try again.");
+                            MessageBox.Show("Registration Failed. Please Try Again.");
                         }
                     }                  
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred: {ex.Message}");
+                MessageBox.Show($"An Error Occurred: {ex.Message}");
             }         
         }
         private string HashPassword(string password)

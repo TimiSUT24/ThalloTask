@@ -54,17 +54,17 @@
             TextBoxTaskButton.ImageExpand = new Point(0, 0);
             TextBoxTaskButton.ImageOffset = new Point(0, 0);
             TextBoxTaskButton.ImageTint = Color.Transparent;
-            TextBoxTaskButton.Location = new Point(408, 300);
+            TextBoxTaskButton.Location = new Point(406, 295);
             TextBoxTaskButton.Name = "TextBoxTaskButton";
             TextBoxTaskButton.NormalBackground = Color.Transparent;
             TextBoxTaskButton.NormalOutline = Color.Black;
-            TextBoxTaskButton.OutlineThickness = 1.6F;
+            TextBoxTaskButton.OutlineThickness = 3F;
             TextBoxTaskButton.PressedBackground = Color.Transparent;
             TextBoxTaskButton.PressedForeColor = Color.Black;
             TextBoxTaskButton.PressedImageTint = Color.Transparent;
             TextBoxTaskButton.PressedOutline = Color.Black;
             TextBoxTaskButton.Rounding = new Padding(8);
-            TextBoxTaskButton.Size = new Size(35, 34);
+            TextBoxTaskButton.Size = new Size(41, 38);
             TextBoxTaskButton.TabIndex = 43;
             TextBoxTaskButton.TextOffset = new Point(0, 0);
             TextBoxTaskButton.Click += TextBoxTaskButton_Click;
@@ -72,9 +72,10 @@
             // TaskTxtBox
             // 
             TaskTxtBox.BackColor = Color.White;
-            TaskTxtBox.BorderColor = Color.FromArgb(64, 64, 64);
-            TaskTxtBox.BorderFocusColor = Color.White;
-            TaskTxtBox.BorderSize = 1;
+            TaskTxtBox.BackgroundImageLayout = ImageLayout.None;
+            TaskTxtBox.BorderColor = Color.Black;
+            TaskTxtBox.BorderFocusColor = Color.Black;
+            TaskTxtBox.BorderSize = 2;
             TaskTxtBox.Content = "";
             TaskTxtBox.Font = new Font("Microsoft Sans Serif", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TaskTxtBox.ForeColor = Color.Black;
@@ -84,7 +85,7 @@
             TaskTxtBox.Name = "TaskTxtBox";
             TaskTxtBox.Padding = new Padding(15, 5, 15, 5);
             TaskTxtBox.PasswordChar = false;
-            TaskTxtBox.PlaceholderColor = Color.DimGray;
+            TaskTxtBox.PlaceholderColor = Color.Black;
             TaskTxtBox.PlaceholderText = "";
             TaskTxtBox.Rounding = 8;
             TaskTxtBox.Size = new Size(446, 329);

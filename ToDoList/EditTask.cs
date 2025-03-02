@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,7 +27,6 @@ namespace ToDoList
         public string SelectedSubItem { get; set; }
         public string SbId { get; set; }
 
-
         public EditTask(string userName, string Tasks)
         {
             InitializeComponent();
@@ -35,7 +35,7 @@ namespace ToDoList
             TaskLabel.Content = "Current Task: \n" + task;
             ShowDetailsInText();
         }
-
+        //MAIN SECTION
         public void ShowDetailsInText()
         {
             try
@@ -44,7 +44,7 @@ namespace ToDoList
                 {
                     conn.Open();
                     string showDetails = "SELECT DESCRIPTION,PRIORITY,DATESTART,DATEEND FROM TASKS WHERE TASK = @TASK";
-                    using (SqlCommand cmd = new SqlCommand(showDetails, conn))
+                    using (SqlCommand cmd = new SqlCommand(showDetails, conn))    //MAIN TASK
                     {
                         cmd.Parameters.AddWithValue("@TASK", task);
                         using (SqlDataReader reader = cmd.ExecuteReader())
@@ -58,10 +58,10 @@ namespace ToDoList
                             }
                         }
                     }
-                    string showSubTasks = @"SELECT SUBTASK FROM SUBTASKS
+                    string showSubTasks = @"SELECT SUBTASK FROM SUBTASKS        
                                        JOIN TASKS ON TASKS.ID = SUBTASKS.TASKID
                                        WHERE TASK = @TASK";
-                    using (SqlCommand cmd = new SqlCommand(showSubTasks, conn))
+                    using (SqlCommand cmd = new SqlCommand(showSubTasks, conn))  //SUBTASK
                     {
                         cmd.Parameters.AddWithValue("@TASK", task);
 
@@ -89,9 +89,9 @@ namespace ToDoList
                 {
                     conn.Open();
                     string editTask = @"UPDATE TASKS SET DESCRIPTION = @DESCRIPTION, PRIORITY = @PRIORITY, 
-                                   DATESTART = @DATESTART, DATEEND = @DATEEND WHERE TASK = @TASK";
+                                      DATESTART = @DATESTART, DATEEND = @DATEEND WHERE TASK = @TASK";
 
-                    using (SqlCommand cmd = new SqlCommand(editTask, conn))
+                    using (SqlCommand cmd = new SqlCommand(editTask, conn))     //UPDATE MAIN TASK
                     {
                         cmd.Parameters.AddWithValue("@TASK", task);
                         cmd.Parameters.AddWithValue("@DESCRIPTION", Description);
@@ -125,7 +125,7 @@ namespace ToDoList
         {
             EdittedDetails();
             EditTasks();
-            MessageBox.Show("Sucessful edit");
+            MessageBox.Show("Sucessful Edit");
         }
 
         private void EditTask_MouseClick(object sender, MouseEventArgs e)
@@ -133,12 +133,21 @@ namespace ToDoList
             Focuslabel2.Focus();
             SubTasks.SelectedIndex = -1;
         }
+        //SUBTASK SECTION
 
         private async void DoneBtn_Click(object sender, EventArgs e)
         {
-            SelectedSubItem = SubTasks.Items[SubTasks.SelectedIndex].ToString();
-            await SubTaskOperation();
-            SubTasks.Items.Remove(SelectedSubItem);
+            try
+            {
+                if (SubTasks.Items[SubTasks.SelectedIndex].ToString() == null) { }               
+                SelectedSubItem = SubTasks.Items[SubTasks.SelectedIndex].ToString();
+                await SubTaskOperation();
+                SubTasks.Items.Remove(SelectedSubItem);
+            }
+            catch
+            {
+                MessageBox.Show("Select Subtask To Complete!");
+            }          
         }
 
         public async Task SubTaskOperation()
@@ -229,8 +238,16 @@ namespace ToDoList
 
         public void SubTaskAddBtn_Click(object sender, EventArgs e)
         {
-            SubTasks.Items.Add(SubTasksText.Content);
-            AddSubTask();
+            if (SubTasksText.Content.IsNullOrEmpty() || string.IsNullOrWhiteSpace(SubTasksText.Content))
+            {
+                return;
+            }
+            else
+            {
+                SubTasks.Items.Add(SubTasksText.Content);              
+                AddSubTask();
+                SubTasksText.Content = null;
+            }        
         }
 
         public void DeleteSubTask()
@@ -257,9 +274,17 @@ namespace ToDoList
 
         public void SubTaskDelBtn_Click(object sender, EventArgs e)
         {
-            SelectedSubItem = SubTasks.Items[SubTasks.SelectedIndex].ToString();
-            SubTasks.Items.Remove(SelectedSubItem);
-            DeleteSubTask();
+            try
+            {
+                if (SubTasks.Items[SubTasks.SelectedIndex].ToString() == null) {  }
+                SelectedSubItem = SubTasks.Items[SubTasks.SelectedIndex].ToString();
+                SubTasks.Items.Remove(SelectedSubItem);
+                DeleteSubTask();
+            }
+            catch
+            {
+                MessageBox.Show("Select Subtask To Delete!");
+            }          
         }
         private void SubTasksText_KeyPress(object sender, KeyPressEventArgs e)
         {
