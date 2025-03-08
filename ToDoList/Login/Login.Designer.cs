@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             LoginLabel = new Label();
             LoginButton = new Button();
             PasswordLabel = new Label();
@@ -155,6 +156,7 @@
             Controls.Add(UsernameLabel);
             Controls.Add(UsernameText);
             DoubleBuffered = true;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximumSize = new Size(1398, 878);
             Name = "Login";
             StartPosition = FormStartPosition.CenterScreen;

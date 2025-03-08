@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "ToDoList": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "SK_CONNECTION": "Data Source=localhost\\SQLEXPRESS;Initial Catalog=TODOLIST-2025-3-7-20-54;Integrated Security=True;TrustServerCertificate=True"
+      },
+      "remoteDebugEnabled": false
+    }
+  }
+}

@@ -43,7 +43,7 @@ namespace ToDoList
             // Save to the database
             try
             {
-                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Microsoft SQL Server"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(SKClass.GetConnectionString()))
                 {
                     conn.Open();
 

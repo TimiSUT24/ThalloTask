@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditTask));
             DateEnd = new DateTimePicker();
             DateStart = new DateTimePicker();
             label2 = new Label();
@@ -565,6 +566,7 @@
             Controls.Add(label2);
             Controls.Add(cuiBorder3);
             DoubleBuffered = true;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximumSize = new Size(969, 689);
             Name = "EditTask";
             StartPosition = FormStartPosition.CenterScreen;

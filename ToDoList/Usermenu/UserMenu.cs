@@ -101,7 +101,7 @@ namespace ToDoList
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(SKClass.GetConnectionString()))
                 {
                     await conn.OpenAsync();
                     string showTask = "SELECT ID,TASK,DESCRIPTION,PRIORITY,DATESTART,DATEEND FROM TASKS WHERE TASK = @TASK"; //Shows the selected task details
@@ -135,7 +135,7 @@ namespace ToDoList
                 NewTask to = new NewTask(CurrentUser);
                 UserId = to.GetUserID(CurrentUser);     //Get which user is logged in and gets id 
 
-                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(SKClass.GetConnectionString()))
                 {
                     conn.Open();
                     string task = @"SELECT TASK FROM TASKS WHERE USER_ID = @USER_ID
@@ -210,7 +210,7 @@ namespace ToDoList
                     await DeleteConformation();
                 }
 
-                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(SKClass.GetConnectionString()))
                 {
                     await conn.OpenAsync();
                     string deleteTask = @"DELETE FROM TASKS WHERE TASK = @TASK";
@@ -271,7 +271,7 @@ namespace ToDoList
             {
                 if(task != null)
                 {
-                    using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                    using (SqlConnection conn = new SqlConnection(SKClass.GetConnectionString()))
                     {
                         conn.Open();
                         string ShowSubTask = @"SELECT SUBTASKDONE FROM COMPLETEDSUBTASKS
@@ -305,7 +305,7 @@ namespace ToDoList
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(SKClass.GetConnectionString()))
                 {
                     conn.Open();
                     string ActiveSubTask = @"SELECT SUBTASK FROM SUBTASKS
@@ -340,7 +340,7 @@ namespace ToDoList
                 NewTask to = new NewTask(CurrentUser);
                 UserId = to.GetUserID(CurrentUser);
 
-                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(SKClass.GetConnectionString()))
                 {
                     conn.Open();
                     string DueDate = @"SELECT DATEEND,TASK
@@ -395,7 +395,7 @@ namespace ToDoList
                 NewTask to = new NewTask(CurrentUser);
                 UserId = to.GetUserID(CurrentUser);
                 int CompTaskId = -1;
-                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(SKClass.GetConnectionString()))
                 {
                     await conn.OpenAsync();
                     string selectTask = @"SELECT TASK,DESCRIPTION,PRIORITY
@@ -481,7 +481,7 @@ namespace ToDoList
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(SKClass.GetConnectionString()))
                 {
                     conn.Open();
                     string CompDel = @"DELETE FROM COMPLETEDTASKS WHERE COMPTASK = @COMPTASK";
@@ -505,7 +505,7 @@ namespace ToDoList
             {
                 NewTask to = new NewTask(CurrentUser);
                 UserId = to.GetUserID(CurrentUser);
-                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(SKClass.GetConnectionString()))
                 {
                     conn.Open();
                     string ShowComp = @"SELECT COMPTASK FROM COMPLETEDTASKS WHERE USERID = @USERID";
@@ -549,7 +549,7 @@ namespace ToDoList
                 int taskId = -1;
                 NewTask to = new NewTask(CurrentUser);
                 UserId = to.GetUserID(CurrentUser);
-                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(SKClass.GetConnectionString()))
                 {
                     await conn.OpenAsync();
 

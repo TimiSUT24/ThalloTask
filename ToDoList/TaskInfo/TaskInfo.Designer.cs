@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaskInfo));
             TextBoxTaskButton = new CuoreUI.Controls.cuiButton();
             TaskTxtBox = new CuoreUI.Controls.cuiTextBox2();
             SuspendLayout();
@@ -44,11 +45,11 @@
             TextBoxTaskButton.Content = "Ok";
             TextBoxTaskButton.DialogResult = DialogResult.None;
             TextBoxTaskButton.Font = new Font("Microsoft Sans Serif", 9.75F);
-            TextBoxTaskButton.ForeColor = Color.Black;
-            TextBoxTaskButton.HoverBackground = Color.Transparent;
+            TextBoxTaskButton.ForeColor = Color.White;
+            TextBoxTaskButton.HoverBackground = Color.Black;
             TextBoxTaskButton.HoveredImageTint = Color.Transparent;
-            TextBoxTaskButton.HoverForeColor = Color.Black;
-            TextBoxTaskButton.HoverOutline = Color.Empty;
+            TextBoxTaskButton.HoverForeColor = Color.White;
+            TextBoxTaskButton.HoverOutline = Color.Black;
             TextBoxTaskButton.Image = null;
             TextBoxTaskButton.ImageAutoCenter = true;
             TextBoxTaskButton.ImageExpand = new Point(0, 0);
@@ -56,11 +57,11 @@
             TextBoxTaskButton.ImageTint = Color.Transparent;
             TextBoxTaskButton.Location = new Point(406, 295);
             TextBoxTaskButton.Name = "TextBoxTaskButton";
-            TextBoxTaskButton.NormalBackground = Color.Transparent;
+            TextBoxTaskButton.NormalBackground = Color.Black;
             TextBoxTaskButton.NormalOutline = Color.Black;
             TextBoxTaskButton.OutlineThickness = 3F;
             TextBoxTaskButton.PressedBackground = Color.Transparent;
-            TextBoxTaskButton.PressedForeColor = Color.Black;
+            TextBoxTaskButton.PressedForeColor = Color.White;
             TextBoxTaskButton.PressedImageTint = Color.Transparent;
             TextBoxTaskButton.PressedOutline = Color.Black;
             TextBoxTaskButton.Rounding = new Padding(8);
@@ -102,6 +103,7 @@
             ClientSize = new Size(472, 355);
             Controls.Add(TextBoxTaskButton);
             Controls.Add(TaskTxtBox);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximumSize = new Size(488, 394);
             Name = "TaskInfo";
             StartPosition = FormStartPosition.CenterScreen;

@@ -29,7 +29,7 @@ namespace ToDoList
         public int GetUserID(string userName)
         {
             int userId = -1;
-            using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+            using (SqlConnection conn = new SqlConnection(SKClass.GetConnectionString()))
             {
                 conn.Open();
                 string SelectId = "SELECT ID FROM USERS WHERE USERNAME = @USERNAME";        //get userid by username
@@ -84,7 +84,7 @@ namespace ToDoList
 
             try
             {
-                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(SKClass.GetConnectionString()))
                 {
 
 

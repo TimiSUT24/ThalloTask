@@ -902,6 +902,7 @@
             Controls.Add(DeleteButton);
             Controls.Add(FinishedTaskBorder);
             DoubleBuffered = true;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximumSize = new Size(1398, 878);
             Name = "UserMenu";
             StartPosition = FormStartPosition.CenterScreen;

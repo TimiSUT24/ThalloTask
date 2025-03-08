@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewTask));
             StartDatePicker = new DateTimePicker();
             EndDatePicker = new DateTimePicker();
             TaskLabel = new CuoreUI.Controls.cuiButton();
@@ -566,6 +567,7 @@
             Controls.Add(EndDatePicker);
             Controls.Add(StartDatePicker);
             DoubleBuffered = true;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximumSize = new Size(969, 689);
             MinimumSize = new Size(261, 61);
             Name = "NewTask";

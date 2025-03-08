@@ -40,7 +40,7 @@ namespace ToDoList
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(SKClass.GetConnectionString()))
                 {
                     conn.Open();
                     string showDetails = "SELECT DESCRIPTION,PRIORITY,DATESTART,DATEEND FROM TASKS WHERE TASK = @TASK";
@@ -85,7 +85,7 @@ namespace ToDoList
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(SKClass.GetConnectionString()))
                 {
                     conn.Open();
                     string editTask = @"UPDATE TASKS SET DESCRIPTION = @DESCRIPTION, PRIORITY = @PRIORITY, 
@@ -154,7 +154,7 @@ namespace ToDoList
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(SKClass.GetConnectionString()))
                 {
                     await conn.OpenAsync();
                     string getTask = @"SELECT SUBTASK,TASKID,ID FROM SUBTASKS WHERE SUBTASK = @SUBTASK ";
@@ -202,7 +202,7 @@ namespace ToDoList
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(SKClass.GetConnectionString()))
                 {
                     conn.Open();
                     string sel = @"SELECT ID FROM TASKS WHERE TASK = @TASK";
@@ -254,7 +254,7 @@ namespace ToDoList
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft Sql Server"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(SKClass.GetConnectionString()))
                 {
                     conn.Open();
                     string deleteTask = @"DELETE FROM SUBTASKS WHERE SUBTASK = @SUBTASK";

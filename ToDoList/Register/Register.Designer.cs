@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Register));
             UsernameText = new TextBox();
             UsernameLabel = new Label();
             PasswordLabel = new Label();
@@ -161,6 +162,7 @@
             Controls.Add(UsernameText);
             DoubleBuffered = true;
             Font = new Font("Segoe UI", 12F);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4);
             MaximumSize = new Size(1398, 878);
             Name = "Register";

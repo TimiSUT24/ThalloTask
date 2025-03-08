@@ -33,7 +33,7 @@ namespace ToDoList
             // Query the database to get the stored password hash
             try
             {
-                using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Microsoft SQL Server"].ConnectionString))
+                using (SqlConnection conn = new SqlConnection(SKClass.GetConnectionString()))
                 {
                     conn.Open();
                     string query = "SELECT PasswordHash FROM Users WHERE UserName = @UserName";
@@ -41,7 +41,7 @@ namespace ToDoList
                     {
                         cmd.Parameters.AddWithValue("@UserName", userName);
                         string storedHash = cmd.ExecuteScalar() as string;
-                        conn.Close();
+                        
                         if (storedHash != null && storedHash == passwordHash)
                         {
                             MessageBox.Show("Successful Login");
