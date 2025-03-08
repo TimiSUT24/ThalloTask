@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/ToDoList/UIEditor.cs
+/ToDoList/Script.ps1
+/ToDoList/DataBaseCreation.cs
+/ToDoList/ConnScript.cs
+/ToDoList/app.manifest
+/ToDoList/Database/TODOLIST-2025-3-7-20-54.dacpac
