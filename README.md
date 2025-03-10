@@ -1,4 +1,6 @@
-ThalloTask is a program where you can add Todos to your daily life and is stored locally on your windows device. 
+ThalloTask is a Windows application designed to help you organize and manage your daily tasks efficiently. 
+Built with WinForms in Visual Studio and powered by SQL Server Express (local database) with ADO.NET, 
+ThalloTask ensures that your to-dos are securely stored on your device—without requiring an internet connection.
 
 https://drive.google.com/file/d/1lulDvK0AQyrCzkmQhFNao9hobbywR8c-/view?usp=sharing
 
