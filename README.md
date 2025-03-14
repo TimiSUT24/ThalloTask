@@ -1,3 +1,4 @@
+
 ThalloTask is a Windows application designed to help you organize and manage your daily tasks efficiently. 
 Built with WinForms in Visual Studio and powered by SQL Server Express (local database) with ADO.NET, 
 ThalloTask ensures that your to-dos are securely stored on your device—without requiring an internet connection.
@@ -10,3 +11,5 @@ Installation Guide:
    After install click connect now.
 3. Run Setup.exe
 4. Run ThalloTask.exe Located in ApplicationFiles/ThalloTask_1_0_0_1
+
+![ThalloTask](https://github.com/user-attachments/assets/fe4539ef-e0cb-416f-a1bb-60cc5076bc50)
